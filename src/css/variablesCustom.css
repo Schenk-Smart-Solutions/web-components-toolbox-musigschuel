@@ -45,12 +45,12 @@
   --bg-line-height: 1.5em;
   --button-category-background-color-custom:var(--color-quaternary);
   --button-category-background-color-hover-mobile-custom: var(--color-quaternary);
-  --color-active: #592037;
-  --color-disabled: #592037;
-  --color-hover: #b37187;
+  --color-active: #7e6d04;
+  --color-disabled: #7e6d04;
+  --color-hover: #bbbab5;
   --color-quaternary:#fefce5;
-  --color-secondary: #8b254c;
-  --color-tertiary: #b5ce34;
+  --color-secondary: black;
+  --color-tertiary: #7e6d04;
   --details-default-svg-color-custom: var(--color-tertiary);
   --download-box-shadow-color-custom: var(--download-color-custom);
   --download-color-custom: var(--color-tertiary);
