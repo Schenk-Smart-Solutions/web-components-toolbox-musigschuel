@@ -170,6 +170,11 @@
   './src/es/components/', // baseUrl
   [
     {
+      selector: 'a-logo',
+      url: 'atoms/logo/Logo.js',
+      separateFolder: false
+    },
+    {
       selector: 'a-',
       url: 'web-components-toolbox/src/es/components/atoms/',
       separateFolder: true

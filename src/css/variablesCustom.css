@@ -4,53 +4,51 @@
   * - if a component holds other components or nodes you can declare or remap classes eg. :host > h1 {--color: var(--h1-color, white);}
   * - if a component holds other components you should share the attribute namespace with its children
   */
-/* font tracking */
-@import url("https://cdn.fonts.net/t/1.css?apiType=css&projectid=b2e5ea60-e0d9-11ec-b713-06e2001461d0");
 
 /* custom alnatura fonts */
 @font-face {
-  font-family: "FrutigerRegular";
-  src: url("https://cdn.migros.ch/ch.migros/static/fonts/Frutiger/Frutiger55Roman.woff2") format("woff2"), url("https://cdn.migros.ch/ch.migros/static/fonts/Frutiger/Frutiger55Roman.woff") format("woff");
+  font-family: "SF Pro Text";
+  src: url("../font/sf-pro-text_light.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "FrutigerBold";
-  src: url("https://cdn.migros.ch/ch.migros/static/fonts/Frutiger/Frutiger65Bold.woff2") format("woff2"), url("https://cdn.migros.ch/ch.migros/static/fonts/Frutiger/Frutiger65Bold.woff") format("woff");
-  font-weight: normal;
+  font-family: "SF Pro Text Bold";
+  src: url("../font/sf-pro-text_light.woff2") format("woff2");
+  font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "KalamRegular";
-  src: url("https://cdn.migros.ch/ch.migros/static/fonts/Kalam/Kalam-Regular.woff") format("woff");
-  font-weight: normal;
+  font-family: "SF Pro Icons";
+  src: url("../font/sf-pro-icons_light.woff2") format("woff2");
+  font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Helvetica Neue Condensed';
-  src: url(https://cdn.migros.ch/ch.migros/static/fonts/helveticaneue-condensed-bold/helveticaneue-condensed-bold.woff);
-  font-weight: 600;
+  font-family: "Noto Music";
+  src: url("../font/NotoMusic-Regular.ttf") format("ttf");
+  font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 :root {
-  --background-color: #fffef4;
+  --background-color: white;
   --bg-line-height: 1.5em;
   --button-category-background-color-custom:var(--color-quaternary);
   --button-category-background-color-hover-mobile-custom: var(--color-quaternary);
-  --color-active: #7e6d04;
-  --color-disabled: #7e6d04;
-  --color-hover: #bbbab5;
-  --color-quaternary:#fefce5;
+  --color-active: #F0DD5B;
+  --color-disabled: gray;
+  --color-hover: goldenrod;
+  --color-quaternary: #F0DD5B;
   --color-secondary: black;
-  --color-tertiary: #7e6d04;
+  --color-tertiary: #F0DD5B;
   --details-default-svg-color-custom: var(--color-tertiary);
   --download-box-shadow-color-custom: var(--download-color-custom);
   --download-color-custom: var(--color-tertiary);
@@ -58,9 +56,9 @@
   --emotion-pictures-with-button-img-max-height: var(--emotion-pictures-default-img-max-height);
   --emotion-pictures-with-logo-img-max-height: var(--emotion-pictures-default-img-max-height);
   --emotion-pictures-with-title-img-max-height: var(--emotion-pictures-default-img-max-height);
-  --font-family-bold: FrutigerBold, HelveticaNowTextBold, HelveticaNowText, Helvetica, Arial, sans-serif;
-  --font-family-secondary: KalamRegular, Avenir35Light, sans-serif;
-  --font-family: FrutigerRegular, HelveticaNowText, Helvetica, Arial, sans-serif;
+  --font-family-bold: "SF Pro Text Bold", "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "Apple Legacy Chevron", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  --font-family-secondary: "Noto Music", "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "Apple Legacy Chevron", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  --font-family: "Myriad Set Pro", "Apple Legacy Chevron", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   --footer-default-h4-color: var(--background-color);
   --footer-default-invert-a-color-hover-custom: var(--color-tertiary);
   --footer-default-invert-color-hover-custom: var(--color-tertiary);
@@ -70,11 +68,17 @@
   --footer-default-invert-svg-color-hover-custom: var(--color-tertiary);
   --h-color: var(--color-secondary);
   --h1-font-size: calc(1.5 * 1.75em);
+  --h3-font-size: 1em;
   --h6-font-family: var(--font-family-secondary);
   --h6-font-size: var(--h2-font-size, 1.5em);
-  --header-default-a-logo-top-custom: calc(60.5px / 2 - 88px / 2);
-  --header-default-a-logo-top-mobile-custom: -0.5em;
-  --header-default-logo-width-custom: min(9em, 138px);
+  --header-default-a-color-custom: var(--background-color);
+  --header-default-a-color-hover-custom: var(--color-hover);
+  --header-default-a-font-family: var(--font-family-secondary);
+  --header-default-a-logo-top-custom: calc(61px / 2 - 24px / 2);
+  --header-default-a-logo-top-mobile-custom: 1.75em;
+  --header-default-logo-width-custom: min(11em, 127px);
+  --header-default-margin-custom: 0 auto var(--content-spacing);
+  --header-default-margin-mobile-custom: 0 auto var(--content-spacing-mobile);
   --hr-border-bottom: 2px dotted var(--m-gray-600);
   --hr-border-width: 0 0 2px;
   --hr-secondary-border-bottom: 2px solid var(--color-secondary);
@@ -87,7 +91,6 @@
   --news-alnatura-line-height-mobile:100%;
   --news-alnatura-line-height:100%;
   --picture-close-btn-background-color:var(--color-secondary);
-  --search-input-width-big:100%;
   --teaser-round-figcaption-color: var(--color-secondary);
   --teaser-tile-rounded-h6-figcaption-color-custom: var(--color-secondary);
   --title-border-display: none;
