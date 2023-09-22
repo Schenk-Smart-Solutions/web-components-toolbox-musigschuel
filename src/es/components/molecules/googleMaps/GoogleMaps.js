@@ -4,17 +4,14 @@ export default class GoogleMaps extends Shadow() {
 
     bounds = undefined;
 
-
     constructor(...args) {
         super(...args);
     }
-
 
     connectedCallback() {
         if (this.shouldComponentRenderCSS()) this.renderCSS();
         if (this.shouldComponentRenderHTML()) this.renderMap();
     }
-
 
     disconnectedCallback() {
 
@@ -38,11 +35,30 @@ export default class GoogleMaps extends Shadow() {
                 color: red;
                 background-color: #000000;
             }
+
+            label {
+                font-weight: 400;
+                font-size: 1.2rem;
+
+            }
+
+            input {
+                height: 3rem;
+                font-size: 2rem;
+                margin-bottom: 1rem;
+                padding: 0 0.5rem;
+            }
+
+            input::placeholder {
+              font-weight: bold;
+              opacity: 0.5;
+              font-size: 1.2rem;
+              
+              
+            }
+
         `;
-
     }
-
-
 
     addMarker(gMap, markerData) {
         const marker = new google.maps.Marker({
@@ -59,7 +75,6 @@ export default class GoogleMaps extends Shadow() {
             this.addInfoWindow(gMap, marker, markerData.content);
         }
     }
-
 
     addInfoWindow(gMap, marker, content) {
         const infoWindow = new google.maps.InfoWindow({
@@ -78,19 +93,20 @@ export default class GoogleMaps extends Shadow() {
     renderMap() {
         this.container = document.createElement('DIV');
         this.map = document.createElement('DIV');
-        this.searchField = document.createElement('INPUT');
-        this.searchField.addEventListener('change', this.handleSearchChange);
-        this.container.appendChild(this.searchField);
+        if (this.hasAttribute('show-search')) {
+            
+            
+            this.searchField = document.createElement('INPUT');
+            this.searchField.addEventListener('change', this.handleSearchChange);
+            if (this.hasAttribute('search-label') && this.getAttribute('search-label') !== '') {
+                this.searchField.setAttribute('placeholder', this.getAttribute('search-label'));
+            }
+            this.container.appendChild(this.searchField);
+        }
+     
         this.map.className = 'g-maps';
         this.map.setAttribute('id', 'map');
         this.container.appendChild(this.map);
-
-        const gMap = new google.maps.Map(this.map, {
-            center: { lat: 46.8182, lng: 8.2275 },
-            zoom: 8,
-        });
-
-
         const additionalCss = `
              <style>
                 .container {
@@ -145,10 +161,8 @@ export default class GoogleMaps extends Shadow() {
 
         this.markers = Array.from(this.shadowRoot.querySelectorAll('ms-a-g-maps-marker'))
             .map(m => {
-                let res = {
-                    lat: parseFloat(m.getAttribute('lat')),
-                    lng: parseFloat(m.getAttribute('long')),
-                    content: `${additionalCss}<div class="container">
+                const content = m.getAttribute('img-src') ?
+                    `${additionalCss}<div class="container">
                       <div class="card">
                         <div class="side front">
                          <img src="${m.getAttribute('img-src')}" />
@@ -157,7 +171,16 @@ export default class GoogleMaps extends Shadow() {
                           ${m.innerHTML}
                         </div>
                       </div>
-                    </div>`,
+                    </div>` : m.innerHTML && m.innerHTML.trim() !== '' ? `
+                        <div>
+                            ${m.innerHTML}
+                        </div>
+                    ` : undefined;
+
+                let res = {
+                    lat: parseFloat(m.getAttribute('lat')),
+                    lng: parseFloat(m.getAttribute('long')),
+                    content: content,
 
                 };
 
@@ -167,7 +190,10 @@ export default class GoogleMaps extends Shadow() {
                 return res;
             });
 
-
+        const gMap = new google.maps.Map(this.map, {
+            center: this.markers.length > 1 ? { lat: 46.8182, lng: 8.2275 } : { lat: this.markers[0].lat, lng: this.markers[0].lng },
+            zoom: this.markers.length > 1 ? 8 : 12,
+        });
 
         this.bounds = this.markers.length > 1 ? this.bounds = new google.maps.LatLngBounds() : undefined;
 
@@ -187,11 +213,20 @@ export default class GoogleMaps extends Shadow() {
         }
     }
 
-    getMarkers = () =>  this.markers.map(m => new google.maps.Marker({
-            position: { lat: m.lat, lng: m.lng },
-            map: this.map,
-            icon: m.icon
-        }));
+    getMarkers = () => {
+        
+        return this.markers.map(m => {
+
+
+            return new google.maps.Marker({
+                position: { lat: m.lat, lng: m.lng },
+                map: this.map,
+                icon: m.icon,
+                content: m.content,
+            });
+        });
+
+    } 
     
 
     filterMarkers(postcode, radius, markers, map) {
@@ -208,6 +243,7 @@ export default class GoogleMaps extends Shadow() {
                     if (distance < radius) {
                         markers[i].setVisible(true);
                     } else {
+                        debugger;
                         markers[i].setVisible(false);
                     }
                 }
