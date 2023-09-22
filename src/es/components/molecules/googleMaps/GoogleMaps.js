@@ -94,10 +94,11 @@ export default class GoogleMaps extends Shadow() {
         const additionalCss = `
              <style>
                 .container {
-                    width: 300px;
-                    height: 300px;
+                    width: 150px;
+                    height: 150px;
                     position: relative;
                     perspective: 1000px;
+                    
                 }
 
                 .card {
@@ -106,6 +107,7 @@ export default class GoogleMaps extends Shadow() {
                     height: 100%;
                     transform-style: preserve-3d;
                     transition: transform 1s;
+         
                 }
 
                 .container:hover .card {
@@ -120,12 +122,23 @@ export default class GoogleMaps extends Shadow() {
                 }
 
                 .card .front {
-                    background: url('your-image-url');
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
 
                 .card .back {
-                    background: #f8f8f8;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
                     transform: rotateY(180deg);
+                    background: #ffffff;
+                
+                }
+
+                .card .back a {
+                    color: #000000;
                 }
                 </style>`;
 
