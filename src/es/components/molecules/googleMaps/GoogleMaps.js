@@ -10,8 +10,6 @@ export default class GoogleMaps extends Shadow() {
     }
 
 
-    uluru = { lat: -25.344, lng: 131.031 };
-
     connectedCallback() {
         if (this.shouldComponentRenderCSS()) this.renderCSS();
         if (this.shouldComponentRenderHTML()) this.renderMap();
@@ -80,6 +78,9 @@ export default class GoogleMaps extends Shadow() {
     renderMap() {
         this.container = document.createElement('DIV');
         this.map = document.createElement('DIV');
+        this.searchField = document.createElement('INPUT');
+        this.searchField.addEventListener('change', this.handleSearchChange);
+        this.container.appendChild(this.searchField);
         this.map.className = 'g-maps';
         this.map.setAttribute('id', 'map');
         this.container.appendChild(this.map);
@@ -126,17 +127,11 @@ export default class GoogleMaps extends Shadow() {
                     background: #f8f8f8;
                     transform: rotateY(180deg);
                 }
-                </style>
-
-        `;
+                </style>`;
 
 
-        const markers = Array.from(this.shadowRoot.querySelectorAll('ms-a-g-maps-marker'))
+        this.markers = Array.from(this.shadowRoot.querySelectorAll('ms-a-g-maps-marker'))
             .map(m => {
-
-
-
-
                 let res = {
                     lat: parseFloat(m.getAttribute('lat')),
                     lng: parseFloat(m.getAttribute('long')),
@@ -149,8 +144,7 @@ export default class GoogleMaps extends Shadow() {
                           ${m.innerHTML}
                         </div>
                       </div>
-                    </div>
- ` ,
+                    </div>`,
 
                 };
 
@@ -160,14 +154,56 @@ export default class GoogleMaps extends Shadow() {
                 return res;
             });
 
-        this.bounds = markers.length > 1 ? this.bounds = new google.maps.LatLngBounds() : undefined;
+
+
+        this.bounds = this.markers.length > 1 ? this.bounds = new google.maps.LatLngBounds() : undefined;
 
         if (this.bounds) {
             gMap.fitBounds(this.bounds);
         }
 
-        markers.forEach(m => this.addMarker(gMap, m));
+        this.markers.forEach(m => this.addMarker(gMap, m));
+
         this.map = gMap;
         this.html = this.container;
+    }
+
+    handleSearchChange = (event) => {
+        if (!isNaN(event.target.value)) {
+            this.filterMarkers(event.target.value, 5, this.getMarkers(), this.map);
+        }
+    }
+
+    getMarkers = () =>  this.markers.map(m => new google.maps.Marker({
+            position: { lat: m.lat, lng: m.lng },
+            map: this.map,
+            icon: m.icon
+        }));
+    
+
+    filterMarkers(postcode, radius, markers, map) {
+
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({ 'address': postcode }, function (results, status,) {
+            if (status === 'OK') {
+                var center = results[0].geometry.location;
+
+                for (var i = 0; i < markers.length; i++) {
+                    var distance = google.maps.geometry.spherical.computeDistanceBetween(markers[i].getPosition(), center);
+
+                    if (distance < radius) {
+                        markers[i].setVisible(true);
+                    } else {
+                        markers[i].setVisible(false);
+                    }
+                }
+
+                map.setCenter(center);
+                map.setZoom(11);
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
     }
 };
