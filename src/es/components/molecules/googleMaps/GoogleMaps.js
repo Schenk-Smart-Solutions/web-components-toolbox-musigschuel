@@ -99,27 +99,16 @@ export default class GoogleMaps extends Shadow() {
 
 
 
-        // const myMarkers = Array.from([this.root.querySelector('g-maps-marker')]).map(c => {
 
-        //     return {
-        //         lat: parseFloat(c.getAttribute('lat')),
-        //         lng: parseFloat(c.getAttribute('long')),
-        //         content: c.innerHTML
-        //     };
-
-        // });  
-
-
-
-        const markers = Array.from(this.shadowRoot.querySelectorAll('base-g-maps-marker'))
+        const markers = Array.from(this.shadowRoot.querySelectorAll('ms-a-g-maps-marker'))
             .map(m => {
                 let res = {
                     lat: parseFloat(m.getAttribute('lat')),
                     lng: parseFloat(m.getAttribute('long')),
                     content: m.innerHTML,
-                    icon: m.getAttribute('icon')
                 };
 
+                if (m.getAttribute('icon')) res.icon = m.getAttribute('icon')
                 m.innerHTML = '';
                 return res;
             });
