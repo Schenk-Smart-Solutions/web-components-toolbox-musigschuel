@@ -53,9 +53,9 @@ export default class GoogleMaps extends Shadow() {
               font-weight: bold;
               opacity: 0.5;
               font-size: 1.2rem;
-              
-              
             }
+
+           
 
         `;
     }
@@ -155,6 +155,15 @@ export default class GoogleMaps extends Shadow() {
 
                 .card .back a {
                     color: #000000;
+                }
+                
+
+                p {
+                    margin: 0;
+                }
+                
+                h2 {
+                    margin: 0;
                 }
                 </style>`;
 
