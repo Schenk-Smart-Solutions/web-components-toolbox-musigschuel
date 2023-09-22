@@ -36,7 +36,6 @@ export default class GoogleMaps extends Shadow() {
                 height: 50vh;
                 color: #000000;
             }
-        
             div.g-maps  button {
                 color: red;
                 background-color: #000000;
@@ -48,8 +47,6 @@ export default class GoogleMaps extends Shadow() {
 
 
     addMarker(gMap, markerData) {
-
-
         const marker = new google.maps.Marker({
             position: { lat: markerData.lat, lng: markerData.lng },
             map: gMap,
@@ -60,16 +57,13 @@ export default class GoogleMaps extends Shadow() {
             this.bounds.extend(marker.position);
         }
 
-
         if (markerData.content) {
             this.addInfoWindow(gMap, marker, markerData.content);
         }
-
     }
 
 
     addInfoWindow(gMap, marker, content) {
-
         const infoWindow = new google.maps.InfoWindow({
             content: content
         });
@@ -81,8 +75,6 @@ export default class GoogleMaps extends Shadow() {
                 shouldFocus: true
             })
         });
-
-
     }
 
     renderMap() {
@@ -93,22 +85,77 @@ export default class GoogleMaps extends Shadow() {
         this.container.appendChild(this.map);
 
         const gMap = new google.maps.Map(this.map, {
-            center: { lat: 47.453591281777086, lng: 9.184775417772617 },
-            zoom: 10,
+            center: { lat: 46.8182, lng: 8.2275 },
+            zoom: 8,
         });
 
 
+        const additionalCss = `
+             <style>
+                .container {
+                    width: 300px;
+                    height: 300px;
+                    position: relative;
+                    perspective: 1000px;
+                }
+
+                .card {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    transform-style: preserve-3d;
+                    transition: transform 1s;
+                }
+
+                .container:hover .card {
+                    transform: rotateY(180deg);
+                }
+
+                .card .side {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    backface-visibility: hidden;
+                }
+
+                .card .front {
+                    background: url('your-image-url');
+                }
+
+                .card .back {
+                    background: #f8f8f8;
+                    transform: rotateY(180deg);
+                }
+                </style>
+
+        `;
 
 
         const markers = Array.from(this.shadowRoot.querySelectorAll('ms-a-g-maps-marker'))
             .map(m => {
+
+
+
+
                 let res = {
                     lat: parseFloat(m.getAttribute('lat')),
                     lng: parseFloat(m.getAttribute('long')),
-                    content: m.innerHTML,
+                    content: `${additionalCss}<div class="container">
+                      <div class="card">
+                        <div class="side front">
+                         <img src="${m.getAttribute('img-src')}" />
+                        </div>
+                        <div class="side back">
+                          ${m.innerHTML}
+                        </div>
+                      </div>
+                    </div>
+ ` ,
+
                 };
 
                 if (m.getAttribute('icon')) res.icon = m.getAttribute('icon')
+
                 m.innerHTML = '';
                 return res;
             });
@@ -123,8 +170,4 @@ export default class GoogleMaps extends Shadow() {
         this.map = gMap;
         this.html = this.container;
     }
-
-
-
-
 };
