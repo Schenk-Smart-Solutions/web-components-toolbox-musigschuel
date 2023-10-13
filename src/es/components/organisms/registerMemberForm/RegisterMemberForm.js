@@ -59,7 +59,7 @@ export default class RegisterMemberForm extends Shadow() {
 
         try {
             const response = await fetch('/api/registerMember', {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
