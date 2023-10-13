@@ -6,8 +6,6 @@ export default class GMapsMarker extends Shadow() {
     }
 
 
-
-
     connectedCallback() {
 
     }
