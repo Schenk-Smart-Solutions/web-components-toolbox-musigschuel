@@ -60,7 +60,7 @@ export default class Login extends Shadow() {
           </div>
         `;
 
-        this.root.querySelector('input[type="button"]').addEventListener('click', () => this.login());
+        this.root.querySelector('input[type="submit"]').addEventListener('click', () => this.login());
         this.root.querySelector('#logoutButton').addEventListener('click', () => this.logout());
         this.updateView();
     }
