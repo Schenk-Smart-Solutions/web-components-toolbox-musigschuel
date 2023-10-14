@@ -8,26 +8,67 @@ export default class RegisterMemberForm extends Shadow() {
 
     connectedCallback() {
         this.render();
+        this.renderCss();
+    }
+
+    renderCss() {
+        this.css = `
+            :host {
+                background-color: rgba(0,0,0,0.2);
+                padding: 1rem;
+            }
+            #registerForm {
+                       display: grid;
+                       grid-template: "a b"
+                                      "c d"
+                                      "e f"
+                                      "g h"
+                                      "i j"
+                                      "k";  
+            }
+           #registerForm > input[type=text],
+           #registerForm > input[type=password],
+           #registerForm > input[type=email] {
+                margin-bottom: 1rem;
+            }
+
+           #registerForm > input[type=submit] {
+                padding: 0.5rem;
+                border-radius: 10px;
+                font-weight: 600;
+            }
+
+           #registerForm > :nth-child(11) {
+                margin: 1rem 0;
+                justify-self: end;
+            }
+
+        `;
     }
 
     render() {
         this.html = `
       <form id="registerForm">
         <label>
-          Name: <input type="text" id="lastName" name="lastName">
+          Name: 
         </label>
+        <input type="text" id="lastName" name="lastName">
         <label>
-          Vorname: <input type="text" id="firstName" name="firstName">
+          Vorname: 
         </label>
+        <input type="text" id="firstName" name="firstName">
         <label>
-          Email: <input type="email" id="email" name="email">
+          Email: 
         </label>
+        <input type="email" id="email" name="email">
         <label>
-          Passwort: <input type="password" id="password" name="password">
+          Passwort: 
         </label>
+        <input type="password" id="password" name="password">
         <label>
-          Passwort wiederholen: <input type="password" id="repeatPassword" name="repeatPassword">
+          Passwort wiederholen: 
         </label>
+        <input type="password" id="repeatPassword" name="repeatPassword">
         <input type="submit" value="Absenden">
       </form>
       <div id="message"></div>
