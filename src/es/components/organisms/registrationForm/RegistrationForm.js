@@ -30,17 +30,31 @@ export default class RegisterMemberForm extends Shadow() {
            #registerForm > input[type=password],
            #registerForm > input[type=email] {
                 margin-bottom: 1rem;
+                padding: 0.5rem;
+                font-size: 1.25rem:
             }
 
-           #registerForm > input[type=submit] {
+           #registerForm > button {
                 padding: 0.5rem;
-                border-radius: 10px;
                 font-weight: 600;
+                font-size: 1.25rem;
+                padding: 0.5rem;
+                color: white;
+                background-color: #000000;
+            }
+
+           #registerForm > button:hover {
+                color: var(--color-tertiary);
+                cursor: pointer;
             }
 
            #registerForm > :nth-child(11) {
                 margin: 1rem 0;
                 justify-self: end;
+            }
+            
+           #registerForm > label {
+                font-weight: 600;
             }
 
         `;
@@ -48,7 +62,7 @@ export default class RegisterMemberForm extends Shadow() {
 
     render() {
         this.html = `
-      <form id="registerForm">
+      <div id="registerForm">
         <label>
           Name: 
         </label>
@@ -69,17 +83,32 @@ export default class RegisterMemberForm extends Shadow() {
           Passwort wiederholen: 
         </label>
         <input type="password" id="repeatPassword" name="repeatPassword">
-        <input type="submit" value="Absenden">
-      </form>
-      <div id="message"></div>
+        <button id="submitButton">Senden</button>
+      </div>
+      <div id="message" style="display: none;"></div>
     `;
 
-        this.root.querySelector('#registerForm').addEventListener('submit', this.submitForm.bind(this));
+        this.root.querySelector('#submitButton').addEventListener('click', () => this.submit());
+        this.updateView();
     }
 
-    async submitForm(e) {
-        e.preventDefault();
+    updateView() {
 
+        const formDiv = this.root.querySelector('#registerForm');
+        const messageDiv = this.root.querySelector('#message');
+
+
+        if (this._isRegistered) {
+            formDiv.style.display = 'none';
+            messageDiv.style.display = 'block';
+       } else {
+            formDiv.style.display = 'grid';
+            messageDiv.style.display = 'none';
+        }
+            
+    }
+
+    async submit() {
         const lastName = this.root.querySelector('#lastName').value;
         const firstName = this.root.querySelector('#firstName').value;
         const email = this.root.querySelector('#email').value;
@@ -112,15 +141,19 @@ export default class RegisterMemberForm extends Shadow() {
             }
 
             this.showMessage('Erfolgreich registriert!', 'success');
+            this._isRegistered = true;
         } catch (error) {
             this.showMessage(error.message, 'error');
         }
+
+        this.updateView();
     }
 
     showMessage(message, type) {
         const messageDiv = this.root.querySelector('#message');
         messageDiv.textContent = message;
         messageDiv.classList.add(type);
+        this.updateView();
     }
 }
 

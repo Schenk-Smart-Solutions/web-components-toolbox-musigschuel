@@ -26,14 +26,29 @@ export default class Login extends Shadow() {
                                "c d"
                                "e";       
             }
-            #authForm > input[type=text] {
+            #authForm > input[type=text],
+            #authForm > input[type=password] {
                 margin-bottom: 1rem;
+                padding: 0.5rem;
+                font-size: 1.25rem:
             }
 
-            #authForm > input[type=submit] {
-                padding: 0.5rem;
-                border-radius: 10px;
+            #authForm > label {
                 font-weight: 600;
+            }
+
+            #authForm > button {
+                padding: 0.5rem;
+                font-weight: 600;
+                font-size: 1.25rem;
+                padding: 0.5rem;
+                color: white;
+                background-color: #000000;
+            }
+
+            #authForm > button:hover {
+                color: var(--color-tertiary);
+                cursor: pointer;
             }
             
             #authForm > :nth-child(5) {
@@ -47,20 +62,20 @@ export default class Login extends Shadow() {
 
     render() {
         this.html = `
-          <form id="authForm">
+          <div id="authForm">
             <label for="username">${this.getAttribute('label-username')}:</label>
             <input type="text" id="username" name="username">
             <label for="password">${this.getAttribute('label-password')}:</label>
             <input type="password" id="password" name="password">
-            <input type="submit" value="${this.getAttribute('label-login-button')}">
-          </form>
+            <button id="loginButton">${this.getAttribute('label-login-button')}</button>
+          </div>
           <div id="logoutDiv" style="display: none;">
             <div id="loginInfo"></div>
             <button id="logoutButton">${this.getAttribute('label-logout-button')}</button>
           </div>
         `;
 
-        this.root.querySelector('input[type="submit"]').addEventListener('click', () => this.login());
+        this.root.querySelector('#loginButton').addEventListener('click', () => this.login());
         this.root.querySelector('#logoutButton').addEventListener('click', () => this.logout());
         this.updateView();
     }
@@ -111,8 +126,6 @@ export default class Login extends Shadow() {
     }
 
     async logout() {
-
-
         const response = await fetch('/api/logout', {
             method: 'GET'
         });
