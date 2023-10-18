@@ -43,12 +43,12 @@
   --bg-line-height: 1.5em;
   --button-category-background-color-custom:var(--color-quaternary);
   --button-category-background-color-hover-mobile-custom: var(--color-quaternary);
-  --color-active: #F0DD5B;
+  --color-active: #f3d6ae;
   --color-disabled: gray;
-  --color-hover: goldenrod;
-  --color-quaternary: #F0DD5B;
+  --color-hover: var(--color-quaternary);
+  --color-quaternary: #af9878;
   --color-secondary: black;
-  --color-tertiary: #F0DD5B;
+  --color-tertiary: #9d835d;
   --details-default-svg-color-custom: var(--color-tertiary);
   --download-box-shadow-color-custom: var(--download-color-custom);
   --download-color-custom: var(--color-tertiary);
@@ -76,7 +76,8 @@
   --header-default-a-font-family: var(--font-family-secondary);
   --header-default-a-logo-top-custom: calc(61px / 2 - 24px / 2);
   --header-default-a-logo-top-mobile-custom: 1.75em;
-  --header-default-logo-width-custom: min(11em, 127px);
+  --header-default-content-spacing-mobile: 0;
+  --header-default-logo-width-custom: min(14em, 201px);
   --header-default-margin-custom: 0 auto var(--content-spacing);
   --header-default-margin-mobile-custom: 0 auto var(--content-spacing-mobile);
   --hr-border-bottom: 2px dotted var(--m-gray-600);
@@ -91,6 +92,7 @@
   --news-alnatura-line-height-mobile:100%;
   --news-alnatura-line-height:100%;
   --picture-close-btn-background-color:var(--color-secondary);
+  --search-input-border-radius: 0.5em;
   --teaser-round-figcaption-color: var(--color-secondary);
   --teaser-tile-rounded-h6-figcaption-color-custom: var(--color-secondary);
   --title-border-display: none;
