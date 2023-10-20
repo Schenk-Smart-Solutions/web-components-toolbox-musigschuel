@@ -8,7 +8,6 @@ export default class Login extends Shadow() {
 
     connectedCallback() {
         this._isLoggedIn = localStorage.getItem('username') && localStorage.getItem('token');
-        console.log(this._isLoggedIn);
         this.render();
         this.renderCss();
     }
