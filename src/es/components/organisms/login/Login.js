@@ -121,6 +121,7 @@ export default class Login extends Shadow() {
         const data = await response.json();
         localStorage.setItem('token', data.token);
         localStorage.setItem('username', data.user.displayName);
+        localStorage.setItem('userEMail', data.user.email)
         this.updateView();
     }
 

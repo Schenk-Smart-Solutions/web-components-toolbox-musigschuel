@@ -41,15 +41,14 @@ export default class  Value extends Shadow() {
 
             .line {
                 height: 1px;
-                width: 60%;
                 background-color: #000000;
             }
 
             .value {
-                width: 60%;
                 margin-top: 0.25rem;
                 display: flex;
                 justify-content: flex-end;
+                text-align: right;
             }
         `;
     }
@@ -63,7 +62,7 @@ export default class  Value extends Shadow() {
         this.line = document.createElement('DIV');
         this.line.className = 'line';
         this.container.appendChild(this.line);
-        this.value = document.createElement('DIV');
+        this.value = this.getAttribute("asAddress") ? document.createElement('ADDRESS') : document.createElement('DIV');
         this.value.className = 'value';
         this.value.innerText = this.getAttribute('value');
         this.container.appendChild(this.value);
