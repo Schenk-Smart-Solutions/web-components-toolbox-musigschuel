@@ -9,6 +9,20 @@ export default class GoogleMaps extends Shadow() {
     }
 
     connectedCallback() {
+        this.visibleSloganIndex = 0;
+        this.sloganDiv = this.getSlogan();
+
+        setInterval(() => {
+            this.slogans[this.visibleSloganIndex].classList.remove('visible');
+
+            if (this.visibleSloganIndex < this.slogans.length - 1)
+                this.visibleSloganIndex++;
+            else
+                this.visibleSloganIndex = 0;
+
+            this.slogans[this.visibleSloganIndex].classList.add('visible');
+        }, 10000);
+
         if (this.shouldComponentRenderCSS()) this.renderCSS();
         if (this.shouldComponentRenderHTML()) this.renderMap();
     }
@@ -27,6 +41,10 @@ export default class GoogleMaps extends Shadow() {
 
     renderCSS() {
         this.css = `
+            :host > div {
+                width: 100%; 
+          
+            }
             div.g-maps {
                 height: 50vh;
                 color: #000000;
@@ -46,16 +64,58 @@ export default class GoogleMaps extends Shadow() {
                 height: 3rem;
                 font-size: 2rem;
                 margin-bottom: 1rem;
+                font-size: 1rem;
+                box-sizing: border-box;
                 padding: 0 0.5rem;
+   
             }
 
             input::placeholder {
               font-weight: bold;
               opacity: 0.5;
-              font-size: 1.2rem;
+              font-size: 1rem;
+    
             }
 
-           
+            .slogan-container {
+               position: relative;
+               height: 4rem;
+               width: 100%;
+               margin-bottom: 1rem;
+            }
+
+            .slogan-container div {
+               font-size: 1rem;
+               font-weight: bold;
+               width: 100%;
+               top: 0;
+               left: 0;
+               position: absolute;
+               transition: opacity 2s ease-in-out;
+               opacity: 0;
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               text-align: center;
+               height: 100%;
+               text-transform: uppercase;
+               background-color: #000000;
+               color: white;
+            }
+
+            .slogan-container div.visible {
+                opacity: 1;
+            }
+            
+
+            .search-container {
+    
+ 
+            }
+            
+            .search-container input {
+                width: 100%;
+            }
 
         `;
     }
@@ -90,22 +150,54 @@ export default class GoogleMaps extends Shadow() {
         });
     }
 
+
+    getSlogan() {
+        const sloganContainer = document.createElement('DIV');
+        sloganContainer.className = 'slogan-container';
+        this.sloganPanels = [];
+
+       this.slogans = Array.from(this.shadowRoot.querySelectorAll('ms-a-slogan')).map((s, i) => {
+           const panel = document.createElement('DIV');
+           if (i === 0) panel.classList.add('visible');
+
+           if (i % 2 === 0) {
+               panel.classList.add('inverse');
+           }
+           panel.innerHTML = s.innerHTML;
+           return panel;
+        });
+
+       this.slogans.forEach(s => sloganContainer.appendChild(s));
+       return sloganContainer;
+    }
+
     renderMap() {
         this.container = document.createElement('DIV');
         this.map = document.createElement('DIV');
+
         if (this.hasAttribute('show-search')) {
-            
-            
+            this.searchContainer = document.createElement('DIV');
+            this.searchContainer.className = 'search-container';
             this.searchField = document.createElement('INPUT');
+
+
             this.searchField.addEventListener('change', this.handleSearchChange);
+            
             if (this.hasAttribute('search-label') && this.getAttribute('search-label') !== '') {
                 this.searchField.setAttribute('placeholder', this.getAttribute('search-label'));
             }
-            this.container.appendChild(this.searchField);
+            this.searchContainer.appendChild(this.searchField);
+            this.container.appendChild(this.searchContainer);
+
         }
-     
+
+        if (this.slogans && this.slogans.length > 0) {
+            this.container.appendChild(this.sloganDiv);
+        }
+
         this.map.className = 'g-maps';
         this.map.setAttribute('id', 'map');
+
         this.container.appendChild(this.map);
         const additionalCss = `
              <style>
