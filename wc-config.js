@@ -170,15 +170,15 @@
   './src/es/components/', // baseUrl
   [
     {
-      selector: 'ms-m-',
-      url: 'molecules/',
-      separateFolder: true
-    },
-    {
       selector: 'ms-a-',
       url: 'atoms/',
       separateFolder: true
 
+    },
+    {
+      selector: 'ms-m-',
+      url: 'molecules/',
+      separateFolder: true
     },
     {
       selector: 'ms-o-',
