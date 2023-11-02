@@ -52,23 +52,6 @@ export default class Logo extends Shadow() {
     this.setAttribute('lang', document.documentElement.getAttribute('lang') || 'de')
 
     let timeout = null
-    this.resizeListener = event => {
-      clearTimeout(timeout)
-      timeout = setTimeout(() => {
-        if (this.text) {
-          this.css = /* css */`
-          :host > ${this.textSelector}{
-            width: var(--text-width, ${this.a.getBoundingClientRect().width}px);
-          }
-          @media only screen and (max-width: _max-width_) {
-            :host > ${this.textSelector}{
-              width: var(--text-width-mobile, ${this.a.getBoundingClientRect().width}px);
-            }
-          }
-        `
-        }
-      }, 200)
-    }
     this.clickListener = event => {
       if (!this.getAttribute('href')) return
       self.open(this.getAttribute('href'))
@@ -78,12 +61,10 @@ export default class Logo extends Shadow() {
   connectedCallback () {
     if (this.shouldRenderCSS()) this.renderCSS()
     if (this.shouldRenderHTML()) this.renderHTML()
-    self.addEventListener('resize', this.resizeListener)
     this.addEventListener('click', this.clickListener)
   }
 
   disconnectedCallback () {
-    self.removeEventListener('resize', this.resizeListener)
     this.removeEventListener('click', this.clickListener)
   }
 
@@ -102,7 +83,7 @@ export default class Logo extends Shadow() {
    * @return {boolean}
    */
   shouldRenderHTML () {
-    return !this.a
+    return !this.svg
   }
 
   /**
@@ -638,8 +619,8 @@ export default class Logo extends Shadow() {
     }))
   }
 
-  get a () {
-    return this.root.querySelector('a')
+  get svg () {
+    return this.root.querySelector('svg')
   }
 
   get text () {
