@@ -1,4 +1,4 @@
-<m-simple-form load-form-styles namespace="simple-form-default-" api-endpoint="endpoint">
+<m-simple-form load-form-styles namespace="simple-form-default-">
     <form action="/some-action" enctype="multipart/form-data" method="post">
       <input type="hidden" name="xp_sendBackParams" value="0" />
       <div class="inline">
@@ -23,7 +23,7 @@
       </div>
       <div class="inline">
         <label validation-message="datenschutz einverstanden?" for="Policy">Ich bestätige, dass ich die <a href="https://www.migros.ch/de/datenschutz.html" target="_blank">Datenschutzerklärung</a> und die darin umschriebene Bearbeitung meiner Personendaten zur Kenntnis genommen haben.</label>
-        <input id="Policy" name="Policy" required="" type="checkbox" value="false" />
+        <input id="Policy" name="Policy" required="" type="checkbox" />
       </div>
       <input type="submit" value="Registrieren" />
     </form>
