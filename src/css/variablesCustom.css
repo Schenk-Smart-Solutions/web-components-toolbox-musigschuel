@@ -76,6 +76,7 @@
   --header-default-a-font-family: var(--font-family-secondary);
   --header-default-a-logo-top-custom: calc(61px / 2 - 24px / 2);
   --header-default-a-logo-top-mobile-custom: 1.75em;
+  --header-default-a-menu-icon-border-radius-custom: none;
   --header-default-content-spacing-mobile: 0;
   --header-default-logo-width-custom: min(14em, 201px);
   --header-default-margin-custom: 0 auto var(--content-spacing);

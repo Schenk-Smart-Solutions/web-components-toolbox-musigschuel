@@ -1,12 +1,7 @@
-<m-simple-form load-form-styles type="search">
-    <form action="/apiEndpoint" enctype="multipart/form-data" method="post">
-      <input type="hidden" name="ac" value="reg" />
-      <input type="hidden" name="clientCode" value="ASrrB9ASTmKaGVqEBe" />
-      <input type="hidden" name="doubleOptin" value="1" />
+<m-simple-form load-form-styles namespace="simple-form-default-" api-endpoint="endpoint">
+    <form action="/some-action" enctype="multipart/form-data" method="post">
       <input type="hidden" name="xp_sendBackParams" value="0" />
-      <input type="hidden" name="trackId" value="null" id="trackId" />
-      <input type="hidden" name="Sprache" value="en" id="Sprache" />
-      <div style="display: flex; gap: 1em;">
+      <div class="inline">
         <label for="anrede1">Herr</label>
         <input id="anrede1" name="Anrede" type="radio" value="2" checked />
         <label for="anrede2">Frau</label>
@@ -15,21 +10,20 @@
         <input id="anrede3" name="Anrede" type="radio" value="3" />
       </div>
       <div>
-        <label for="Name">Name</label>
-        <input id="Name" type="text" required="" value="" name="Name" placeholder="Name hier eingeben..."  autocomplete="off" validation-message="Name ist ungültig" />
+        <label validation-message="Name ist ungültig" for="Name">Name</label>
+        <input id="Name" type="text" required="" value="" name="Name" placeholder="Name hier eingeben..."  autocomplete="off" />
       </div>
       <div>
-        <label for="Firstname">Vorname</label>
-        <input id="Firstname" type="text" required="" value="" name="Vorname" placeholder="Vorname hier eingeben..." autocomplete="off" validation-message="Vorname ist ungültig" />
+        <label validation-message="Vorname ist ungültig" for="Firstname">Vorname</label>
+        <input id="Firstname" type="text" required="" value="" name="Vorname" placeholder="Vorname hier eingeben..." autocomplete="off" />
       </div>
       <div>
-        <label for="Email">E-Mail</label>
-        <input id="Email" type="email" required="" value="" name="Email" placeholder="Email hier eingeben..." autocomplete="off" validation-message="Ungültige Email Ungültige Email Ungültige Email" />
+        <label validation-message="Ungültige Email" for="Email">E-Mail</label>
+        <input id="Email" type="email" required="" value="" name="Email" placeholder="Email hier eingeben..." autocomplete="off" />
       </div>
-      <div></div>
-      <div style="display: flex; gap: 1em;">
-        <label class="normal" for="Policy">Ich bestätige, dass ich die <a href="https://www.migros.ch/de/datenschutz.html" target="_blank">Datenschutzerklärung</a> und die darin umschriebene Bearbeitung meiner Personendaten zur Kenntnis genommen haben.</label>
-        <input reverse id="Policy" name="Policy" required="" type="checkbox" value="false" validation-message="datenschutz einverstanden?" />
+      <div class="inline">
+        <label validation-message="datenschutz einverstanden?" for="Policy">Ich bestätige, dass ich die <a href="https://www.migros.ch/de/datenschutz.html" target="_blank">Datenschutzerklärung</a> und die darin umschriebene Bearbeitung meiner Personendaten zur Kenntnis genommen haben.</label>
+        <input id="Policy" name="Policy" required="" type="checkbox" value="false" />
       </div>
       <input type="submit" value="Registrieren" />
     </form>
