@@ -1,27 +1,22 @@
-﻿import { Shadow } from '../../web-components-toolbox/src/es/components/prototypes/Shadow.js';
+import { Shadow } from '../../web-components-toolbox/src/es/components/prototypes/Shadow.js'
 
 export default class EditProfileForm extends Shadow() {
+  constructor (...args) {
+    super(...args)
+  }
 
-    constructor(...args) {
-        super(...args);
-    }
+  connectedCallBack () {
 
+  }
 
-    connectedCallBack() {
+  renderCss () { }
 
-    }
-
-    renderCss() { }
-
-
-    render() {
-        this.html = `
+  render () {
+    this.html = `
             <div id="edit-form">
                 <label></label>
             </div>
 
-        `;     
-    }
-
-
+        `
+  }
 }

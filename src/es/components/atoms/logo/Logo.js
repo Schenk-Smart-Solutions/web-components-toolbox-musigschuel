@@ -51,7 +51,6 @@ export default class Logo extends Shadow() {
     this.textSelector = ':not(img):not(a):not(style):not(script)'
     this.setAttribute('lang', document.documentElement.getAttribute('lang') || 'de')
 
-    let timeout = null
     this.clickListener = event => {
       if (!this.getAttribute('href')) return
       self.open(this.getAttribute('href'))
@@ -609,7 +608,6 @@ export default class Logo extends Shadow() {
     `
     this.dispatchEvent(new CustomEvent(this.getAttribute('logo-load') || 'logo-load', {
       detail: {
-        origEvent: event,
         child: this,
         img: this.img
       },

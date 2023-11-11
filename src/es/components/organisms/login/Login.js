@@ -1,20 +1,18 @@
-﻿import { Shadow } from '../../web-components-toolbox/src/es/components/prototypes/Shadow.js';
+import { Shadow } from '../../web-components-toolbox/src/es/components/prototypes/Shadow.js'
 
 export default class Login extends Shadow() {
+  constructor (...args) {
+    super(...args)
+  }
 
-    constructor(...args) {
-        super(...args);
-    }
+  connectedCallback () {
+    this._isLoggedIn = localStorage.getItem('username') && localStorage.getItem('token')
+    this.render()
+    this.renderCss()
+  }
 
-    connectedCallback() {
-        this._isLoggedIn = localStorage.getItem('username') && localStorage.getItem('token');
-        this.render();
-        this.renderCss();
-    }
-
-
-    renderCss() {
-        this.css = `
+  renderCss () {
+    this.css = `
             :host {
                 background-color: rgba(0,0,0,0.2);
                 padding: 1rem;
@@ -56,11 +54,11 @@ export default class Login extends Shadow() {
             }
 
 
-        `;
-    }
+        `
+  }
 
-    render() {
-        this.html = `
+  render () {
+    this.html = `
           <div id="authForm">
             <label for="username">${this.getAttribute('label-username')}:</label>
             <input type="text" id="username" name="username">
@@ -72,71 +70,68 @@ export default class Login extends Shadow() {
             <div id="loginInfo"></div>
             <button id="logoutButton">${this.getAttribute('label-logout-button')}</button>
           </div>
-        `;
+        `
 
-        this.root.querySelector('#loginButton').addEventListener('click', () => this.login());
-        this.root.querySelector('#logoutButton').addEventListener('click', () => this.logout());
-        this.updateView();
+    this.root.querySelector('#loginButton').addEventListener('click', () => this.login())
+    this.root.querySelector('#logoutButton').addEventListener('click', () => this.logout())
+    this.updateView()
+  }
+
+  updateView () {
+    const form = this.root.querySelector('#authForm')
+    const logoutDiv = this.root.querySelector('#logoutDiv')
+    const loginInfo = this.root.querySelector('#loginInfo')
+
+    if (this._isLoggedIn) {
+      form.style.display = 'none'
+      logoutDiv.style.display = 'block'
+      loginInfo.innerHTML = `${this.getAttribute('welcome-text').replace('[[username]]', `<strong>${localStorage.getItem('username')}</strong>`)}`
+    } else {
+      form.style.display = 'grid'
+      logoutDiv.style.display = 'none'
+    }
+  }
+
+  async login () {
+    const username = this.root.querySelector('#username').value
+    const password = this.root.querySelector('#password').value
+
+    const response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username,
+        password
+      })
+    })
+
+    if (!response.ok) {
+      this._isLoggedIn = false
+      return
     }
 
+    this._isLoggedIn = true
+    const data = await response.json()
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('username', data.user.displayName)
+    localStorage.setItem('userEMail', data.user.email)
+    this.updateView()
+  }
 
-    updateView() {
-        const form = this.root.querySelector('#authForm');
-        const logoutDiv = this.root.querySelector('#logoutDiv');
-        const loginInfo = this.root.querySelector('#loginInfo');
+  async logout () {
+    const response = await fetch('/api/logout', {
+      method: 'GET'
+    })
+    localStorage.removeItem('token')
+    localStorage.removeItem('username')
 
-        
-
-        if (this._isLoggedIn) {
-            form.style.display = 'none';
-            logoutDiv.style.display = 'block';
-            loginInfo.innerHTML = `${this.getAttribute('welcome-text').replace('[[username]]', `<strong>${localStorage.getItem('username')}</strong>`)}`; 
-        } else {
-            form.style.display = 'grid';
-            logoutDiv.style.display = 'none';
-        }
+    if (!response.ok) {
+      console.error('Logout fehlgeschlagen:', response.status)
+      return
     }
-
-    async login() {
-        const username = this.root.querySelector('#username').value;
-        const password = this.root.querySelector('#password').value;
-
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username,
-                password
-            })
-        });
-
-        if (!response.ok) {
-            this._isLoggedIn = false;
-            return;
-        }
-
-        this._isLoggedIn = true;
-        const data = await response.json();
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('username', data.user.displayName);
-        localStorage.setItem('userEMail', data.user.email)
-        this.updateView();
-    }
-
-    async logout() {
-        const response = await fetch('/api/logout', {
-            method: 'GET'
-        });
-        localStorage.removeItem('token');
-        localStorage.removeItem('username');
-        
-        if (!response.ok) {
-            console.error('Logout fehlgeschlagen:', response.status);
-            return;
-        }
-        this._isLoggedIn = false;
-        this.updateView();
-    }
+    this._isLoggedIn = false
+    this.updateView()
+  }
 }

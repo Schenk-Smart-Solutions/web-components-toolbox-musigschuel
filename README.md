@@ -5,4 +5,8 @@ The web component toolbox for any CMS but particularly used for [Web Components 
 
 TODO
 
-- [] http://musigschuel-dev.schenk-smart-solutions.ch/swagger/index.html
+- [x] http://musigschuel-dev.schenk-smart-solutions.ch/swagger/index.html
+- [ ] Form Pictures (input type file) fetch support
+- [ ] Edit Profile Instruments and Coordinates options with dynamic field adds and removes
+- [ ] Profile Pages styling
+- [ ] Home Map Instrument filter

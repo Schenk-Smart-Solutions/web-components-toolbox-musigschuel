@@ -67,8 +67,8 @@
   --footer-default-invert-svg-color-custom: var(--background-color);
   --footer-default-invert-svg-color-hover-custom: var(--color-tertiary);
   --h-color: var(--color-secondary);
-  --h1-font-size: calc(1.5 * 1.75em);
-  --h3-font-size: 1em;
+  --h2-font-family: var(--font-family-bold);
+  --h2-font-weight: bold;
   --h6-font-family: var(--font-family-secondary);
   --h6-font-size: var(--h2-font-size, 1.5em);
   --header-default-a-color-custom: var(--background-color);
@@ -94,7 +94,9 @@
   --news-alnatura-line-height:100%;
   --picture-close-btn-background-color:var(--color-secondary);
   --search-input-border-radius: 0.5em;
+  --teaser-plain-figcaption-justify-content-custom: flex-start;
   --teaser-round-figcaption-color: var(--color-secondary);
   --teaser-tile-rounded-h6-figcaption-color-custom: var(--color-secondary);
   --title-border-display: none;
+  --wrapper-teaser-justify-content-custom: center;
 }

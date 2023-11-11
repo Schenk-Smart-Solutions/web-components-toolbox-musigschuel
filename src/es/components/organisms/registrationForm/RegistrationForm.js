@@ -1,18 +1,17 @@
-﻿import { Shadow } from '../../web-components-toolbox/src/es/components/prototypes/Shadow.js';
+import { Shadow } from '../../web-components-toolbox/src/es/components/prototypes/Shadow.js'
 
 export default class RegisterMemberForm extends Shadow() {
+  constructor (...args) {
+    super(...args)
+  }
 
-    constructor(...args) {
-        super(...args);
-    }
+  connectedCallback () {
+    this.render()
+    this.renderCss()
+  }
 
-    connectedCallback() {
-        this.render();
-        this.renderCss();
-    }
-
-    renderCss() {
-        this.css = `
+  renderCss () {
+    this.css = `
             :host {
                 background-color: rgba(0,0,0,0.2);
                 padding: 1rem;
@@ -57,11 +56,11 @@ export default class RegisterMemberForm extends Shadow() {
                 font-weight: 600;
             }
 
-        `;
-    }
+        `
+  }
 
-    render() {
-        this.html = `
+  render () {
+    this.html = `
       <div id="registerForm">
         <label>
           Name: 
@@ -86,74 +85,70 @@ export default class RegisterMemberForm extends Shadow() {
         <button id="submitButton">Senden</button>
       </div>
       <div id="message" style="display: none;"></div>
-    `;
+    `
 
-        this.root.querySelector('#submitButton').addEventListener('click', () => this.submit());
-        this.updateView();
+    this.root.querySelector('#submitButton').addEventListener('click', () => this.submit())
+    this.updateView()
+  }
+
+  updateView () {
+    const formDiv = this.root.querySelector('#registerForm')
+    const messageDiv = this.root.querySelector('#message')
+
+    if (this._isRegistered) {
+      formDiv.style.display = 'none'
+      messageDiv.style.display = 'block'
+    } else {
+      formDiv.style.display = 'grid'
+      messageDiv.style.display = 'none'
+    }
+  }
+
+  async submit () {
+    const lastName = this.root.querySelector('#lastName').value
+    const firstName = this.root.querySelector('#firstName').value
+    const email = this.root.querySelector('#email').value
+    const password = this.root.querySelector('#password').value
+    const repeatPassword = this.root.querySelector('#repeatPassword').value
+
+    if (password !== repeatPassword) {
+      this.showMessage('Passwörter stimmen nicht überein!', 'error')
+      return
     }
 
-    updateView() {
-
-        const formDiv = this.root.querySelector('#registerForm');
-        const messageDiv = this.root.querySelector('#message');
-
-
-        if (this._isRegistered) {
-            formDiv.style.display = 'none';
-            messageDiv.style.display = 'block';
-       } else {
-            formDiv.style.display = 'grid';
-            messageDiv.style.display = 'none';
-        }
-            
+    const data = {
+      email,
+      password,
+      firstName,
+      lastName
     }
 
-    async submit() {
-        const lastName = this.root.querySelector('#lastName').value;
-        const firstName = this.root.querySelector('#firstName').value;
-        const email = this.root.querySelector('#email').value;
-        const password = this.root.querySelector('#password').value;
-        const repeatPassword = this.root.querySelector('#repeatPassword').value;
+    try {
+      const response = await fetch('/api/registerMember', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
 
-        if (password !== repeatPassword) {
-            this.showMessage('Passwörter stimmen nicht überein!', 'error');
-            return;
-        }
+      if (!response.ok) {
+        throw new Error('Fehler beim Senden der Anforderung')
+      }
 
-        const data = {
-            email,
-            password,
-            firstName,
-            lastName
-        };
-
-        try {
-            const response = await fetch('/api/registerMember', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (!response.ok) {
-                throw new Error('Fehler beim Senden der Anforderung');
-            }
-
-            this.showMessage('Erfolgreich registriert!', 'success');
-            this._isRegistered = true;
-        } catch (error) {
-            this.showMessage(error.message, 'error');
-        }
-
-        this.updateView();
+      this.showMessage('Erfolgreich registriert!', 'success')
+      this._isRegistered = true
+    } catch (error) {
+      this.showMessage(error.message, 'error')
     }
 
-    showMessage(message, type) {
-        const messageDiv = this.root.querySelector('#message');
-        messageDiv.textContent = message;
-        messageDiv.classList.add(type);
-        this.updateView();
-    }
+    this.updateView()
+  }
+
+  showMessage (message, type) {
+    const messageDiv = this.root.querySelector('#message')
+    messageDiv.textContent = message
+    messageDiv.classList.add(type)
+    this.updateView()
+  }
 }
-
