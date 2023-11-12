@@ -9,7 +9,7 @@ export default class GMapsMarker extends Shadow() {
           <div class="card">
             <div class="side front">
               <a-picture
-                namespace="picture-scale-up-"
+                namespace="picture-cover-"
                 defaultSource="${this.getAttribute('img-src')}"
               ></a-picture>
             </div>

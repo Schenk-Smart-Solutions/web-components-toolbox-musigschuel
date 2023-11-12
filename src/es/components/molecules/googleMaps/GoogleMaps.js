@@ -66,7 +66,10 @@ export default class GoogleMaps extends Shadow() {
         height: 10em;
         position: relative;
         perspective: 1000px;
-        
+        overflow: hidden;
+      }
+      .container:hover {
+        overflow: auto;
       }
       .card {
         position: absolute;
@@ -88,7 +91,7 @@ export default class GoogleMaps extends Shadow() {
         display: flex;
         align-items: center;
         justify-content: center;
-        overflow: hidden;
+        width: 100%;
         height: 100%;
       }
       .card .back {
