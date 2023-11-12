@@ -10,6 +10,20 @@ export default class GoogleMaps extends Shadow() {
     super({ importMetaUrl: import.meta.url, ...options }, ...args)
 
     this.MAP_URL = this.getAttribute('url') || `${location.protocol || 'http:'}//maps.googleapis.com/maps/api/js?key=${this.getAttribute('key') || 'AIzaSyDDxevvZBiDT7FSimv6nI4tg3UTVJ7qewE'}&libraries=geometry&language=${document.documentElement.getAttribute('lang') || 'de'}`
+  
+    // scroll card container back to top on mouse out to not hide the picture on overflow hidden
+    const addedMouseOutNodes = []
+    this.clickEventListener = event => {
+      const containers = this.root.querySelectorAll('.container')
+      containers.forEach(container => {
+        if (!addedMouseOutNodes.includes(container)) {
+          addedMouseOutNodes.push(container)
+          container.addEventListener('mouseout', event => {
+            if (!container.matches(':hover')) container.scrollTop = 0
+          })
+        }
+      })
+    }
   }
 
   connectedCallback () {
@@ -19,10 +33,12 @@ export default class GoogleMaps extends Shadow() {
     if (this.shouldRenderHTML()) showPromises.push(this.renderHTML())
     Promise.all(showPromises).then(() => (this.hidden = false))
     document.body.addEventListener('request-map-search', this.handleSearchChange)
+    this.addEventListener('click', this.clickEventListener)
   }
 
   disconnectedCallback () {
     document.body.removeEventListener('request-map-search', this.handleSearchChange)
+    this.removeEventListener('click', this.clickEventListener)
   }
 
   /**
