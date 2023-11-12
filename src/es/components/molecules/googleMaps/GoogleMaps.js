@@ -9,7 +9,7 @@ export default class GoogleMaps extends Shadow() {
   constructor (options = {}, ...args) {
     super({ importMetaUrl: import.meta.url, ...options }, ...args)
 
-    this.MAP_URL = `http://maps.googleapis.com/maps/api/js?key=${this.getAttribute('key') || 'AIzaSyDDxevvZBiDT7FSimv6nI4tg3UTVJ7qewE'}&libraries=geometry&language=de`
+    this.MAP_URL = this.getAttribute('url') || `${location.protocol || 'http:'}//maps.googleapis.com/maps/api/js?key=${this.getAttribute('key') || 'AIzaSyDDxevvZBiDT7FSimv6nI4tg3UTVJ7qewE'}&libraries=geometry&language=${document.documentElement.getAttribute('lang') || 'de'}`
   }
 
   connectedCallback () {
@@ -133,7 +133,15 @@ export default class GoogleMaps extends Shadow() {
    * @return {Promise<void>}
    */
   renderHTML () {
-    return this.loadDependency().then(googleMap => {
+    return Promise.all([
+      this.loadDependency(),
+      this.fetchModules([
+        {
+          path: `${this.importMetaUrl}../../web-components-toolbox/src/es/components/atoms/picture/Picture.js`,
+          name: 'a-picture'
+        }
+      ])
+    ]).then(() => {
       this.container = document.createElement('DIV')
       this.map = document.createElement('DIV')
 
