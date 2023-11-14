@@ -1,5 +1,19 @@
-<m-simple-form load-form-styles namespace="simple-form-default-">
-    <form action="/some-action" enctype="multipart/form-data" method="post">
+<m-simple-form
+  load-form-styles
+  namespace="simple-form-default-"
+  endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/..."
+  method="POST"
+  schema="{
+    'xp_sendBackParams': 'number',
+    'Anrede': 'string',
+    'Name': 'string',
+    'Firstname': 'string',
+    'Email': 'email',
+    'File': 'base64',
+    'Policy': 'boolean'
+  }"
+>
+    <form>
       <input type="hidden" name="xp_sendBackParams" value="0" />
       <div class="inline">
         <label for="anrede1">Herr</label>
