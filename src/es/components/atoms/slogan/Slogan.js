@@ -17,7 +17,7 @@ export default class Slogan extends Shadow() {
     Promise.all(showPromises).then(() => {
       this.hidden = false
       setTimeout(() => this.setAttribute('loaded', 'true'), 500); // workaround of all flashing up bug
-      this.interval = setInterval(() => {
+      /*this.interval = setInterval(() => {
         this.slogans[this.visibleSloganIndex].classList.remove('visible')
         if (this.visibleSloganIndex < this.slogans.length - 1) {
           this.visibleSloganIndex++
@@ -25,7 +25,7 @@ export default class Slogan extends Shadow() {
           this.visibleSloganIndex = 0
         }
         this.slogans[this.visibleSloganIndex].classList.add('visible')
-      }, this.getAttribute('delay') || 10000)
+      }, this.getAttribute('delay') || 10000)*/
     })
   }
 
@@ -57,28 +57,34 @@ export default class Slogan extends Shadow() {
    * @return {Promise<void>}
    */
   renderCSS () {
+    console.log('changed', this.parentElement.children[0] === this);
     this.css = /* css */`
       :host {
         ${this.hasAttribute('width')
           ? `width: ${this.getAttribute('width')} !important;`
           : ''
         }
+        --picture-cover-img-max-height: 25dvh;
+        ${this.parentElement.children[0] === this ?
+          'margin-top: calc(-1 * var(--content-spacing)) !important;'
+          : ''
+        }
       }
       :host .slogan-container {
+        background-color: var(--color);
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
         width: 100%;
-        padding: 1em;
-        background-color: var(--color);
       }
-      
       :host .slogan-container > * {
         grid-column: 1;
         grid-row: 1;
         width: 100%;
         transition: opacity 2s ease-in-out;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
         visibility: hidden;
         opacity: 0;
         align-items: center;
@@ -88,13 +94,32 @@ export default class Slogan extends Shadow() {
         text-transform: uppercase;
         color: var(--background-color);
       }
-
+      :host .slogan-container > * > * {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      :host .slogan-container > * > *:first-child {
+        background-color: var(--color-opacity);
+        color: var(--background-color);
+        text-align: center;
+        padding: 1em;
+        margin: 0;
+        text-transform: uppercase;
+        z-index: 1;
+      }
       :host([loaded]) .slogan-container > * {
         visibility: visible;
       }
-      
       :host([loaded]) .slogan-container > *.visible {
         opacity: 1;
+      }
+      @media only screen and (max-width: _max-width_) {
+        :host {
+          ${this.parentElement.children[0] === this ?
+            'margin-top: calc(-1 * var(--content-spacing-mobile, var(--content-spacing))) !important;'
+            : ''
+          }
+        }
       }
     `
     return this.fetchTemplate()

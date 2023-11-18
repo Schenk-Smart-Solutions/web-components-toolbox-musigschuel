@@ -66,6 +66,13 @@ export default class GoogleMaps extends Shadow() {
    */
   renderCSS () {
     this.css = /* css */`
+      :host {
+        ${Array.from(this.parentElement.children).splice(-1)[0] === this ?
+          'margin-bottom: 0 !important;'
+          : ''
+        }
+        width: 100% !important;
+      }
       :host > div {
         width: 100%; 
       }
