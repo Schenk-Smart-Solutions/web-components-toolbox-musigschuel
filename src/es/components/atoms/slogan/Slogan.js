@@ -57,7 +57,6 @@ export default class Slogan extends Shadow() {
    * @return {Promise<void>}
    */
   renderCSS () {
-    console.log('changed', this.parentElement.children[0] === this);
     this.css = /* css */`
       :host {
         ${this.hasAttribute('width')
