@@ -94,6 +94,10 @@ export default class Logo extends Shadow() {
     this.css = /* css */`
       :host {
         --logo-color: var(--color-tertiary);
+        ${this.hasAttribute('max-height')
+          ? `--img-max-height: ${this.getAttribute('max-height')};`
+          : ''
+        }
         align-items: var(--align-items, center);
         cursor: pointer;
         display: flex;
@@ -251,7 +255,7 @@ export default class Logo extends Shadow() {
    * @return {void}
    */
   renderHTML () {
-    this.html = /* html */`
+    if (!this.root.querySelector('a-picture')) this.html = /* html */`
       <?xml version="1.0" encoding="UTF-8" standalone="no"?>
       <!-- Created with Inkscape (http://www.inkscape.org/) -->
       
