@@ -17,7 +17,7 @@ export default class Slogan extends Shadow() {
     Promise.all(showPromises).then(() => {
       this.hidden = false
       setTimeout(() => this.setAttribute('loaded', 'true'), 500); // workaround of all flashing up bug
-      /*this.interval = setInterval(() => {
+      this.interval = setInterval(() => {
         this.slogans[this.visibleSloganIndex].classList.remove('visible')
         if (this.visibleSloganIndex < this.slogans.length - 1) {
           this.visibleSloganIndex++
@@ -25,7 +25,7 @@ export default class Slogan extends Shadow() {
           this.visibleSloganIndex = 0
         }
         this.slogans[this.visibleSloganIndex].classList.add('visible')
-      }, this.getAttribute('delay') || 10000)*/
+      }, this.getAttribute('delay') || 10000)
     })
   }
 
