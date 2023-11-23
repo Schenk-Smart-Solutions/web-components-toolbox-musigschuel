@@ -36,7 +36,7 @@ export default class Value extends Shadow() {
 
             .line {
                 height: 1px;
-                background-color: #000000;
+                background-color: var(--color, #000000);
             }
 
             .value {
