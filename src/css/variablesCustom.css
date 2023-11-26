@@ -80,7 +80,7 @@
   --header-default-a-logo-top-mobile-custom: 1.75em;
   --header-default-a-menu-icon-border-radius-custom: none;
   --header-default-content-spacing-mobile: 0;
-  --header-default-logo-width-custom: min(14em, 201px);
+  --header-default-logo-width-custom: 14em;
   --header-default-margin-custom: 0 auto var(--content-spacing);
   --header-default-margin-mobile-custom: 0 auto var(--content-spacing-mobile);
   --hr-border-bottom: 2px dotted var(--m-gray-600);
