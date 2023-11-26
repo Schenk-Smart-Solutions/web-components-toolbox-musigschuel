@@ -9,6 +9,7 @@ TODO
 - [x] Form Pictures (input type file) fetch support
 - [ ] Form #response styling
 - [ ] Form with dynamic sub objects (select options)
+- [ ] Logo max width (is overflowing on very wide screens)
 - [ ] Map Picture turn fix
 - [ ] Home Map Instrument filter / API get Players / player list
 - [ ] Profile Pages styling
