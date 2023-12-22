@@ -5,15 +5,17 @@ export default class GMapsMarker extends Shadow() {
     if (this.content) return this.content
     this.content = this.getAttribute('img-src')
       ? /* html */`
-        <div class="container">
-          <div class="card">
-            <div class="side front">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
               <a-picture
                 namespace="picture-cover-"
                 defaultSource="${this.getAttribute('img-src')}"
               ></a-picture>
             </div>
-            <div class="side back">${this.root.innerHTML}</div>
+            <div class="flip-card-back">
+              ${this.root.innerHTML}
+            </div>
           </div>
         </div>
       `

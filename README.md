@@ -8,9 +8,9 @@ TODO
 - [x] http://musigschuel-dev.schenk-smart-solutions.ch/swagger/index.html
 - [x] Form Pictures (input type file) fetch support
 - [ ] Form #response styling
-- [ ] Form with dynamic sub objects (select options)
+- [x] Form with dynamic sub objects (select options)
 - [x] Logo max width (is overflowing on very wide screens)
-- [ ] Map Picture turn fix
+- [x] Map Picture turn fix
 - [ ] Home Map Instrument filter / API get Players / player list
 - [ ] Profile Pages styling
 - [ ] Spam protection

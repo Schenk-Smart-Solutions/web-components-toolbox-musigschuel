@@ -84,48 +84,47 @@ export default class GoogleMaps extends Shadow() {
         color: red;
         background-color: var(--color);
       }
-      .container {
+      /* https://blog.hubspot.com/website/css-flip-animation */
+      .flip-card {
+        background-color: transparent;
         width: 10em;
         height: 10em;
-        position: relative;
         perspective: 1000px;
-        overflow: hidden;
       }
-      .container:hover {
-        overflow: auto;
-      }
-      .card {
-        position: absolute;
+      
+      .flip-card-inner {
+        position: relative;
         width: 100%;
         height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
         transform-style: preserve-3d;
-        transition: transform 1s;
       }
-      .container:hover .card {
+      
+      .flip-card:hover .flip-card-inner {
         transform: rotateY(180deg);
       }
-      .card .side {
+      
+      .flip-card-front, .flip-card-back {
         position: absolute;
         width: 100%;
         height: 100%;
+        -webkit-backface-visibility: hidden; /* Safari */
         backface-visibility: hidden;
       }
-      .card .front {
+      
+      .flip-card-front {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        height: 100%;
       }
-      .card .back {
+      
+      .flip-card-back {
         display: flex;
         align-items: center;
-        justify-content: center;
         flex-direction: column;
         transform: rotateY(180deg);
-        background: var(--background-color);
-        height: auto;
-      }
+      }      
     `
     return this.fetchTemplate()
   }
