@@ -26,48 +26,68 @@
 </ms-a-slogan>
 <h1>musigschuel.ch</h1>
 <p>Die nationale Plattform für freischaffende Musiklehrer.</p>
-<a-input
-  inputid="map-search-location"
-  placeholder="Bitte geben Sie Ihre Postleitzahl oder Ort ein"
-  submit-search="request-map-search"
-  search=""
-  type=search
-  change-listener
-  delete-listener
-  answer-event-name="map-search"
-  active-detail-property-name="searchLocation"
-></a-input>
-<ms-m-google-maps search-label="Bitte geben Sie ihre Postleitzahl ein" show-search>
-<ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/qj0fulap/teacher1.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da05014c952580" lat=47.464275 long=9.040814>
-<h2>Davide de Perota</h2>
-<p>Klavier und Keyboard, Songwriting, Begleitung von Gesang, Programmieren ...</p>
-<a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/davide-de-perota/">...mehr</a>
-</ms-a-g-maps-marker> <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/qj0fulap/teacher1.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da05014c952580" lat=47.464275 long=9.040814>
-<h2>Davide de Perota</h2>
-<p>Klavier und Keyboard, Songwriting, Begleitung von Gesang, Programmieren ...</p>
-<a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/davide-de-perota/">...mehr</a> </ms-a-g-maps-marker> <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/1sibwsnx/1688559654.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da05014c9cc6a0" lat=47.498405 long=9.12595>
-<h2>Philipp P&#xF6;pperl</h2>
-<p>Just beat it<br>Philipp Pöpperl ...</p>
-<a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/philipp-poepperl/">...mehr</a> </ms-a-g-maps-marker> <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/ukvf1at2/1690352754.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da05014ca77500" lat=47.480576 long=9.18872>
-  <h2>Peter Gasser</h2>
-  <p>Jazz, Punk, Metal<br>Peter Gasser ...</p>
-  <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/peter-gasser/">...mehr</a> </ms-a-g-maps-marker> <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/emvfow0c/roland_schenk.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cde5acedb70" lat=47.272167 long=8.100057>
-    <h2>Roland Schenk</h2>
-    <p>Jazz, Rock, Klassik<br>Fritz Frosch ...</p>
-    <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/fritz-frosch/">...mehr</a> </ms-a-g-maps-marker> <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/emvfow0c/roland_schenk.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cde5acedb70" lat=47.182903 long=7.7955723>
+<!--<ms-c-teachers endpoint="">-->
+  <a-input
+    inputid="map-search-location"
+    placeholder="Bitte geben Sie Ihre Postleitzahl oder Ort ein"
+    submit-search="request-map-search"
+    search=""
+    type=search
+    change-listener
+    delete-listener
+    answer-event-name="map-search"
+    active-detail-property-name="searchLocation"
+  ></a-input>
+  <ms-m-google-maps search-label="Bitte geben Sie ihre Postleitzahl ein" show-search>
+    <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/qj0fulap/teacher1.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da05014c952580" lat=47.464275 long=9.040814>
+      <h2>Davide de Perota</h2>
+      <p>Klavier und Keyboard, Songwriting, Begleitung von Gesang, Programmieren ...</p>
+      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/davide-de-perota/">...mehr</a>
+    </ms-a-g-maps-marker>
+    <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/qj0fulap/teacher1.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da05014c952580" lat=47.464275 long=9.040814>
+      <h2>Davide de Perota</h2>
+      <p>Klavier und Keyboard, Songwriting, Begleitung von Gesang, Programmieren ...</p>
+      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/davide-de-perota/">...mehr</a>
+    </ms-a-g-maps-marker>
+    <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/1sibwsnx/1688559654.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da05014c9cc6a0" lat=47.498405 long=9.12595>
+      <h2>Philipp P&#xF6;pperl</h2>
+      <p>Just beat it<br>Philipp Pöpperl ...</p>
+      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/philipp-poepperl/">...mehr</a>
+    </ms-a-g-maps-marker>
+    <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/ukvf1at2/1690352754.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da05014ca77500" lat=47.480576 long=9.18872>
+      <h2>Peter Gasser</h2>
+      <p>Jazz, Punk, Metal<br>Peter Gasser ...</p>
+      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/peter-gasser/">...mehr</a>
+    </ms-a-g-maps-marker>
+    <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/emvfow0c/roland_schenk.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cde5acedb70" lat=47.272167 long=8.100057>
       <h2>Roland Schenk</h2>
       <p>Jazz, Rock, Klassik<br>Fritz Frosch ...</p>
-      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/fritz-frosch/">...mehr</a> </ms-a-g-maps-marker> <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/xeady4hf/1688561251.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cdaa0122b00" lat=47.241154 long=8.720361>
-        <h2>Billy Wirz</h2>
-        <p>Billy Wirz ...</p>
-        <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/billy-wirz/">...mehr</a> </ms-a-g-maps-marker> <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/xeady4hf/1688561251.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cdaa0122b00" lat=47.350845 long=8.5664425>
-          <h2>Billy Wirz</h2>
-          <p>Billy Wirz ...</p>
-          <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/billy-wirz/">...mehr</a> </ms-a-g-maps-marker> <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/kbgaytj2/1669882401.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cdcccf074e0" lat=47.478367 long=9.479398>
-            <h2>Madeleine Rascher</h2>
-            <p>Madeleine Rascher ...</p>
-            <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/madeleine-rascher/">...mehr</a> </ms-a-g-maps-marker> <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/kbgaytj2/1669882401.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cdcccf074e0" lat=47.478367 long=9.479398>
-              <h2>Madeleine Rascher</h2>
-              <p>Madeleine Rascher ...</p>
-              <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/madeleine-rascher/">...mehr</a> </ms-a-g-maps-marker>
-            </ms-m-google-maps>
+      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/fritz-frosch/">...mehr</a>
+    </ms-a-g-maps-marker>
+    <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/emvfow0c/roland_schenk.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cde5acedb70" lat=47.182903 long=7.7955723>
+      <h2>Roland Schenk</h2>
+      <p>Jazz, Rock, Klassik<br>Fritz Frosch ...</p>
+      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/fritz-frosch/">...mehr</a>
+    </ms-a-g-maps-marker>
+    <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/xeady4hf/1688561251.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cdaa0122b00" lat=47.241154 long=8.720361>
+      <h2>Billy Wirz</h2>
+      <p>Billy Wirz ...</p>
+      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/billy-wirz/">...mehr</a>
+    </ms-a-g-maps-marker>
+    <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/xeady4hf/1688561251.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cdaa0122b00" lat=47.350845 long=8.5664425>
+      <h2>Billy Wirz</h2>
+      <p>Billy Wirz ...</p>
+      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/billy-wirz/">...mehr</a>
+    </ms-a-g-maps-marker>
+    <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/kbgaytj2/1669882401.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cdcccf074e0" lat=47.478367 long=9.479398>
+      <h2>Madeleine Rascher</h2>
+      <p>Madeleine Rascher ...</p>
+      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/madeleine-rascher/">...mehr</a>
+    </ms-a-g-maps-marker>
+    <ms-a-g-maps-marker img-src="http://musigschuel-dev.schenk-smart-solutions.ch/media/kbgaytj2/1669882401.jpg?width=145&amp;height=145&amp;format=png&amp;quality=80&amp;v=1da0cdcccf074e0" lat=47.478367 long=9.479398>
+      <h2>Madeleine Rascher</h2>
+      <p>Madeleine Rascher ...</p>
+      <a href="http://musigschuel-dev.schenk-smart-solutions.ch/schuluebersicht/madeleine-rascher/">...mehr</a>
+    </ms-a-g-maps-marker>
+  </ms-m-google-maps>
+<!--</ms-c-teachers>-->

@@ -121,6 +121,7 @@ export default class GoogleMaps extends Shadow() {
       
       .flip-card-back {
         display: flex;
+        background-color: white;
         align-items: center;
         flex-direction: column;
         transform: rotateY(180deg);
