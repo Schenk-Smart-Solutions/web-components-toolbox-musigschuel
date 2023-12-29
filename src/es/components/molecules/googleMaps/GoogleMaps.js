@@ -111,6 +111,7 @@ export default class GoogleMaps extends Shadow() {
         height: 100%;
         -webkit-backface-visibility: hidden; /* Safari */
         backface-visibility: hidden;
+        background-color: white;
       }
       
       .flip-card-front {
@@ -121,11 +122,10 @@ export default class GoogleMaps extends Shadow() {
       
       .flip-card-back {
         display: flex;
-        background-color: white;
         align-items: center;
         flex-direction: column;
         transform: rotateY(180deg);
-      }      
+      }
     `
     return this.fetchTemplate()
   }
