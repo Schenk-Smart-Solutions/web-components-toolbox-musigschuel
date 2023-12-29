@@ -1,0 +1,129 @@
+<m-simple-form
+  load-form-styles
+  namespace="simple-form-default-"
+  endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/updateTeacherProfile"
+  method="POST"
+  schema="{
+    'image': 'string',
+    'instrumentLocations': [
+      {
+        'instruments': [
+          '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+        ],
+        'school': 'string',
+        'streetNr': 'string',
+        'zipCode': 'string',
+        'city': 'string',
+        'lat': 0,
+        'lon': 0,
+        'addMore': 'boolean'
+      }
+    ],
+    'style': 'string',
+    'lessonsFrom': 0,
+    'name': 'string',
+    'subtitle': 'string',
+    'address': 'string',
+    'zipCode': 'string',
+    'state': 'string',
+    'city': 'string',
+    'website': 'string',
+    'email': 'string',
+    'languages': 'string'
+  }"
+>
+    <form action="/api/updateTeacherProfile" enctype="multipart/form-data" method="post">
+      <div class="inline">
+        <label for="subtitle1">Herr</label>
+        <input id="subtitle1" name="subtitle" type="radio" value="2" checked />
+        <label for="subtitle2">Frau</label>
+        <input id="subtitle2" name="subtitle" type="radio" value="1" />
+        <label for="subtitle3">Other</label>
+        <input id="subtitle3" name="subtitle" type="radio" value="3" />
+      </div>
+      <div>
+        <label validation-message="Name ist ungültig" for="name">Name</label>
+        <input id="name" type="text" required="" value="" name="name" placeholder="Bitte geben Sie hier Ihren Namen ein..."  autocomplete="off" />
+      </div>
+      <div>
+        <label validation-message="Adresse ist ungültig" for="address">Adresse</label>
+        <input id="address" type="text" required="" value="" name="address" placeholder="Adresse hier eingeben..." autocomplete="off" />
+      </div>
+      <div>
+        <label validation-message="PLZ ist ungültig" for="zipCode">Postleitzahl</label>
+        <input id="zipCode" type="number" min="1000" max="9999" inputmode="numeric" required="" value="" name="zipCode" placeholder="Postleitzahl hier eingeben..." autocomplete="off" />
+      </div>
+      <div>
+        <label validation-message="Ortschaft ist ungültig" for="city">Ortschaft</label>
+        <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
+      </div>
+      <div>
+        <label validation-message="Kanton ist ungültig" for="state">Kanton</label>
+        <input id="state" type="text" required="" value="" name="state" placeholder="Kanton hier eingeben..." autocomplete="off" />
+      </div>
+      <div>
+        <label validation-message="Ungültige Website" for="website">Website</label>
+        <input id="website" type="url" inputmode="url" required="" value="" name="website" placeholder="Website hier eingeben..." autocomplete="off" />
+      </div>
+      <div>
+        <label validation-message="Ungültige Email" for="email">E-Mail</label>
+        <input id="email" type="email" inputmode="email" required="" value="" name="email" placeholder="Email hier eingeben..." autocomplete="off" />
+      </div>
+      <div>
+        <label validation-message="Die Sprachen sind ungültig" for="languages">Sprachen</label>
+        <input id="languages" type="text" required="" value="" name="languages" placeholder="Bitte geben Sie hier Ihre Sprachenn ein..."  autocomplete="off" />
+      </div>
+      <div>
+        <label validation-message="Die lessonsFrom sind ungültig" for="lessonsFrom">lessonsFrom</label>
+        <input id="lessonsFrom" type="number" required="" value="" name="lessonsFrom" placeholder="Bitte geben Sie hier Ihre lessonsFrom ein..."  autocomplete="off" />
+      </div>
+      <div>
+        <label validation-message="Die style sind ungültig" for="style">style</label>
+        <input id="style" type="text" required="" value="" name="style" placeholder="Bitte geben Sie hier Ihre style ein..."  autocomplete="off" />
+      </div>
+      <div class="center">
+        <div>
+          <div>
+            <div validation-message="Bild fehlt">
+              <a-icon-paperclip hover-level="2"></a-icon-paperclip>
+              <span class="type-file-label">&nbsp;Bild auswählen</span>
+            </div>
+            <input name="image" type="file" required="" remove-file-title="Bild entfernen" />
+          </div>
+        </div>
+      </div>
+      <section name="instrumentLocations">
+        <h2 multiply-text="Unterrichtslokalität $count$">Unterrichtslokalität</h2>
+        <div class="instruments">
+          <label validation-message="Ein Instrument muss ausgewählt werden!" for="instruments" multiply-text-two="Wählen Sie ein weiteres Instrument (--c--):">Wählen Sie ein Instrument:</label>
+          <select name="instruments" value="0" required="1" id="instruments" multiply="div.instruments" multiply-text-selector="multiply-text-two" multiply-condition="truthy" multiply-max="5" counter-placeholder="--c--">
+            <option value="">--Wählen Sie ein Instrument--</option>
+            <option value="Trompete">Trompete</option>
+            <option value="Klavier">Klavier</option>
+            <option value="Harmonika">Harmonika</option>
+          </select>
+        </div>
+        <div>
+          <label validation-message="Schule ist ungültig" for="school">Schule</label>
+          <input id="school" type="text" required="" value="" name="school" placeholder="Bitte geben Sie hier Ihren Schule ein..."  autocomplete="off" />
+        </div>
+        <div>
+          <label validation-message="Strasse ist ungültig" for="streetNr">Strasse</label>
+          <input id="streetNr" type="text" required="" value="" name="streetNr" placeholder="Strasse hier eingeben..." autocomplete="off" />
+        </div>
+        <div>
+          <label validation-message="PLZ ist ungültig" for="zipCode">Postleitzahl</label>
+          <input id="zipCode" type="number" min="1000" max="9999" inputmode="numeric" required="" value="" name="zipCode" placeholder="Postleitzahl hier eingeben..." autocomplete="off" />
+        </div>
+        <div>
+          <label validation-message="Ortschaft ist ungültig" for="city">Ortschaft</label>
+          <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
+        </div>
+        <div class="inline">
+          <label for="addMore">Mehr hinzufügen!</label>
+          <input id="addMore" name="addMore" type="checkbox" multiply="section[name=instrumentLocations]" multiply-text-selector="multiply-text" multiply-condition="true" multiply-max="5" counter-placeholder="$count$" />
+        </div>
+      </section>
+      <input type="submit" value="Speichern" />
+    </form>
+</m-simple-form>
