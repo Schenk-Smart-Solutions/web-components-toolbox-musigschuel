@@ -27,31 +27,53 @@
 <h1>musigschuel.ch</h1>
 <p>Die nationale Plattform für freischaffende Musiklehrer.</p>
 <ms-c-teachers endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/teachers" lang="de-CH">
-  <a-input
-    inputid="map-search-location"
-    placeholder="Bitte geben Sie Ihre Postleitzahl oder Ort ein"
-    submit-search="request-map-search"
-    search=""
-    type=search
-    change-listener
-    delete-listener
-    answer-event-name="map-search"
-    active-detail-property-name="searchLocation"
-  >
-    <style>
-      :host {
-        --search-input-border-radius: 0.5em 0.5em 0 0;
-      }
-    </style>
-  </a-input>
-  <m-details namespace="details-default-">
-    <details open>
-        <summary>
-            <h4>Karte</h4>
-        </summary>
-        <div>
-          <ms-m-google-maps search-label="Bitte geben Sie ihre Postleitzahl ein" show-search></ms-m-google-maps>
-        </div>
-    </details>
-  </m-details>
+  <ms-c-instruments endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/instruments" lang="de-CH">
+    <o-wrapper>
+      <a-input
+        width="60%"
+        inputid="map-search-location"
+        placeholder="Bitte geben Sie Ihre Postleitzahl oder Ort ein"
+        submit-search="request-map-search"
+        search=""
+        type=search
+        change-listener
+        delete-listener
+        answer-event-name="map-search"
+        active-detail-property-name="searchLocation"
+      >
+        <style protected="true">
+          :host {
+            --search-input-border-radius: 0.5em 0.5em 0 0;
+          }
+          :host([search]) input {
+            border-bottom: 0;
+          }
+        </style>
+      </a-input>
+      <a-select
+        placeholder="Bitte Instrument wählen"
+        render-event-name="instruments"
+        request-render-event-name="request-instruments"
+      >
+        <style protected="true">
+          :host {
+            --select-border-radius: 0.5em 0.5em 0 0;
+          }
+          :host select {
+            border-bottom: 0;
+          }
+        </style>
+      </a-select>
+    </o-wrapper>
+    <m-details namespace="details-default-">
+      <details open>
+          <summary>
+              <h4>Karte</h4>
+          </summary>
+          <div>
+            <ms-m-google-maps search-label="Bitte geben Sie ihre Postleitzahl ein" show-search></ms-m-google-maps>
+          </div>
+      </details>
+    </m-details>
+  </ms-c-instruments>
 </ms-c-teachers>
