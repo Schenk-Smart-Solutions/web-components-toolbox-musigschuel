@@ -53,6 +53,10 @@
   --color-success: green;
   --color-tertiary: #9d835d;
   --color: #333333;
+  --details-default-child-margin-custom: 0;
+  --details-default-child-margin-mobile-custom: 0;
+  --details-default-content-spacing-custom: 0;
+  --details-default-content-spacing-mobile-custom: 0;
   --details-default-svg-color-custom: var(--color-tertiary);
   --download-box-shadow-color-custom: var(--download-color-custom);
   --download-color-custom: var(--color-tertiary);

@@ -7,6 +7,10 @@
 /* global history */
 /* global self */
 
+/** @typedef {{ lat: number, lon: number, title: string, text: string, imageUrl: string, link: string, instruments: string[] }} teacher */
+
+/** @typedef {teacher[]} teachers */
+
 import { Shadow } from '../../web-components-toolbox/src/es/components/prototypes/Shadow.js'
 
 /**
@@ -30,12 +34,24 @@ export default class Teachers extends Shadow() {
     this.requestListTeachersListener = async event => {
       if (this.abortController) this.abortController.abort()
       this.abortController = new AbortController()
-      this.dispatchEvent(new CustomEvent(this.getAttribute('teachers') || 'teachers', {
+      const lang = this.getAttribute('lang') || document.documentElement.getAttribute('lang') || 'de-CH'
+      const endpoint = this.getAttribute('endpoint')
+        ? `${this.getAttribute('endpoint')}?lang=${lang}`
+        : `http://musigschuel-dev.schenk-smart-solutions.ch/api/teachers?lang=${lang}`
+      this.dispatchEvent(new CustomEvent(this.getAttribute('teachers') || 'teachers',
+      {
         detail: {
-          fetch: fetch(this.getAttribute('endpoint'), {
+          origin: (new URL(endpoint)).origin,
+          fetch: fetch(endpoint,
+          {
             method: 'GET',
             signal: this.abortController.signal
-          }).then(async response => {
+          }).then(
+          /**
+           * @param {Response} response
+           * @return {Promise<teachers>}
+           */
+          async response => {
             if (response.status >= 200 && response.status <= 299) return await response.json()
             throw new Error(response.statusText)
           })

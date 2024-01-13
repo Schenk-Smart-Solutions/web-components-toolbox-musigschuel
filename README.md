@@ -12,5 +12,5 @@ TODO
 - [x] Logo max width (is overflowing on very wide screens)
 - [x] Map Picture turn fix
 - [ ] Home Map Instrument filter / API get Players / player list
+- [ ] Spam protection recaptcha in simpleForm
 - [ ] Profile Pages styling
-- [ ] Spam protection

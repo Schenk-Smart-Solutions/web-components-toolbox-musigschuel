@@ -183,7 +183,13 @@
     {
       selector: 'ms-o-',
       url: 'organisms/',
-      separateFolder: false
+      separateFolder: true
+
+    },
+    {
+      selector: 'ms-c-',
+      url: 'controllers/',
+      separateFolder: true
 
     },
     {

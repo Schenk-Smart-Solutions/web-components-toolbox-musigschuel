@@ -14,31 +14,43 @@ export default class GoogleMaps extends Shadow() {
     // scroll card container back to top on mouse out to not hide the picture on overflow hidden
     const addedMouseOutNodes = []
     this.clickEventListener = event => {
-      const containers = this.root.querySelectorAll('.container')
+      this.scrollIntoView()
+      const containers = this.root.querySelectorAll('[role=dialog], .gm-style-iw, .gm-style-iw-c')
       containers.forEach(container => {
         if (!addedMouseOutNodes.includes(container)) {
           addedMouseOutNodes.push(container)
           container.addEventListener('mouseout', event => {
-            if (!container.matches(':hover')) container.scrollTop = 0
+            if (container.children[0] && !container.matches(':hover')) container.children[0].scrollTop = 0
           })
         }
       })
+    }
+
+    let renderHTMLResolve
+    this.showPromises = [new Promise(resolve => (renderHTMLResolve = resolve))]
+    this.teachersEventListener = event => {
+      if (this.shouldRenderHTML()) renderHTMLResolve(this.renderHTML(event.detail.fetch, event.detail.origin))
     }
   }
 
   connectedCallback () {
     this.hidden = true
-    const showPromises = []
-    if (this.shouldRenderCSS()) showPromises.push(this.renderCSS())
-    if (this.shouldRenderHTML()) showPromises.push(this.renderHTML())
-    Promise.all(showPromises).then(() => (this.hidden = false))
-    document.body.addEventListener('request-map-search', this.handleSearchChange)
+    if (this.shouldRenderCSS()) this.showPromises.push(this.renderCSS())
+    Promise.all(this.showPromises).then(() => (this.hidden = false))
     this.addEventListener('click', this.clickEventListener)
+    document.body.addEventListener('teachers', this.teachersEventListener)
+    document.body.addEventListener('request-map-search', this.handleSearchChange)
+    this.dispatchEvent(new CustomEvent(this.getAttribute('request-teachers') || 'request-teachers', {
+      bubbles: true,
+      cancelable: true,
+      composed: true
+    }))
   }
 
   disconnectedCallback () {
-    document.body.removeEventListener('request-map-search', this.handleSearchChange)
     this.removeEventListener('click', this.clickEventListener)
+    document.body.removeEventListener('teachers', this.teachersEventListener)
+    document.body.removeEventListener('request-map-search', this.handleSearchChange)
   }
 
   /**
@@ -76,11 +88,11 @@ export default class GoogleMaps extends Shadow() {
       :host > div {
         width: 100%; 
       }
-      div.g-maps {
+      div#map {
         height: 50dvh;
         color: var(--color);
       }
-      div.g-maps  button {
+      div#map  button {
         color: red;
         background-color: var(--color);
       }
@@ -100,9 +112,17 @@ export default class GoogleMaps extends Shadow() {
         transition: transform 0.8s;
         transform-style: preserve-3d;
       }
-      
-      .flip-card:hover .flip-card-inner {
+
+      [role=dialog]:hover .flip-card .flip-card-inner, .gm-style-iw:hover .flip-card .flip-card-inner, .gm-style-iw-c:hover .flip-card .flip-card-inner {
         transform: rotateY(180deg);
+      }
+
+      [role=dialog] > *, .gm-style-iw > *, .gm-style-iw-c > * {
+        overscroll-behavior: contain;
+      }
+
+      .gm-style img {
+        max-width: none !important;
       }
       
       .flip-card-front, .flip-card-back {
@@ -161,10 +181,13 @@ export default class GoogleMaps extends Shadow() {
   /**
    * renders the html
    *
+   * @param {Promise<import("../../controllers/teachers/Teachers.js").teachers>} fetch
+   * @param {string} origin
    * @return {Promise<void>}
    */
-  renderHTML () {
+  renderHTML (fetch, origin) {
     return Promise.all([
+      fetch,
       this.loadDependency(),
       this.fetchModules([
         {
@@ -172,62 +195,81 @@ export default class GoogleMaps extends Shadow() {
           name: 'a-picture'
         }
       ])
-    ]).then(() => {
-      this.container = document.createElement('DIV')
-      this.map = document.createElement('DIV')
-
-      this.map.className = 'g-maps'
-      this.map.setAttribute('id', 'map')
-
-      this.container.appendChild(this.map)
-
-      this.markers = Array.from(this.root.querySelectorAll('ms-a-g-maps-marker')).map(marker => {
-        const res = {
-          lat: parseFloat(marker.getAttribute('lat')),
-          lng: parseFloat(marker.getAttribute('long')),
-          content: marker.getContentHTML()
-        }
-        if (marker.getAttribute('icon')) res.icon = marker.getAttribute('icon')
-        return res
+    ]).then(([teachers]) => {
+      this.teachers = teachers.map(teacher => ({
+        ...teacher,
+        lat: parseFloat(teacher.lat),
+        lng: parseFloat(teacher.lon),
+        content: /* HTML */`
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <a-picture
+                  namespace="picture-cover-"
+                  defaultSource="${origin}${teacher.imageUrl}"
+                ></a-picture>
+              </div>
+              <div class="flip-card-back">
+                <h2>${teacher.title}</h2>
+                <p>${teacher.text}</p>
+                <a href="${origin}${teacher.link}">...mehr</a>
+              </div>
+            </div>
+          </div>
+        `
+      }))
+      this.html = /* HTML */`
+        <div>
+          <div id=map></div>
+        </div>
+      `
+      this.gMap = new google.maps.Map(this.map, {
+        // TODO: Calc teachers center
+        center: this.teachers.length > 1 ? { lat: 46.8182, lng: 8.2275 } : { lat: this.teachers[0].lat, lng: this.teachers[0].lng },
+        // TODO: Calc the zoom
+        zoom: this.teachers.length > 1 ? 8 : 12
       })
-
-      const gMap = new google.maps.Map(this.map, {
-        center: this.markers.length > 1 ? { lat: 46.8182, lng: 8.2275 } : { lat: this.markers[0].lat, lng: this.markers[0].lng },
-        zoom: this.markers.length > 1 ? 8 : 12
-      })
-
-      this.bounds = this.markers.length > 1 ? this.bounds = new google.maps.LatLngBounds() : undefined
-
-      if (this.bounds) {
-        gMap.fitBounds(this.bounds)
-      }
-
-      this.markers.forEach(m => this.addMarker(gMap, m))
-
-      this.map = gMap
-      this.html = this.container
+      this.bounds = this.teachers.length > 1 ? this.bounds = new google.maps.LatLngBounds() : undefined
+      if (this.bounds) this.gMap.fitBounds(this.bounds)
+      this.teachers.forEach(teacher => this.addMarker(this.gMap, teacher))
     })
   }
 
   handleSearchChange = (event) => {
     if (event.detail.value) {
-      this.filterMarkers(event.detail.value || 0, 5, this.getMarkers(), this.map)
+      this.filterMarkers(event.detail.value || 0, 5, this.getMarkers(), this.gMap)
     }
   }
 
-  addMarker (gMap, markerData) {
+  /**
+   *
+   *
+   * @param {*} gMap
+   * @param {{
+   *  lat: number;
+   *  lng: number;
+   *  content: string;
+   *  lon: number;
+   *  title: string;
+   *  text: string;
+   *  imageUrl: string;
+   *  link: string;
+   *  instruments: string[];
+   * }} teacher
+   */
+  addMarker (gMap, teacher) {
     const marker = new google.maps.Marker({
-      position: { lat: markerData.lat, lng: markerData.lng },
+      position: { lat: teacher.lat, lng: teacher.lng },
       map: gMap,
-      icon: markerData.icon
+      icon: teacher.icon
     })
 
     if (this.bounds) {
       this.bounds.extend(marker.position)
     }
 
-    if (markerData.content) {
-      this.addInfoWindow(gMap, marker, markerData.content)
+    if (teacher.content) {
+      this.addInfoWindow(gMap, marker, teacher.content)
     }
   }
 
@@ -246,17 +288,17 @@ export default class GoogleMaps extends Shadow() {
   }
 
   getMarkers = () => {
-    return this.markers.map(m => {
+    return this.teachers.map(m => {
       return new google.maps.Marker({
         position: { lat: m.lat, lng: m.lng },
-        map: this.map,
+        map: this.gMap,
         icon: m.icon,
         content: m.content
       })
     })
   }
 
-  filterMarkers (postcode, radius, markers, map) {
+  filterMarkers (postcode, radius, markers, gMap) {
     const geocoder = new google.maps.Geocoder()
 
     geocoder.geocode({ address: postcode + " Switzerland" }, (results, status) => {
@@ -282,8 +324,8 @@ export default class GoogleMaps extends Shadow() {
           }
         }
 
-        map.setCenter(center)
-        map.setZoom(11)
+        gMap.setCenter(center)
+        gMap.setZoom(11)
       } else {
         console.warn('Geocode was not successful for the following reason: ' + status)
       }
@@ -310,5 +352,9 @@ export default class GoogleMaps extends Shadow() {
       }
       this.html = googleMapScript
     })
+  }
+
+  get map() {
+    return this.root.querySelector('#map')
   }
 }
