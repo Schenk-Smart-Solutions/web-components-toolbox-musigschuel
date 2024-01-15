@@ -10,7 +10,7 @@ export default class GoogleMaps extends Shadow() {
     super({ importMetaUrl: import.meta.url, ...options }, ...args)
 
     this.MAP_URL = this.getAttribute('url') || `${location.protocol || 'http:'}//maps.googleapis.com/maps/api/js?key=${this.getAttribute('key') || 'AIzaSyDDxevvZBiDT7FSimv6nI4tg3UTVJ7qewE'}&libraries=geometry&language=${document.documentElement.getAttribute('lang') || 'de'}`
-  
+
     // scroll card container back to top on mouse out to not hide the picture on overflow hidden
     const addedMouseOutNodes = []
     this.clickEventListener = event => {
@@ -79,8 +79,8 @@ export default class GoogleMaps extends Shadow() {
   renderCSS () {
     this.css = /* css */`
       :host {
-        ${Array.from(this.parentElement.children).splice(-1)[0] === this ?
-          'margin-bottom: 0 !important;'
+        ${Array.from(this.parentElement.children).splice(-1)[0] === this
+          ? 'margin-bottom: 0 !important;'
           : ''
         }
         width: 100% !important;
@@ -301,7 +301,7 @@ export default class GoogleMaps extends Shadow() {
   filterMarkers (postcode, radius, markers, gMap) {
     const geocoder = new google.maps.Geocoder()
 
-    geocoder.geocode({ address: postcode + " Switzerland" }, (results, status) => {
+    geocoder.geocode({ address: postcode + ' Switzerland' }, (results, status) => {
       if (status === 'OK') {
         this.dispatchEvent(new CustomEvent(this.getAttribute('map-search') || 'map-search', {
           detail: {
@@ -354,7 +354,7 @@ export default class GoogleMaps extends Shadow() {
     })
   }
 
-  get map() {
+  get map () {
     return this.root.querySelector('#map')
   }
 }

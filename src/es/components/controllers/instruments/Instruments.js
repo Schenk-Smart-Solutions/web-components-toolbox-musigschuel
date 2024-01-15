@@ -39,30 +39,30 @@ export default class Instruments extends Shadow() {
         ? `${this.getAttribute('endpoint')}?lang=${lang}`
         : `http://musigschuel-dev.schenk-smart-solutions.ch/api/instruments?lang=${lang}`
       this.dispatchEvent(new CustomEvent(this.getAttribute('instruments') || 'instruments',
-      {
-        detail: {
-          origin: (new URL(endpoint)).origin,
-          fetch: fetch(endpoint,
-          {
-            method: 'GET',
-            signal: this.abortController.signal
-          }).then(
-          /**
+        {
+          detail: {
+            origin: (new URL(endpoint)).origin,
+            fetch: fetch(endpoint,
+              {
+                method: 'GET',
+                signal: this.abortController.signal
+              }).then(
+              /**
            * @param {Response} response
            * @return {Promise<{options: instruments}>}
            */
-          async response => {
-            if (response.status >= 200 && response.status <= 299) {
-              const instruments = await response.json()
-              return {options: instruments.map(instrument => ({value: instrument.id, textContent: instrument.label}))}
-            }
-            throw new Error(response.statusText)
-          })
-        },
-        bubbles: true,
-        cancelable: true,
-        composed: true
-      }))
+              async response => {
+                if (response.status >= 200 && response.status <= 299) {
+                  const instruments = await response.json()
+                  return { options: instruments.map(instrument => ({ value: instrument.id, textContent: instrument.label })) }
+                }
+                throw new Error(response.statusText)
+              })
+          },
+          bubbles: true,
+          cancelable: true,
+          composed: true
+        }))
     }
   }
 

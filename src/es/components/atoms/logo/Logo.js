@@ -255,7 +255,8 @@ export default class Logo extends Shadow() {
    * @return {void}
    */
   renderHTML () {
-    if (!this.root.querySelector('a-picture')) this.html = /* html */`
+    if (!this.root.querySelector('a-picture')) {
+      this.html = /* html */`
       <?xml version="1.0" encoding="UTF-8" standalone="no"?>
       <!-- Created with Inkscape (http://www.inkscape.org/) -->
       
@@ -610,6 +611,7 @@ export default class Logo extends Shadow() {
         </g>
       </svg>    
     `
+    }
     this.dispatchEvent(new CustomEvent(this.getAttribute('logo-load') || 'logo-load', {
       detail: {
         child: this,

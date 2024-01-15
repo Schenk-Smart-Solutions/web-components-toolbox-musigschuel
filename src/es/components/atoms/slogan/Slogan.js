@@ -16,7 +16,7 @@ export default class Slogan extends Shadow() {
     if (this.shouldRenderHTML()) showPromises.push(this.renderHTML())
     Promise.all(showPromises).then(() => {
       this.hidden = false
-      setTimeout(() => this.setAttribute('loaded', 'true'), 500); // workaround of all flashing up bug
+      setTimeout(() => this.setAttribute('loaded', 'true'), 500) // workaround of all flashing up bug
       this.interval = setInterval(() => {
         this.slogans[this.visibleSloganIndex].classList.remove('visible')
         if (this.visibleSloganIndex < this.slogans.length - 1) {
@@ -64,8 +64,8 @@ export default class Slogan extends Shadow() {
           : ''
         }
         --picture-cover-img-max-height: 25dvh;
-        ${this.parentElement.children[0] === this ?
-          'margin-top: calc(-1 * var(--content-spacing)) !important;'
+        ${this.parentElement.children[0] === this
+          ? 'margin-top: calc(-1 * var(--content-spacing)) !important;'
           : ''
         }
       }
@@ -114,8 +114,8 @@ export default class Slogan extends Shadow() {
       }
       @media only screen and (max-width: _max-width_) {
         :host {
-          ${this.parentElement.children[0] === this ?
-            'margin-top: calc(-1 * var(--content-spacing-mobile, var(--content-spacing))) !important;'
+          ${this.parentElement.children[0] === this
+            ? 'margin-top: calc(-1 * var(--content-spacing-mobile, var(--content-spacing))) !important;'
             : ''
           }
         }
