@@ -40,11 +40,14 @@ export default class GoogleMaps extends Shadow() {
     this.addEventListener('click', this.clickEventListener)
     document.body.addEventListener('teachers', this.teachersEventListener)
     document.body.addEventListener('request-map-search', this.handleSearchChange)
+    // TeacherList is taking care of this call
+    /*
     this.dispatchEvent(new CustomEvent(this.getAttribute('request-teachers') || 'request-teachers', {
       bubbles: true,
       cancelable: true,
       composed: true
     }))
+    */
   }
 
   disconnectedCallback () {
@@ -212,7 +215,7 @@ export default class GoogleMaps extends Shadow() {
               <div class="flip-card-back">
                 <h2>${teacher.title}</h2>
                 <p>${teacher.text}</p>
-                <a href="${origin}${teacher.link}">...mehr</a>
+                <a href="${origin}${teacher.link}">${this.getAttribute('label-more') || '...more'}</a>
               </div>
             </div>
           </div>

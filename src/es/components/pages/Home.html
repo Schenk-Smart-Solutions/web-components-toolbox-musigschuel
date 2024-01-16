@@ -29,6 +29,11 @@
 <ms-c-teachers endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/teachers" lang="de-CH">
   <ms-c-instruments endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/instruments" lang="de-CH">
     <o-wrapper>
+      <style protected="true">
+        :host {
+          --margin-last-child-mobile: 0 0 var(--content-spacing-mobile) 0;
+        }
+      </style>
       <a-input
         width="60%"
         inputid="map-search-location"
@@ -44,7 +49,7 @@
         <style protected="true">
           :host {
             --search-input-border-radius: 0.5em 0.5em 0 0;
-            --search-input-border-radius: 0.5em;
+            --search-input-border-radius-mobile: 0.5em;
           }
           :host([search]) input {
             border-bottom: 0;
@@ -55,10 +60,12 @@
         placeholder="Bitte Instrument wählen"
         render-event-name="instruments"
         request-render-event-name="request-instruments"
+        selected="request-teachers"
       >
         <style protected="true">
           :host {
             --select-border-radius: 0.5em 0.5em 0 0;
+            --select-border-radius-mobile: 0.5em;
           }
           :host select {
             border-bottom: 0;
@@ -66,13 +73,23 @@
         </style>
       </a-select>
     </o-wrapper>
-    <m-details namespace="details-default-">
+    <m-details namespace="details-default-" no-auto-close>
       <details open>
           <summary>
               <h4>Karte</h4>
           </summary>
           <div>
-            <ms-m-google-maps search-label="Bitte geben Sie ihre Postleitzahl ein" show-search></ms-m-google-maps>
+            <ms-m-google-maps search-label="Bitte geben Sie ihre Postleitzahl ein" label-more="...mehr"></ms-m-google-maps>
+          </div>
+      </details>
+    </m-details>
+    <m-details namespace="details-default-" no-auto-close>
+      <details open>
+          <summary>
+              <h4>Lehrerliste</h4>
+          </summary>
+          <div>
+            <ms-m-teacher-list label-more="...mehr"></ms-m-teacher-list>
           </div>
       </details>
     </m-details>
