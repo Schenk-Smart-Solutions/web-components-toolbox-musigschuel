@@ -11,6 +11,7 @@ TODO
 - [x] Form with dynamic sub objects (select options)
 - [x] Logo max width (is overflowing on very wide screens)
 - [x] Map Picture turn fix
+- [x] SimpleForm type=file preview
 - [ ] Home Map Instrument filter / API get Players / player list
-- [ ] Spam protection recaptcha in simpleForm
+- [ ] Recaptcha Spam protection recaptcha in simpleForm
 - [ ] Profile Pages styling

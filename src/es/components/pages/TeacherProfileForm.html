@@ -83,13 +83,11 @@
       </div>
       <div class="center">
         <div>
-          <div>
-            <div validation-message="Bild fehlt">
-              <a-icon-paperclip hover-level="2"></a-icon-paperclip>
-              <span class="type-file-label">&nbsp;Bild auswählen</span>
-            </div>
-            <input name="image" type="file" required="" remove-file-title="Bild entfernen" />
+          <div validation-message="Bild fehlt">
+            <a-icon-paperclip hover-level="2" size="1em"></a-icon-paperclip>
+            <div class="type-file-label">Bild auswählen</div>
           </div>
+          <input name="image" type="file" required="" remove-file-title="Bild entfernen" file-preview />
         </div>
       </div>
       <section name="instrumentLocations">
