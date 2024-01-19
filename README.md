@@ -14,4 +14,5 @@ TODO
 - [x] SimpleForm type=file preview
 - [ ] Home Map Instrument filter / API get Players / player list
 - [ ] Recaptcha Spam protection recaptcha in simpleForm
+- [ ] Google Tag Manager, click on Address
 - [ ] Profile Pages styling
