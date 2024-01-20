@@ -12,7 +12,8 @@ TODO
 - [x] Logo max width (is overflowing on very wide screens)
 - [x] Map Picture turn fix
 - [x] SimpleForm type=file preview
-- [ ] Home Map Instrument filter / API get Players / player list
+- [x] Home Map Instrument filter / API get Players / player list
+- [ ] IPhone Select Option Display height bug fix
 - [ ] Recaptcha Spam protection recaptcha in simpleForm
 - [ ] Google Tag Manager, click on Address
 - [ ] Profile Pages styling

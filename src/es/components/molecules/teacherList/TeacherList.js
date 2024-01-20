@@ -18,6 +18,7 @@ export default class TeacherList extends Shadow() {
   connectedCallback () {
     if (this.shouldRenderCSS()) this.renderCSS()
     document.body.addEventListener('teachers', this.teachersEventListener)
+  document.body.addEventListener('google-maps-teachers', this.teachersEventListener)
     this.dispatchEvent(new CustomEvent(this.getAttribute('request-teachers') || 'request-teachers', {
       bubbles: true,
       cancelable: true,
@@ -27,6 +28,7 @@ export default class TeacherList extends Shadow() {
 
   disconnectedCallback () {
     document.body.removeEventListener('teachers', this.teachersEventListener)
+    document.body.removeEventListener('google-maps-teachers', this.teachersEventListener)
   }
 
   /**
@@ -115,12 +117,11 @@ export default class TeacherList extends Shadow() {
         }
       ])
     ]).then(([teachers]) => {
-      console.log('changed', teachers);
-      this.html = ''
-      this.html = /* html */`<ul>${teachers.reduce((acc, teacher) => /* html */`${acc}
+      const htmlStr = /* html */`<ul>${teachers.reduce((acc, teacher) => /* html */`${acc}
           <li>
             <o-wrapper>
               <a-picture
+                picture-load
                 namespace="picture-cover-"
                 defaultSource="${origin}${teacher.imageUrl}"
                 width="20%"
@@ -134,6 +135,12 @@ export default class TeacherList extends Shadow() {
           </li>
         `, '')}
       </ul>`
+      if (this.lastHtmlStr === htmlStr) return
+      this.lastHtmlStr = htmlStr
+      this.hidden = true
+      this.html = ''
+      this.html = htmlStr
+      this.root.querySelector('o-wrapper')?.root.querySelector('a-picture').addEventListener('picture-load', event => (this.hidden = false), { once: true })
     })
   }
 }

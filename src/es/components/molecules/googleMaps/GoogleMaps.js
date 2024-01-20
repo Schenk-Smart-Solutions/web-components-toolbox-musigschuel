@@ -14,7 +14,7 @@ export default class GoogleMaps extends Shadow() {
     // scroll card container back to top on mouse out to not hide the picture on overflow hidden
     const addedMouseOutNodes = []
     this.clickEventListener = event => {
-      this.scrollIntoView()
+      //this.scrollIntoView()
       const containers = this.root.querySelectorAll('[role=dialog], .gm-style-iw, .gm-style-iw-c')
       containers.forEach(container => {
         if (!addedMouseOutNodes.includes(container)) {
@@ -28,9 +28,7 @@ export default class GoogleMaps extends Shadow() {
 
     let renderHTMLResolve
     this.showPromises = [new Promise(resolve => (renderHTMLResolve = resolve))]
-    this.teachersEventListener = event => {
-      if (this.shouldRenderHTML()) renderHTMLResolve(this.renderHTML(event.detail.fetch, event.detail.origin))
-    }
+    this.teachersEventListener = event => renderHTMLResolve(this.renderHTML(event.detail.fetch, event.detail.origin))
   }
 
   connectedCallback () {
@@ -63,15 +61,6 @@ export default class GoogleMaps extends Shadow() {
    */
   shouldRenderCSS () {
     return !this.root.querySelector(`:host > style[_css], ${this.tagName} > style[_css]`)
-  }
-
-  /**
-   * evaluates if a render is necessary
-   *
-   * @return {boolean}
-   */
-  shouldRenderHTML () {
-    return !this.div
   }
 
   /**
@@ -199,10 +188,12 @@ export default class GoogleMaps extends Shadow() {
         }
       ])
     ]).then(([teachers]) => {
-      this.teachers = teachers.map(teacher => ({
+      // teachers is the new incoming teachers and this.teachers is the old teachers array
+      teachers = teachers.map(teacher => ({
         ...teacher,
         lat: parseFloat(teacher.lat),
         lng: parseFloat(teacher.lon),
+        id: `${teacher.lat}/${teacher.lon}/${teacher.title}/${teacher.link}`,
         content: /* HTML */`
           <div class="flip-card">
             <div class="flip-card-inner">
@@ -221,26 +212,64 @@ export default class GoogleMaps extends Shadow() {
           </div>
         `
       }))
-      this.html = /* HTML */`
-        <div>
-          <div id=map></div>
-        </div>
-      `
-      this.gMap = new google.maps.Map(this.map, {
-        // TODO: Calc teachers center
-        center: this.teachers.length > 1 ? { lat: 46.8182, lng: 8.2275 } : { lat: this.teachers[0].lat, lng: this.teachers[0].lng },
-        // TODO: Calc the zoom
-        zoom: this.teachers.length > 1 ? 8 : 12
-      })
-      this.bounds = this.teachers.length > 1 ? this.bounds = new google.maps.LatLngBounds() : undefined
-      if (this.bounds) this.gMap.fitBounds(this.bounds)
-      this.teachers.forEach(teacher => this.addMarker(this.gMap, teacher))
+      const center = teachers.length > 1 ? { lat: 46.8182, lng: 8.2275 } : { lat: teachers[0].lat, lng: teachers[0].lng }
+      const zoom = teachers.length > 1 ? 8 : 12
+      // update Map
+      if (this.gMap) {
+        // add all teachers which not already on the map
+        teachers.forEach(teacher => {
+          if (!this.teachers.some(oldTeacher => teacher.id === oldTeacher.id)) this.addMarker(this.gMap, teacher)
+        })
+        // remove all teachers which are no more in the new teachers array
+        this.teachers.forEach(oldTeacher => {
+          if (!teachers.some(teacher => teacher.id === oldTeacher.id)) this.removeMarker(oldTeacher)
+        })
+        this.gMap.setCenter(center)
+        this.gMap.setZoom(zoom)
+        this.bounds = teachers.length > 1 ? new google.maps.LatLngBounds() : undefined
+        this.updateBounds()
+        if (this.bounds) this.gMap.fitBounds(this.bounds)
+      // create new map
+      } else {
+        this.html = /* HTML */`
+          <div>
+            <div id=map></div>
+          </div>
+        `
+        this.gMap = new google.maps.Map(this.map, {
+          center,
+          zoom
+        })
+        this.markers = []
+        // update the teachers list
+        let boundsChangedTimeout
+        this.gMap.addListener('bounds_changed', () => {
+          clearTimeout(boundsChangedTimeout)
+          boundsChangedTimeout = setTimeout(() => this.dispatchEvent(new CustomEvent(this.getAttribute('google-maps-teachers') || 'google-maps-teachers',
+          {
+            detail: {
+              origin,
+              fetch: Promise.resolve(this.markers.filter(marker => this.gMap.getBounds().contains(marker.getPosition())).map(marker => this.teachers.find(teacher => teacher.id === marker.id)))
+            },
+            bubbles: true,
+            cancelable: true,
+            composed: true
+          })), 50)
+        })
+        this.bounds = teachers.length > 1 ? new google.maps.LatLngBounds() : undefined
+        teachers.forEach(teacher => this.addMarker(this.gMap, teacher))
+        if (this.bounds) this.gMap.fitBounds(this.bounds)
+      }
+      this.teachers = teachers
     })
   }
 
   handleSearchChange = (event) => {
-    if (event.detail.value) {
+    if (event.detail.value && event.detail.value.length >= 3) {
       this.filterMarkers(event.detail.value || 0, 5, this.getMarkers(), this.gMap)
+    } else {
+      this.updateBounds()
+      if (this.bounds) this.gMap.fitBounds(this.bounds)
     }
   }
 
@@ -264,8 +293,10 @@ export default class GoogleMaps extends Shadow() {
     const marker = new google.maps.Marker({
       position: { lat: teacher.lat, lng: teacher.lng },
       map: gMap,
+      id: teacher.id,
       icon: teacher.icon
     })
+    this.markers.push(marker)
 
     if (this.bounds) {
       this.bounds.extend(marker.position)
@@ -274,6 +305,18 @@ export default class GoogleMaps extends Shadow() {
     if (teacher.content) {
       this.addInfoWindow(gMap, marker, teacher.content)
     }
+  }
+
+  removeMarker (teacher) {
+    const index = isNaN(teacher)
+      ? this.markers.findIndex(marker => marker.id === teacher.id)
+      : teacher
+    this.markers.splice(index, 1)[0]?.setMap(null)
+  }
+
+  removeAllMarkers () {
+    this.markers.forEach(marker => marker.setMap(null))
+    this.markers = []
   }
 
   addInfoWindow (gMap, marker, content) {
@@ -301,9 +344,12 @@ export default class GoogleMaps extends Shadow() {
     })
   }
 
+  updateBounds () {
+    if (this.bounds) this.markers.forEach(marker => this.bounds.extend(marker.position))
+  }
+
   filterMarkers (postcode, radius, markers, gMap) {
     const geocoder = new google.maps.Geocoder()
-
     geocoder.geocode({ address: postcode + ' Switzerland' }, (results, status) => {
       if (status === 'OK') {
         this.dispatchEvent(new CustomEvent(this.getAttribute('map-search') || 'map-search', {
@@ -341,20 +387,18 @@ export default class GoogleMaps extends Shadow() {
   * @returns {Promise<{components: any}>}
   */
   loadDependency () {
-    // @ts-ignore
+    if (self.google?.maps) return Promise.resolve(self.google.maps)
     self.initMap = () => { }
-
-    return new Promise(resolve => {
+    return this._dependency || (this._dependency = new Promise(resolve => {
       const googleMapScript = document.createElement('script')
       googleMapScript.setAttribute('type', 'text/javascript')
       googleMapScript.setAttribute('async', '')
       googleMapScript.setAttribute('src', this.MAP_URL)
       googleMapScript.onload = () => {
-        // @ts-ignore
-        if ('google' in self) resolve(self.google.maps)
+        if (self.google?.maps) resolve(self.google.maps)
       }
       this.html = googleMapScript
-    })
+    }))
   }
 
   get map () {

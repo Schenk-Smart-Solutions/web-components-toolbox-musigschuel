@@ -26,8 +26,8 @@
 </ms-a-slogan>
 <h1>musigschuel.ch</h1>
 <p>Die nationale Plattform für freischaffende Musiklehrer.</p>
-<ms-c-teachers endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/teachers" lang="de-CH">
-  <ms-c-instruments endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/instruments" lang="de-CH">
+<ms-c-teachers endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/teachers" lang="de-CH" mock>
+  <ms-c-instruments endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/instruments" lang="de-CH" mock>
     <o-wrapper>
       <style protected="true">
         :host {
@@ -42,6 +42,7 @@
         search=""
         type=search
         change-listener
+        focus-listener
         delete-listener
         answer-event-name="map-search"
         active-detail-property-name="searchLocation"
@@ -51,8 +52,8 @@
             --search-input-border-radius: 0.5em 0.5em 0 0;
             --search-input-border-radius-mobile: 0.5em;
           }
-          :host([search]) input {
-            border-bottom: 0;
+          :host([search]) input, :host([search]) input:focus {
+            border-bottom: 0 !important;
           }
         </style>
       </a-input>
