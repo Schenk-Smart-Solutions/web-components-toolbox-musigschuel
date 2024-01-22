@@ -193,7 +193,6 @@ export default class GoogleMaps extends Shadow() {
         ...teacher,
         lat: parseFloat(teacher.lat),
         lng: parseFloat(teacher.lon),
-        id: `${teacher.lat}/${teacher.lon}/${teacher.title}/${teacher.link}`,
         content: /* HTML */`
           <div class="flip-card">
             <div class="flip-card-inner">
@@ -218,11 +217,11 @@ export default class GoogleMaps extends Shadow() {
       if (this.gMap) {
         // add all teachers which not already on the map
         teachers.forEach(teacher => {
-          if (!this.teachers.some(oldTeacher => teacher.id === oldTeacher.id)) this.addMarker(this.gMap, teacher)
+          if (!this.teachers.some(oldTeacher => teacher.teacherId === oldTeacher.teacherId)) this.addMarker(this.gMap, teacher)
         })
         // remove all teachers which are no more in the new teachers array
         this.teachers.forEach(oldTeacher => {
-          if (!teachers.some(teacher => teacher.id === oldTeacher.id)) this.removeMarker(oldTeacher)
+          if (!teachers.some(teacher => teacher.teacherId === oldTeacher.teacherId)) this.removeMarker(oldTeacher)
         })
         this.gMap.setCenter(center)
         this.gMap.setZoom(zoom)
@@ -249,7 +248,7 @@ export default class GoogleMaps extends Shadow() {
           {
             detail: {
               origin,
-              fetch: Promise.resolve(this.markers.filter(marker => this.gMap.getBounds().contains(marker.getPosition())).map(marker => this.teachers.find(teacher => teacher.id === marker.id)))
+              fetch: Promise.resolve(this.markers.filter(marker => this.gMap.getBounds().contains(marker.getPosition())).map(marker => this.teachers.find(teacher => teacher.teacherId === marker.teacherId)))
             },
             bubbles: true,
             cancelable: true,
@@ -293,7 +292,7 @@ export default class GoogleMaps extends Shadow() {
     const marker = new google.maps.Marker({
       position: { lat: teacher.lat, lng: teacher.lng },
       map: gMap,
-      id: teacher.id,
+      teacherId: teacher.teacherId,
       icon: teacher.icon
     })
     this.markers.push(marker)
@@ -309,7 +308,7 @@ export default class GoogleMaps extends Shadow() {
 
   removeMarker (teacher) {
     const index = isNaN(teacher)
-      ? this.markers.findIndex(marker => marker.id === teacher.id)
+      ? this.markers.findIndex(marker => marker.teacherId === teacher.teacherId)
       : teacher
     this.markers.splice(index, 1)[0]?.setMap(null)
   }
@@ -388,8 +387,8 @@ export default class GoogleMaps extends Shadow() {
   */
   loadDependency () {
     if (self.google?.maps) return Promise.resolve(self.google.maps)
-    self.initMap = () => { }
     return this._dependency || (this._dependency = new Promise(resolve => {
+      self.initMap = () => { }
       const googleMapScript = document.createElement('script')
       googleMapScript.setAttribute('type', 'text/javascript')
       googleMapScript.setAttribute('async', '')

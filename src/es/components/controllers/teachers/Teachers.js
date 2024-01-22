@@ -7,7 +7,7 @@
 /* global history */
 /* global self */
 
-/** @typedef {{ lat: number, lon: number, title: string, text: string, imageUrl: string, link: string, instruments: string[] }} teacher */
+/** @typedef {{ teacherId: number, lat: number, lon: number, title: string, text: string, imageUrl: string, link: string, instruments: string[] }} teacher */
 
 /** @typedef {teacher[]} teachers */
 
@@ -97,49 +97,54 @@ export default class Teachers extends Shadow() {
         /** @type {Promise<teachers>} */
         fetch: (this._fetch || (this._fetch = Promise.resolve([
           {
-              lat: 47.464275,
-              lon: 9.040814,
-              title: "Davide de Perota",
-              text: "Klavier und Keyboard, Songwriting, Begleitung von Gesang, Programmieren von Synthesizer-Sounds und die Arbeit mit Musiksoftware<br />Klavier und Keyboard, Songwriting, Begleitung von Gesang, Programmieren von Synthesizer-Sounds und die Arbeit mit Musiksoftware",
-              imageUrl: "/media/qj0fulap/teacher1.jpg?width=145&height=145&format=png&quality=80&v=1da05014c952580",
-              link: "/schuluebersicht/davide-de-perota/",
-              instruments: ["106b2535-65ad-4d73-9af4-d0eb069f6c50"]
+            teacherId: "ef169e1f-9638-4a1c-a6f8-2838090eff91",
+            lat: 47.464275,
+            lon: 9.040814,
+            title: "Davide de Perota",
+            text: "Klavier und Keyboard, Songwriting, Begleitung von Gesang, Programmieren von Synthesizer-Sounds und die Arbeit mit Musiksoftware<br />Klavier und Keyboard, Songwriting, Begleitung von Gesang, Programmieren von Synthesizer-Sounds und die Arbeit mit Musiksoftware",
+            imageUrl: "/media/qj0fulap/teacher1.jpg?width=145&height=145&format=png&quality=80&v=1da05014c952580",
+            link: "/schuluebersicht/davide-de-perota/",
+            instruments: ["106b2535-65ad-4d73-9af4-d0eb069f6c50"]
           },
           {
-              lat: 47.480576,
-              lon: 9.18872,
-              title: "Peter Gasser",
-              text: "Jazz\nRock\nPop<br />Ich unterrichte E-Bass und Kontrabass an der Musikschule Hinterthurgau und in meiner Musikschule in Niederhelfenschwil unterrichte ich zusätzlich Gitarrenschüler.",
-              imageUrl: "/media/ukvf1at2/1690352754.jpg?width=145&height=145&format=png&quality=80&v=1da05014ca77500",
-              link: "/schuluebersicht/peter-gasser/",
-              instruments: ["6147254d-24c1-4930-bf92-ca5ca3942e32"]
+            teacherId: "3fc8487a-2ebf-46be-9fb0-1e19d3b18c03",
+            lat: 47.480576,
+            lon: 9.18872,
+            title: "Peter Gasser",
+            text: "Jazz\nRock\nPop<br />Ich unterrichte E-Bass und Kontrabass an der Musikschule Hinterthurgau und in meiner Musikschule in Niederhelfenschwil unterrichte ich zusätzlich Gitarrenschüler.",
+            imageUrl: "/media/ukvf1at2/1690352754.jpg?width=145&height=145&format=png&quality=80&v=1da05014ca77500",
+            link: "/schuluebersicht/peter-gasser/",
+            instruments: ["6147254d-24c1-4930-bf92-ca5ca3942e32"]
           },
           {
-              lat: 47.272167,
-              lon: 8.100057,
-              title: "Roland Schenk",
-              text: "Jazz, Rock, Klassik<br />Fritz Frosch",
-              imageUrl: "/media/emvfow0c/roland_schenk.jpg?width=145&height=145&format=png&quality=80&v=1da0cde5acedb70",
-              link: "/schuluebersicht/fritz-frosch/",
-              instruments: []
+            teacherId: "5a3df905-3bf2-4353-acc9-4793689daebb",
+            lat: 47.272167,
+            lon: 8.100057,
+            title: "Roland Schenk",
+            text: "Jazz, Rock, Klassik<br />Fritz Frosch",
+            imageUrl: "/media/emvfow0c/roland_schenk.jpg?width=145&height=145&format=png&quality=80&v=1da0cde5acedb70",
+            link: "/schuluebersicht/fritz-frosch/",
+            instruments: []
           },
           {
-              lat: 47.241154,
-              lon: 8.720361,
-              title: "Billy Wirz",
-              text: "Billy Wirz",
-              imageUrl: "/media/xeady4hf/1688561251.jpg?width=145&height=145&format=png&quality=80&v=1da0cdaa0122b00",
-              link: "/schuluebersicht/billy-wirz/",
-              instruments: ["6147254d-24c1-4930-bf92-ca5ca3942e32", "d9b4d8fc-0a89-4ac5-96a8-bb9fd8050073"]
+            teacherId: "fe80cd86-363d-4759-ac58-28ce9129aba8",
+            lat: 47.241154,
+            lon: 8.720361,
+            title: "Billy Wirz",
+            text: "Billy Wirz",
+            imageUrl: "/media/xeady4hf/1688561251.jpg?width=145&height=145&format=png&quality=80&v=1da0cdaa0122b00",
+            link: "/schuluebersicht/billy-wirz/",
+            instruments: ["6147254d-24c1-4930-bf92-ca5ca3942e32", "d9b4d8fc-0a89-4ac5-96a8-bb9fd8050073"]
           },
           {
-              lat: 47.478367,
-              lon: 9.479398,
-              title: "Madeleine Rascher",
-              text: "Madeleine Rascher",
-              imageUrl: "/media/kbgaytj2/1669882401.jpg?width=145&height=145&format=png&quality=80&v=1da0cdcccf074e0",
-              link: "/schuluebersicht/madeleine-rascher/",
-              instruments: ["b50a92cc-9954-4d3f-9404-7e7ee89eaace"]
+            teacherId: "620813fa-c3f9-43c3-92ff-48582c9c1178",
+            lat: 47.478367,
+            lon: 9.479398,
+            title: "Madeleine Rascher",
+            text: "Madeleine Rascher",
+            imageUrl: "/media/kbgaytj2/1669882401.jpg?width=145&height=145&format=png&quality=80&v=1da0cdcccf074e0",
+            link: "/schuluebersicht/madeleine-rascher/",
+            instruments: ["b50a92cc-9954-4d3f-9404-7e7ee89eaace"]
           }
         ]))).then(teachers => Teachers.filter(teachers, eventTarget, eventValue))
       },

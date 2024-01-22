@@ -117,6 +117,14 @@ export default class TeacherList extends Shadow() {
         }
       ])
     ]).then(([teachers]) => {
+      if (!this.hasAttribute('no-filter-teachers')) {
+        const addedTeachers = []
+        teachers = teachers.filter(teacher => {
+          if (addedTeachers.includes(teacher.teacherId)) return false
+          addedTeachers.push(teacher.teacherId)
+          return true
+        })
+      }
       const htmlStr = /* html */`<ul>${teachers.reduce((acc, teacher) => /* html */`${acc}
           <li>
             <o-wrapper>

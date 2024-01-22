@@ -13,7 +13,7 @@ TODO
 - [x] Map Picture turn fix
 - [x] SimpleForm type=file preview
 - [x] Home Map Instrument filter / API get Players / player list
-- [ ] IPhone Select Option Display height bug fix
-- [ ] Recaptcha Spam protection recaptcha in simpleForm
-- [ ] Google Tag Manager, click on Address
+- [x] IPhone Select Option Display height bug fix
+- [x] Recaptcha Spam protection recaptcha in simpleForm
+- [ ] Google Tag Manager, click on Address event
 - [ ] Profile Pages styling
