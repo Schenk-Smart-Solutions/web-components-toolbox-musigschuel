@@ -1,0 +1,56 @@
+<m-simple-form
+  load-form-styles
+  namespace="simple-form-default-"
+  endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/updateTeacherProfile"
+  method="POST"
+  schema="{
+    'image': 'string',
+    'instrumentLocations': [
+      {
+        'instruments': [
+          '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+        ],
+        'school': 'string',
+        'streetNr': 'string',
+        'zipCode': 'string',
+        'city': 'string',
+        'lat': 0,
+        'lon': 0,
+        'addMore': 'boolean'
+      }
+    ],
+    'style': 'string',
+    'lessonsFrom': 0,
+    'name': 'string',
+    'subtitle': 'string',
+    'address': 'string',
+    'zipCode': 'string',
+    'state': 'string',
+    'city': 'string',
+    'website': 'string',
+    'email': 'string',
+    'languages': 'string'
+  }"
+>
+    <form action="/api/updateTeacherProfile" enctype="multipart/form-data" method="post">
+      <!--<div class="center">
+        <div>
+          <div validation-message="Bild fehlt">
+            <a-icon-paperclip hover-level="2" size="1em"></a-icon-paperclip>
+            <div class="type-file-label">Bild auswählen</div>
+          </div>
+          <input name="image" type="file" required="" remove-file-title="Bild entfernen" file-preview />
+        </div>
+      </div>-->
+      <div class="center">
+        <div class="has-files">
+          <div validation-message="Bild fehlt">
+            <a-icon-paperclip hover-level="2" size="1em" tabindex="0" class=""></a-icon-paperclip>
+            <div class="type-file-label file-preview" original-label="Bild auswählen"><ul><li><a-picture alt="homer.gif" defaultsource="http://musigschuel-dev.schenk-smart-solutions.ch/media/qj0fulap/teacher1.jpg?width=145&height=145&format=png&quality=80&v=1da05014c952580" tabindex="0" loading="lazy" loaded="true"></a-picture>homer.gif</li></ul></div>
+          </div>
+          <input name="image" type="file" required="" remove-file-title="Bild entfernen" file-preview="" title="Bild entfernen">
+        </div>
+      </div>
+      <input type="submit" value="Speichern" />
+    </form>
+</m-simple-form>
