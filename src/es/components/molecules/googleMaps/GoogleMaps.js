@@ -188,7 +188,7 @@ export default class GoogleMaps extends Shadow() {
         }
       ])
     ]).then(async ([teachers]) => {
-      if (!teachers.length) {
+      if (!teachers || !teachers.length) {
         this.teachers = []
         return this.removeAllMarkers()
       }
