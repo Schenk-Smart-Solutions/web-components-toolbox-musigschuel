@@ -216,8 +216,9 @@ export default class GoogleMaps extends Shadow() {
           </div>
         `
       }))
-      const center = teachers.length > 1 ? { lat: 46.8182, lng: 8.2275 } : { lat: teachers[0].lat, lng: teachers[0].lng }
-      const zoom = teachers.length > 1 ? 8 : 12
+      // TODO: Get teachers[0] lat + lng by address
+      const center = teachers.length > 1 || !teachers[0].lat === null || teachers[0].lng === null ? { lat: 46.8182, lng: 8.2275 } : { lat: teachers[0].lat, lng: teachers[0].lng }
+      const zoom = teachers.length > 1 || !teachers[0].lat === null || teachers[0].lng === null ? 8 : 12
       // update Map
       if (this.gMap) {
         // add all teachers which not already on the map
