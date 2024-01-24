@@ -148,7 +148,11 @@ export default class TeacherList extends Shadow() {
       this.hidden = true
       this.html = ''
       this.html = htmlStr
-      this.root.querySelector('o-wrapper')?.root.querySelector('a-picture').addEventListener('picture-load', event => (this.hidden = false), { once: true })
+      let counter = 0
+      this.root.querySelectorAll('o-wrapper').forEach(wrapper => wrapper.root.querySelectorAll('a-picture').forEach(picture => picture.addEventListener('picture-load', event => {
+        counter++
+        if (counter === teachers.length) this.hidden = false
+      }, { once: true })))
     })
   }
 }

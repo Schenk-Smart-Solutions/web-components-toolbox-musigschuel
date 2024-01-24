@@ -7,7 +7,7 @@
 /* global history */
 /* global self */
 
-/** @typedef {{ teacherId: number, lat: number, lon: number, title: string, text: string, imageUrl: string, link: string, instruments: string[] }} teacher */
+/** @typedef {{ teacherId: number, lat?: number, lon?: number, title: string, text: string, imageUrl: string, link: string, street?: string, zipCode?:number, city?:string, instruments: string[] }} teacher */
 
 /** @typedef {teacher[]} teachers */
 
@@ -108,12 +108,13 @@ export default class Teachers extends Shadow() {
           },
           {
             teacherId: "3fc8487a-2ebf-46be-9fb0-1e19d3b18c03",
-            lat: 47.480576,
-            lon: 9.18872,
             title: "Peter Gasser",
             text: "Jazz\nRock\nPop<br />Ich unterrichte E-Bass und Kontrabass an der Musikschule Hinterthurgau und in meiner Musikschule in Niederhelfenschwil unterrichte ich zusätzlich Gitarrenschüler.",
             imageUrl: "/media/ukvf1at2/1690352754.jpg?width=145&height=145&format=png&quality=80&v=1da05014ca77500",
             link: "/schuluebersicht/peter-gasser/",
+            street: "Neudorfgass 6",
+            zipCode: "9527",
+            city: "Niederhelfenschwil",
             instruments: ["6147254d-24c1-4930-bf92-ca5ca3942e32"]
           },
           {

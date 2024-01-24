@@ -187,12 +187,17 @@ export default class GoogleMaps extends Shadow() {
           name: 'a-picture'
         }
       ])
-    ]).then(([teachers]) => {
+    ]).then(async ([teachers]) => {
+      if (!teachers.length) {
+        this.teachers = []
+        return this.removeAllMarkers()
+      }
       // teachers is the new incoming teachers and this.teachers is the old teachers array
       teachers = teachers.map(teacher => ({
         ...teacher,
-        lat: parseFloat(teacher.lat),
-        lng: parseFloat(teacher.lon),
+        lat: parseFloat(teacher.lat) || null,
+        lng: parseFloat(teacher.lon) || null,
+        id: `${teacher.title}/${teacher.link}/${teacher.imageUrl}`,
         content: /* HTML */`
           <div class="flip-card">
             <div class="flip-card-inner">
@@ -216,12 +221,13 @@ export default class GoogleMaps extends Shadow() {
       // update Map
       if (this.gMap) {
         // add all teachers which not already on the map
-        teachers.forEach(teacher => {
-          if (!this.teachers.some(oldTeacher => teacher.teacherId === oldTeacher.teacherId)) this.addMarker(this.gMap, teacher)
-        })
+        teachers = await Promise.all(teachers.map(async (teacher) => {
+          if (!this.teachers.some(oldTeacher => teacher.id === oldTeacher.id)) return await this.addMarker(this.gMap, teacher)
+          return this.teachers.find(oldTeacher => teacher.id === oldTeacher.id)
+        }))
         // remove all teachers which are no more in the new teachers array
         this.teachers.forEach(oldTeacher => {
-          if (!teachers.some(teacher => teacher.teacherId === oldTeacher.teacherId)) this.removeMarker(oldTeacher)
+          if (!teachers.some(teacher => teacher.id === oldTeacher.id)) this.removeMarker(oldTeacher)
         })
         this.gMap.setCenter(center)
         this.gMap.setZoom(zoom)
@@ -239,7 +245,11 @@ export default class GoogleMaps extends Shadow() {
           center,
           zoom
         })
+        this.geocoder = new google.maps.Geocoder()
         this.markers = []
+        this.bounds = teachers.length > 1 ? new google.maps.LatLngBounds() : undefined
+        teachers = await Promise.all(teachers.map(async (teacher) => await this.addMarker(this.gMap, teacher)))
+        if (this.bounds) this.gMap.fitBounds(this.bounds)
         // update the teachers list
         let boundsChangedTimeout
         this.gMap.addListener('bounds_changed', () => {
@@ -248,16 +258,13 @@ export default class GoogleMaps extends Shadow() {
           {
             detail: {
               origin,
-              fetch: Promise.resolve(this.markers.filter(marker => this.gMap.getBounds().contains(marker.getPosition())).map(marker => this.teachers.find(teacher => teacher.teacherId === marker.teacherId)))
+              fetch: Promise.resolve(this.markers.filter(marker => this.gMap.getBounds().contains(marker.getPosition())).map(marker => this.teachers.find(teacher => teacher.id === marker.id)))
             },
             bubbles: true,
             cancelable: true,
             composed: true
           })), 50)
         })
-        this.bounds = teachers.length > 1 ? new google.maps.LatLngBounds() : undefined
-        teachers.forEach(teacher => this.addMarker(this.gMap, teacher))
-        if (this.bounds) this.gMap.fitBounds(this.bounds)
       }
       this.teachers = teachers
     })
@@ -288,11 +295,27 @@ export default class GoogleMaps extends Shadow() {
    *  instruments: string[];
    * }} teacher
    */
-  addMarker (gMap, teacher) {
+  async addMarker (gMap, teacher, geocoder = this.geocoder) {
+    await new Promise(resolve => {
+      if (teacher.lat === null || teacher.lng === null) {
+        // add lat/lng if missing
+        geocoder.geocode( { address: `${teacher.street}, ${teacher.zipCode} ${teacher.city}` + ' Switzerland'}, (results, status) => {
+          if (status == google.maps.GeocoderStatus.OK) {
+            teacher.lat = results[0].geometry.location.lat()
+            teacher.lng = results[0].geometry.location.lng()
+          } else {
+            console.warn('teacher could not be added, google maps did not find its address', teacher)
+          }
+          resolve()
+        })
+      } else {
+        resolve()
+      }
+    })
     const marker = new google.maps.Marker({
       position: { lat: teacher.lat, lng: teacher.lng },
       map: gMap,
-      teacherId: teacher.teacherId,
+      id: teacher.id,
       icon: teacher.icon
     })
     this.markers.push(marker)
@@ -304,11 +327,12 @@ export default class GoogleMaps extends Shadow() {
     if (teacher.content) {
       this.addInfoWindow(gMap, marker, teacher.content)
     }
+    return teacher
   }
 
   removeMarker (teacher) {
     const index = isNaN(teacher)
-      ? this.markers.findIndex(marker => marker.teacherId === teacher.teacherId)
+      ? this.markers.findIndex(marker => marker.id === teacher.id)
       : teacher
     this.markers.splice(index, 1)[0]?.setMap(null)
   }
@@ -333,12 +357,12 @@ export default class GoogleMaps extends Shadow() {
   }
 
   getMarkers = () => {
-    return this.teachers.map(m => {
+    return this.teachers.map(teacher => {
       return new google.maps.Marker({
-        position: { lat: m.lat, lng: m.lng },
+        position: { lat: teacher.lat, lng: teacher.lng },
         map: this.gMap,
-        icon: m.icon,
-        content: m.content
+        icon: teacher.icon,
+        content: teacher.content
       })
     })
   }
@@ -347,8 +371,7 @@ export default class GoogleMaps extends Shadow() {
     if (this.bounds) this.markers.forEach(marker => this.bounds.extend(marker.position))
   }
 
-  filterMarkers (postcode, radius, markers, gMap) {
-    const geocoder = new google.maps.Geocoder()
+  filterMarkers (postcode, radius, markers, gMap, geocoder = this.geocoder) {
     geocoder.geocode({ address: postcode + ' Switzerland' }, (results, status) => {
       if (status === 'OK') {
         this.dispatchEvent(new CustomEvent(this.getAttribute('map-search') || 'map-search', {
