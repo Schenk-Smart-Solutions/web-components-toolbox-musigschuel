@@ -216,9 +216,6 @@ export default class GoogleMaps extends Shadow() {
           </div>
         `
       }))
-      // TODO: Get teachers[0] lat + lng by address
-      const center = teachers.length > 1 || !teachers[0].lat === null || teachers[0].lng === null ? { lat: 46.8182, lng: 8.2275 } : { lat: teachers[0].lat, lng: teachers[0].lng }
-      const zoom = teachers.length > 1 || !teachers[0].lat === null || teachers[0].lng === null ? 8 : 12
       // update Map
       if (this.gMap) {
         // add all teachers which not already on the map
@@ -230,11 +227,6 @@ export default class GoogleMaps extends Shadow() {
         this.teachers.forEach(oldTeacher => {
           if (!teachers.some(teacher => teacher.id === oldTeacher.id)) this.removeMarker(oldTeacher)
         })
-        this.gMap.setCenter(center)
-        this.gMap.setZoom(zoom)
-        this.bounds = teachers.length > 1 ? new google.maps.LatLngBounds() : undefined
-        this.updateBounds()
-        if (this.bounds) this.gMap.fitBounds(this.bounds)
       // create new map
       } else {
         this.html = /* HTML */`
@@ -242,15 +234,10 @@ export default class GoogleMaps extends Shadow() {
             <div id=map></div>
           </div>
         `
-        this.gMap = new google.maps.Map(this.map, {
-          center,
-          zoom
-        })
+        this.gMap = new google.maps.Map(this.map, {})
         this.geocoder = new google.maps.Geocoder()
         this.markers = []
-        this.bounds = teachers.length > 1 ? new google.maps.LatLngBounds() : undefined
         teachers = await Promise.all(teachers.map(async (teacher) => await this.addMarker(this.gMap, teacher)))
-        if (this.bounds) this.gMap.fitBounds(this.bounds)
         // update the teachers list
         let boundsChangedTimeout
         this.gMap.addListener('bounds_changed', () => {
@@ -267,6 +254,13 @@ export default class GoogleMaps extends Shadow() {
           })), 50)
         })
       }
+      const center = teachers.length > 1 || !teachers[0].lat === null || teachers[0].lng === null ? { lat: 46.8182, lng: 8.2275 } : { lat: teachers[0].lat, lng: teachers[0].lng }
+      this.gMap.setCenter(center)
+      const zoom = teachers.length > 1 || !teachers[0].lat === null || teachers[0].lng === null ? 8 : 12
+      this.gMap.setZoom(zoom)
+      this.bounds = teachers.length > 1 ? new google.maps.LatLngBounds() : undefined
+      this.updateBounds()
+      if (this.bounds) this.gMap.fitBounds(this.bounds)
       this.teachers = teachers
     })
   }

@@ -94,6 +94,7 @@
   --hr-border-width: 0 0 2px;
   --hr-secondary-border-bottom: 2px solid var(--color-secondary);
   --hr-secondary-opacity: 1;
+  --input-font-size-mobile: var(--font-size);
   --navigation-alnatura-a-link-line-height-mobile: 1.5;
   --navigation-alnatura-a-link-line-height: 1.5;
   --navigation-alnatura-color-mobile-custom: var(--navigation-alnatura-color-second-level-custom);
@@ -103,6 +104,7 @@
   --news-alnatura-line-height:100%;
   --picture-close-btn-background-color:var(--color-secondary);
   --search-input-border-radius: 0.5em;
+  --select-font-size-mobile: var(--input-font-size-mobile);
   --teaser-plain-figcaption-justify-content-custom: flex-start;
   --teaser-round-figcaption-color: var(--color-secondary);
   --teaser-tile-rounded-h6-figcaption-color-custom: var(--color-secondary);
