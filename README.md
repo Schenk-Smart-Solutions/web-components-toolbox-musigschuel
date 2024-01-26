@@ -15,5 +15,7 @@ TODO
 - [x] Home Map Instrument filter / API get Players / player list
 - [x] IPhone Select Option Display height bug fix
 - [x] Recaptcha Spam protection recaptcha in simpleForm
-- [ ] Google Tag Manager, click on Address event
+- [ ] Form styling
 - [ ] Profile Pages styling
+- [ ] map marker html size
+- [ ] Google Tag Manager, click on Address event

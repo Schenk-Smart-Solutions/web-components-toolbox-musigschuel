@@ -1,0 +1,61 @@
+<m-simple-form
+  load-form-styles
+  namespace="simple-form-default-"
+  endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/something"
+  method="POST"
+  schema="{
+    'image': 'string',
+    'styles': [],
+    'stylesOne': 'boolean'
+  }"
+>
+    <form>
+      <h2>Styles</h2>
+      <div>
+        <o-grid auto-fill mode="false" gap="1em">
+          <div>
+            <label for="stylesOne">InstrumentOne:</label>
+            <input id="stylesOne" name="styles" value="InstrumentOne" type="checkbox" />
+          </div>
+          <div>
+            <label for="stylesTwo">InstrumentTwo:</label>
+            <input id="stylesTwo" name="styles" value="InstrumentTwo" type="checkbox" />
+          </div>
+          <div>
+            <label for="stylesThree">InstrumentThree:</label>
+            <input id="stylesThree" name="styles" value="InstrumentThree" type="checkbox" />
+          </div>
+          <div>
+            <label for="stylesThree">InstrumentFour:</label>
+            <input id="stylesFour" name="styles" value="InstrumentFour" type="checkbox" />
+          </div>
+  
+          <div>
+            <label for="stylesThree">InstrumentFive:</label>
+            <input id="stylesFour" name="styles" value="InstrumentFive" type="checkbox" />
+          </div>
+          <div>
+            <label for="stylesThree">InstrumentSix:</label>
+            <input id="stylesFour" name="styles" value="InstrumentSix" type="checkbox" />
+          </div>
+          <div>
+            <label for="stylesThree">InstrumentSeven:</label>
+            <input id="stylesFour" name="styles" value="InstrumentSeven" type="checkbox" />
+          </div>
+          <div>
+            <label for="stylesThree">InstrumentAight:</label>
+            <input id="stylesFour" name="styles" value="InstrumentAight" type="checkbox" />
+          </div>
+          <div>
+            <label for="stylesThree">InstrumentNine:</label>
+            <input id="stylesFour" name="styles" value="InstrumentNine" type="checkbox" />
+          </div>
+          <div>
+            <label for="stylesThree">InstrumentTen:</label>
+            <input id="stylesFour" name="styles" value="InstrumentTen" type="checkbox" />
+          </div>
+        </o-grid>
+      </div>
+      <input type="submit" value="Speichern" />
+    </form>
+</m-simple-form>
