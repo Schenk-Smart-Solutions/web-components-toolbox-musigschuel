@@ -29,7 +29,8 @@
     'city': 'string',
     'website': 'string',
     'email': 'string',
-    'languages': 'string'
+    'languages': 'string',
+    'subtitle': 'string'
   }"
   grecaptcha-key="6LfyfVkpAAAAABhTrnydq717vJEZhPOD93_QixBx"
 >
@@ -117,6 +118,10 @@
         <div>
           <label validation-message="Ortschaft ist ungültig" for="city">Ortschaft</label>
           <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
+        </div>
+        <div>
+          <label validation-message="Fülle die Beschreibung aus" for="subtitle">Beschreibung</label>
+          <textarea id="subtitle" type="text" required="" value="" name="subtitle" placeholder="Beschreibung..." autocomplete="off"></textarea>
         </div>
         <div class="inline">
           <label for="addMore">Mehr hinzufügen!</label>
