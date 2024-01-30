@@ -1,134 +1,1679 @@
-<m-simple-form
-  load-form-styles
-  namespace="simple-form-default-"
-  endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/api/updateTeacherProfile"
-  method="POST"
-  schema="{
+<m-simple-form load-form-styles
+               namespace="simple-form-default-"
+               endpoint="/api/saveTeacherProfile?sourceLanguage=de-CH"
+               method="POST"
+               headers="{
+                    'Content-Type': 'application/json'
+               }"
+               schema="{
     'image': 'string',
+    'gender': 'string',
     'instrumentLocations': [
       {
         'instruments': [
-          '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+            '3fa85f64-5717-4562-b3fc-2c963f66afa6'
         ],
-        'school': 'string',
+        'school': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        'location': 'string',
         'streetNr': 'string',
         'zipCode': 'string',
-        'city': 'string',
-        'lat': 0,
-        'lon': 0,
-        'addMore': 'boolean'
+        'city': 'string'
       }
     ],
-    'style': 'string',
+    'style': [
+        '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+    ],
     'lessonsFrom': 0,
     'name': 'string',
     'subtitle': 'string',
     'address': 'string',
     'zipCode': 'string',
-    'state': 'string',
+    'state': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    'mailConfigId': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
     'city': 'string',
     'website': 'string',
     'email': 'string',
-    'languages': 'string',
-    'subtitle': 'string'
+    'languages': [
+      'string'
+    ],
+    'hidePhoneNr': 'boolean',
+    'homeVisits': 'boolean',
+    'phone': 'string'
   }"
-  grecaptcha-key="6LfyfVkpAAAAABhTrnydq717vJEZhPOD93_QixBx"
->
-    <form action="/api/updateTeacherProfile" enctype="multipart/form-data" method="post">
-      <div class="inline">
-        <label for="subtitle1">Herr</label>
-        <input id="subtitle1" name="subtitle" type="radio" value="2" checked />
-        <label for="subtitle2">Frau</label>
-        <input id="subtitle2" name="subtitle" type="radio" value="1" />
-        <label for="subtitle3">Other</label>
-        <input id="subtitle3" name="subtitle" type="radio" value="3" />
-      </div>
-      <div>
-        <label validation-message="Name ist ungültig" for="name">Name</label>
-        <input id="name" type="text" required="" value="" name="name" placeholder="Bitte geben Sie hier Ihren Namen ein..."  autocomplete="off" />
-      </div>
-      <div>
-        <label validation-message="Adresse ist ungültig" for="address">Adresse</label>
-        <input id="address" type="text" required="" value="" name="address" placeholder="Adresse hier eingeben..." autocomplete="off" />
-      </div>
-      <div>
-        <label validation-message="PLZ ist ungültig" for="zipCode">Postleitzahl</label>
-        <input id="zipCode" type="number" min="1000" max="9999" inputmode="numeric" required="" value="" name="zipCode" placeholder="Postleitzahl hier eingeben..." autocomplete="off" />
-      </div>
-      <div>
-        <label validation-message="Ortschaft ist ungültig" for="city">Ortschaft</label>
-        <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
-      </div>
-      <div>
-        <label validation-message="Kanton ist ungültig" for="state">Kanton</label>
-        <input id="state" type="text" required="" value="" name="state" placeholder="Kanton hier eingeben..." autocomplete="off" />
-      </div>
-      <div>
-        <label validation-message="Ungültige Website" for="website">Website</label>
-        <input id="website" type="url" inputmode="url" required="" value="" name="website" placeholder="Website hier eingeben..." autocomplete="off" />
-      </div>
-      <div>
-        <label validation-message="Ungültige Email" for="email">E-Mail</label>
-        <input id="email" type="email" inputmode="email" required="" value="" name="email" placeholder="Email hier eingeben..." autocomplete="off" />
-      </div>
-      <div>
-        <label validation-message="Die Sprachen sind ungültig" for="languages">Sprachen</label>
-        <input id="languages" type="text" required="" value="" name="languages" placeholder="Bitte geben Sie hier Ihre Sprachenn ein..."  autocomplete="off" />
-      </div>
-      <div>
-        <label validation-message="Die lessonsFrom sind ungültig" for="lessonsFrom">lessonsFrom</label>
-        <input id="lessonsFrom" type="number" required="" value="" name="lessonsFrom" placeholder="Bitte geben Sie hier Ihre lessonsFrom ein..."  autocomplete="off" />
-      </div>
-      <div>
-        <label validation-message="Die style sind ungültig" for="style">style</label>
-        <input id="style" type="text" required="" value="" name="style" placeholder="Bitte geben Sie hier Ihre style ein..."  autocomplete="off" />
-      </div>
-      <div class="center">
-        <div>
-          <div validation-message="Bild fehlt">
-            <a-icon-paperclip hover-level="2" size="1em"></a-icon-paperclip>
-            <div class="type-file-label">Bild auswählen</div>
+               grecaptcha-key="6LfyfVkpAAAAABhTrnydq717vJEZhPOD93_QixBx">
+    <form action="/api/saveTeacherProfile" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="redirectUrl" />
+        <input type="hidden" name="mailConfigId"  value="e03cd870-d199-4aaa-9ef5-5a9c6e8b6936" />
+        <input id="email" type="hidden" name="email" value="icgkdzzasfduufcwln@cwmxc.com" />
+      <h2>Lehrerangaben</h2>
+        <!-- Nur die preview mit a-picture falls prefilled mit defaultSource -->
+        <!--
+        <div class="center">
+            <div class="has-files">
+                <div validationsn-message="Bild fehlt">
+                    <a-icon-paperclip hover-level="2" size="1em" tabindex="0" class=""></a-icon-paperclip>
+                    <div class="type-file-label file-preview" original-label="Bild auswählen">
+                        <ul>
+                            <li>
+                                <a-picture alt="" defaultsource="" loading="lazy"></a-picture>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <input name="image" type="file" data-required="" remove-file-title="Bild entfernen" file-preview="" title="Bild entfernen">
+            </div>
+        </div>
+        -->
+        <div class="center">
+          <div>
+            <div validation-message="Bild fehlt">
+              <a-icon-paperclip hover-level="2" size="1em"></a-icon-paperclip>
+              <div class="type-file-label">Bild auswählen</div>
+            </div>
+            <input name="image" type="file" required="" remove-file-title="Bild entfernen" file-preview />
           </div>
-          <input name="image" type="file" required="" remove-file-title="Bild entfernen" file-preview />
-        </div>
-      </div>
-      <section name="instrumentLocations">
-        <h2 multiply-text="Unterrichtslokalität $count$">Unterrichtslokalität</h2>
-        <div class="instruments">
-          <label validation-message="Ein Instrument muss ausgewählt werden!" for="instruments" multiply-text-two="Wählen Sie ein weiteres Instrument (--c--):">Wählen Sie ein Instrument:</label>
-          <select name="instruments" value="0" required="1" id="instruments" multiply="div.instruments" multiply-text-selector="multiply-text-two" multiply-condition="truthy" multiply-max="5" counter-placeholder="--c--">
-            <option value="">--Wählen Sie ein Instrument--</option>
-            <option value="Trompete">Trompete</option>
-            <option value="Klavier">Klavier</option>
-            <option value="Harmonika">Harmonika</option>
-          </select>
-        </div>
-        <div>
-          <label validation-message="Schule ist ungültig" for="school">Schule</label>
-          <input id="school" type="text" required="" value="" name="school" placeholder="Bitte geben Sie hier Ihren Schule ein..."  autocomplete="off" />
-        </div>
-        <div>
-          <label validation-message="Strasse ist ungültig" for="streetNr">Strasse</label>
-          <input id="streetNr" type="text" required="" value="" name="streetNr" placeholder="Strasse hier eingeben..." autocomplete="off" />
-        </div>
-        <div>
-          <label validation-message="PLZ ist ungültig" for="zipCode">Postleitzahl</label>
-          <input id="zipCode" type="number" min="1000" max="9999" inputmode="numeric" required="" value="" name="zipCode" placeholder="Postleitzahl hier eingeben..." autocomplete="off" />
-        </div>
-        <div>
-          <label validation-message="Ortschaft ist ungültig" for="city">Ortschaft</label>
-          <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
-        </div>
-        <div>
-          <label validation-message="Fülle die Beschreibung aus" for="subtitle">Beschreibung</label>
-          <textarea id="subtitle" type="text" required="" value="" name="subtitle" placeholder="Beschreibung..." autocomplete="off"></textarea>
         </div>
         <div class="inline">
-          <label for="addMore">Mehr hinzufügen!</label>
-          <input id="addMore" name="addMore" type="checkbox" multiply="section[name=instrumentLocations]" multiply-text-selector="multiply-text" multiply-condition="true" multiply-max="5" counter-placeholder="$count$" />
+            <label for="gender1">männlich</label>
+            <input id="gender1" name="gender" type="radio" value="m"   />
+            <label for="gender2">weiblich</label>
+            <input id="gender2" name="gender" type="radio" value="w"  />
+            <label for="gender3">divers</label>
+            <input id="gender3" name="gender" type="radio" value="d"  />
         </div>
-      </section>
-      <div class="center" captcha-message>Fill out the Captcha on the bottom right!</div>
-      <input type="submit" value="Speichern" />
+        <div>
+            <label validation-message="Bitte gib deinen Namen ein" for="name">Name</label>
+            <input id="name" type="text" required="" value="" name="name" placeholder="Nachname hier eingeben..." autocomplete="off" />
+        </div>
+        <div>
+            <label validation-message="Bitte gib deine Adresse ein" for="address">Adresse</label>
+            <input id="address" type="text" required="" value="" name="address" placeholder="Adresse hier eingeben..." autocomplete="off" />
+        </div>
+        <div>
+            <label validation-message="PLZ ist ung&#xFC;ltig" for="zipCode">Postleitzahl</label>
+            <input id="zipCode" type="number" min="1000" max="9999" inputmode="numeric" required="" value="" name="zipCode" placeholder="Postleitzahl hier eingeben..." autocomplete="off" />
+        </div>
+        <div>
+            <label for="city">Ortschaft</label>
+            <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
+        </div>
+        <div>
+          <label validation-message="Bitte gib deinen Kanton ein" for="state">Kanton</label>
+
+          <select id="state" name="state" required>
+                      <option value="0ef61509-48c8-478c-a980-f0fb6bb83577">Aargau</option>
+                      <option value="0bf6cbe2-93be-4806-8edb-b2e2b3f9f2d5">Appenzell Ausserrhoden</option>
+                      <option value="2751ea94-8943-445f-9e78-d5e6092dc7ac">Appenzell Innerrhoden</option>
+                      <option value="04c82ed8-76c0-453e-8c28-3819ebc48835">Basel-Land</option>
+                      <option value="7decd32d-315d-4d90-8c1d-dcce2cb88aaf">Basel-Stadt</option>
+                      <option value="6389eeb0-7354-461e-b55f-25c14405e054">Bern</option>
+                      <option value="1890c018-b28c-4500-bf81-02dd68131cf4">Freiburg</option>
+                      <option value="4d6271d7-9b04-447b-afe4-0838c91a2358">Genf</option>
+                      <option value="72e0871c-7cd8-4ad0-9c96-46b89934b619">Glarus</option>
+                      <option value="7c81e98c-849c-41ef-9d13-0cbe690882a3">Graub&#xFC;nden</option>
+                      <option value="3680f4a1-b6a1-4e28-9531-e8f4ad1800bc">Jura</option>
+                      <option value="bb9da6c3-a069-4df0-b0e0-3426475adddb">Luzern</option>
+                      <option value="b2683ff9-a8d3-49f9-a8d1-0ddf33cec512">Neuenburg</option>
+                      <option value="18132d96-147d-4f13-a8f6-3f601121fda3">Nidwalden</option>
+                      <option value="77d54bf0-a601-4567-bd3d-38a3c6cc3136">Obwalden</option>
+                      <option value="329c0122-646c-4054-85eb-23c293b5d2d9">Sankt Gallen</option>
+                      <option value="d7fb9071-406c-4e90-a6ff-4e0084b02fa2">Schaffhausen</option>
+                      <option value="327b19c8-5139-4763-9bb5-e27c6d35c5e6">Schwyz</option>
+                      <option value="520d8a42-3ed4-40bf-b904-8784452e0afb">Solothurn</option>
+                      <option value="622d0c3a-ee48-4473-8ca2-d22068d48de3">Thurgau</option>
+                      <option value="5e4848f2-6e7c-4d2b-813b-7266efb986d1">Tessin</option>
+                      <option value="346227b2-36c2-4e43-985b-293cde16d397">Uri</option>
+                      <option value="ebc7ddc2-3d4a-4f10-a9f5-883bb3d8c84b">Waadt</option>
+                      <option value="f9a7c110-3efa-48a5-9c53-15a98f0fcb50">Wallis</option>
+                      <option value="d2b42199-5e57-4d40-95c5-3b509f055db1">Zug</option>
+                      <option value="14bd142c-2527-47a4-9255-14f95663bea8">Z&#xFC;rich</option>
+          </select>
+      </div>
+        <div>
+            <label for="phone">Gib deine Telefonnummer ein *</label>
+            <input type="text" required id="phone" name="phone" value="" placeholder="Telefonnummer hier eingeben" />
+          </div>
+          <div class="inline">
+              <label for="hidePhoneNr">Telefonnummer nicht öffentlich anzeigen im Profil</label>
+              <input id="hidePhoneNr" name="hidePhoneNr" type="checkbox" checked />
+          </div>
+          <div>
+            <label validation-message="Ungültige Website" for="website">Website</label>
+            <input id="website" type="url" inputmode="url" required="" name="website" placeholder="Website hier eingeben..." autocomplete="off" />
+        </div>
+        <div>
+            <label for="subtitle">
+                Hier kannst du Einen Kleinen Beschreibungstext über dich hinzufügen, der in deinem Profil angezeigt wird
+            </label>
+            <textarea id="subtitle" name="subtitle" placeholder="gib hier deinen Text ein"></textarea>
+        </div>
+        <hr>
+        <h3>Stilistik</h3>
+        <o-grid id="grid-sprachen" auto-fill mode="false" padding="1em">
+                    <div>
+                        <label>Rock</label>
+                        <input type="checkbox" id="style0" name="style" value="4faefc42-81a0-43a8-a788-51ae6ac6c2ea" />
+                    </div>
+                    <div>
+                        <label>Metal</label>
+                        <input type="checkbox" id="style1" name="style" value="af36581f-647f-41b5-bffc-b540c403b92b" />
+                    </div>
+                    <div>
+                        <label>Klassik</label>
+                        <input type="checkbox" id="style2" name="style" value="fb2974ac-927d-437c-94d5-36a80c7049fa" />
+                    </div>
+                    <div>
+                        <label>Punk</label>
+                        <input type="checkbox" id="style3" name="style" value="1cea5e97-5e99-426f-a102-3e570726c0fe" />
+                    </div>
+                    <div>
+                        <label>Jazz</label>
+                        <input type="checkbox" id="style4" name="style" value="5816ca8a-54eb-4cda-acdd-e5513a3c7833" />
+                    </div>
+                    <div>
+                        <label>HipHop</label>
+                        <input type="checkbox" id="style5" name="style" value="1350fb2d-43bf-4c27-afa3-84d34ceef8ba" />
+                    </div>
+                    <div>
+                        <label>Weltmusik</label>
+                        <input type="checkbox" id="style6" name="style" value="859f7abe-1d22-4ed6-9859-f002dd603102" />
+                    </div>
+                    <div>
+                        <label>Folk</label>
+                        <input type="checkbox" id="style7" name="style" value="4f390b0c-81f2-4d22-9122-6403b06f9794" />
+                    </div>
+                    <div>
+                        <label>Country</label>
+                        <input type="checkbox" id="style8" name="style" value="fbcacf71-3469-44d5-8129-273eb1611632" />
+                    </div>
+                    <div>
+                        <label>Blues</label>
+                        <input type="checkbox" id="style9" name="style" value="a2f769bf-3ee8-4ed2-b65e-49e95bef35fc" />
+                    </div>
+                    <div>
+                        <label>EDM</label>
+                        <input type="checkbox" id="style10" name="style" value="f02cfbe6-2574-4216-be44-9212119c7693" />
+                    </div>
+        </o-grid>
+       
+        </div>
+        <hr>
+        <h3>Sprachen</h3>
+        <o-grid id="grid-sprachen-default" auto-fill mode="false" padding="1em">
+        <div>
+            <label for="languages42">Deutsch</label>
+            <input id="languages42" name="languages" type="checkbox" value="de"  name="language42" />
+        </div>
+        <div>
+          <label for="languages66">Franz&#xF6;sisch</label>
+          <input id="languages66" name="languages" type="checkbox" value="fr"  name="language66" />
+        </div>
+        <div>
+          <label for="languages91">Italienisch</label>
+          <input id="languages91" name="languages" type="checkbox" value="it"  name="language91" />
+      </div>
+      <div>
+          <label for="languages53">Englisch</label>
+          <input id="languages53" name="languages" type="checkbox" value="en"  name="language53" />
+      </div>
+    </o-grid>
+        <div>
+          <m-details id="details-sprachen" namespace="details-default-" mode="false">
+            <details>
+                <summary>andere Sprachen</summary>
+                <o-grid id="grid-sprachen" auto-fill mode="false" padding="1em">
+                        <div>
+                            <label for="languages0">Afar</label>
+                            <input id="languages0" name="languages" type="checkbox" value="aa"  name="language0" />
+                        </div>
+                        <div>
+                            <label for="languages1">Afrikaans</label>
+                            <input id="languages1" name="languages" type="checkbox" value="af"  name="language1" />
+                        </div>
+                        <div>
+                            <label for="languages2">Aghem</label>
+                            <input id="languages2" name="languages" type="checkbox" value="agq"  name="language2" />
+                        </div>
+                        <div>
+                            <label for="languages3">Akan</label>
+                            <input id="languages3" name="languages" type="checkbox" value="ak"  name="language3" />
+                        </div>
+                        <div>
+                            <label for="languages4">Amharisch</label>
+                            <input id="languages4" name="languages" type="checkbox" value="am"  name="language4" />
+                        </div>
+                        <div>
+                            <label for="languages5">Arabisch</label>
+                            <input id="languages5" name="languages" type="checkbox" value="ar"  name="language5" />
+                        </div>
+                        <div>
+                            <label for="languages6">Mapudungun</label>
+                            <input id="languages6" name="languages" type="checkbox" value="arn"  name="language6" />
+                        </div>
+                        <div>
+                            <label for="languages7">Assamesisch</label>
+                            <input id="languages7" name="languages" type="checkbox" value="as"  name="language7" />
+                        </div>
+                        <div>
+                            <label for="languages8">Asu</label>
+                            <input id="languages8" name="languages" type="checkbox" value="asa"  name="language8" />
+                        </div>
+                        <div>
+                            <label for="languages9">Asturisch</label>
+                            <input id="languages9" name="languages" type="checkbox" value="ast"  name="language9" />
+                        </div>
+                        <div>
+                            <label for="languages10">Aserbaidschanisch</label>
+                            <input id="languages10" name="languages" type="checkbox" value="az"  name="language10" />
+                        </div>
+                        <div>
+                            <label for="languages11">Aserbaidschanisch (Kyrillisch)</label>
+                            <input id="languages11" name="languages" type="checkbox" value="az-Cyrl"  name="language11" />
+                        </div>
+                        <div>
+                            <label for="languages12">Aserbaidschanisch (Lateinisch)</label>
+                            <input id="languages12" name="languages" type="checkbox" value="az-Latn"  name="language12" />
+                        </div>
+                        <div>
+                            <label for="languages13">Baschkirisch</label>
+                            <input id="languages13" name="languages" type="checkbox" value="ba"  name="language13" />
+                        </div>
+                        <div>
+                            <label for="languages14">Basaa-Sprache</label>
+                            <input id="languages14" name="languages" type="checkbox" value="bas"  name="language14" />
+                        </div>
+                        <div>
+                            <label for="languages15">Belarussisch</label>
+                            <input id="languages15" name="languages" type="checkbox" value="be"  name="language15" />
+                        </div>
+                        <div>
+                            <label for="languages16">Bemba</label>
+                            <input id="languages16" name="languages" type="checkbox" value="bem"  name="language16" />
+                        </div>
+                        <div>
+                            <label for="languages17">Bena</label>
+                            <input id="languages17" name="languages" type="checkbox" value="bez"  name="language17" />
+                        </div>
+                        <div>
+                            <label for="languages18">Bulgarisch</label>
+                            <input id="languages18" name="languages" type="checkbox" value="bg"  name="language18" />
+                        </div>
+                        <div>
+                            <label for="languages19">Bini-Sprache</label>
+                            <input id="languages19" name="languages" type="checkbox" value="bin"  name="language19" />
+                        </div>
+                        <div>
+                            <label for="languages20">Bambara</label>
+                            <input id="languages20" name="languages" type="checkbox" value="bm"  name="language20" />
+                        </div>
+                        <div>
+                            <label for="languages21">Bengalisch</label>
+                            <input id="languages21" name="languages" type="checkbox" value="bn"  name="language21" />
+                        </div>
+                        <div>
+                            <label for="languages22">Tibetisch</label>
+                            <input id="languages22" name="languages" type="checkbox" value="bo"  name="language22" />
+                        </div>
+                        <div>
+                            <label for="languages23">Bretonisch</label>
+                            <input id="languages23" name="languages" type="checkbox" value="br"  name="language23" />
+                        </div>
+                        <div>
+                            <label for="languages24">Bodo</label>
+                            <input id="languages24" name="languages" type="checkbox" value="brx"  name="language24" />
+                        </div>
+                        <div>
+                            <label for="languages25">Bosnisch</label>
+                            <input id="languages25" name="languages" type="checkbox" value="bs"  name="language25" />
+                        </div>
+                        <div>
+                            <label for="languages26">Bosnisch (Kyrillisch)</label>
+                            <input id="languages26" name="languages" type="checkbox" value="bs-Cyrl"  name="language26" />
+                        </div>
+                        <div>
+                            <label for="languages27">Bosnisch (Lateinisch)</label>
+                            <input id="languages27" name="languages" type="checkbox" value="bs-Latn"  name="language27" />
+                        </div>
+                        <div>
+                            <label for="languages28">Blin</label>
+                            <input id="languages28" name="languages" type="checkbox" value="byn"  name="language28" />
+                        </div>
+                        <div>
+                            <label for="languages29">Katalanisch</label>
+                            <input id="languages29" name="languages" type="checkbox" value="ca"  name="language29" />
+                        </div>
+                        <div>
+                            <label for="languages30">Chakma</label>
+                            <input id="languages30" name="languages" type="checkbox" value="ccp"  name="language30" />
+                        </div>
+                        <div>
+                            <label for="languages31">Tschetschenisch</label>
+                            <input id="languages31" name="languages" type="checkbox" value="ce"  name="language31" />
+                        </div>
+                        <div>
+                            <label for="languages32">Cebuano</label>
+                            <input id="languages32" name="languages" type="checkbox" value="ceb"  name="language32" />
+                        </div>
+                        <div>
+                            <label for="languages33">Rukiga</label>
+                            <input id="languages33" name="languages" type="checkbox" value="cgg"  name="language33" />
+                        </div>
+                        <div>
+                            <label for="languages34">Cherokee</label>
+                            <input id="languages34" name="languages" type="checkbox" value="chr"  name="language34" />
+                        </div>
+                        <div>
+                            <label for="languages35">Zentralkurdisch</label>
+                            <input id="languages35" name="languages" type="checkbox" value="ckb"  name="language35" />
+                        </div>
+                        <div>
+                            <label for="languages36">Korsisch</label>
+                            <input id="languages36" name="languages" type="checkbox" value="co"  name="language36" />
+                        </div>
+                        <div>
+                            <label for="languages37">Tschechisch</label>
+                            <input id="languages37" name="languages" type="checkbox" value="cs"  name="language37" />
+                        </div>
+                        <div>
+                            <label for="languages38">Kirchenslawisch</label>
+                            <input id="languages38" name="languages" type="checkbox" value="cu"  name="language38" />
+                        </div>
+                        <div>
+                            <label for="languages39">Walisisch</label>
+                            <input id="languages39" name="languages" type="checkbox" value="cy"  name="language39" />
+                        </div>
+                        <div>
+                            <label for="languages40">D&#xE4;nisch</label>
+                            <input id="languages40" name="languages" type="checkbox" value="da"  name="language40" />
+                        </div>
+                        <div>
+                            <label for="languages41">Taita</label>
+                            <input id="languages41" name="languages" type="checkbox" value="dav"  name="language41" />
+                        </div>
+                        <div>
+                            <label for="languages43">Zarma</label>
+                            <input id="languages43" name="languages" type="checkbox" value="dje"  name="language43" />
+                        </div>
+                        <div>
+                            <label for="languages44">Dogri</label>
+                            <input id="languages44" name="languages" type="checkbox" value="doi"  name="language44" />
+                        </div>
+                        <div>
+                            <label for="languages45">Niedersorbisch</label>
+                            <input id="languages45" name="languages" type="checkbox" value="dsb"  name="language45" />
+                        </div>
+                        <div>
+                            <label for="languages46">Duala</label>
+                            <input id="languages46" name="languages" type="checkbox" value="dua"  name="language46" />
+                        </div>
+                        <div>
+                            <label for="languages47">Dhivehi</label>
+                            <input id="languages47" name="languages" type="checkbox" value="dv"  name="language47" />
+                        </div>
+                        <div>
+                            <label for="languages48">Diola</label>
+                            <input id="languages48" name="languages" type="checkbox" value="dyo"  name="language48" />
+                        </div>
+                        <div>
+                            <label for="languages49">Dzongkha</label>
+                            <input id="languages49" name="languages" type="checkbox" value="dz"  name="language49" />
+                        </div>
+                        <div>
+                            <label for="languages50">Embu</label>
+                            <input id="languages50" name="languages" type="checkbox" value="ebu"  name="language50" />
+                        </div>
+                        <div>
+                            <label for="languages51">Ewe</label>
+                            <input id="languages51" name="languages" type="checkbox" value="ee"  name="language51" />
+                        </div>
+                        <div>
+                            <label for="languages52">Griechisch</label>
+                            <input id="languages52" name="languages" type="checkbox" value="el"  name="language52" />
+                        </div>
+                        <div>
+                            <label for="languages54">Esperanto</label>
+                            <input id="languages54" name="languages" type="checkbox" value="eo"  name="language54" />
+                        </div>
+                        <div>
+                            <label for="languages55">Spanisch</label>
+                            <input id="languages55" name="languages" type="checkbox" value="es"  name="language55" />
+                        </div>
+                        <div>
+                            <label for="languages56">Estnisch</label>
+                            <input id="languages56" name="languages" type="checkbox" value="et"  name="language56" />
+                        </div>
+                        <div>
+                            <label for="languages57">Baskisch</label>
+                            <input id="languages57" name="languages" type="checkbox" value="eu"  name="language57" />
+                        </div>
+                        <div>
+                            <label for="languages58">Ewondo</label>
+                            <input id="languages58" name="languages" type="checkbox" value="ewo"  name="language58" />
+                        </div>
+                        <div>
+                            <label for="languages59">Persisch</label>
+                            <input id="languages59" name="languages" type="checkbox" value="fa"  name="language59" />
+                        </div>
+                        <div>
+                            <label for="languages60">Ful</label>
+                            <input id="languages60" name="languages" type="checkbox" value="ff"  name="language60" />
+                        </div>
+                        <div>
+                            <label for="languages61">Fulah (Adlam)</label>
+                            <input id="languages61" name="languages" type="checkbox" value="ff-Adlm"  name="language61" />
+                        </div>
+                        <div>
+                            <label for="languages62">Ful (Lateinisch)</label>
+                            <input id="languages62" name="languages" type="checkbox" value="ff-Latn"  name="language62" />
+                        </div>
+                        <div>
+                            <label for="languages63">Finnisch</label>
+                            <input id="languages63" name="languages" type="checkbox" value="fi"  name="language63" />
+                        </div>
+                        <div>
+                            <label for="languages64">Filipino</label>
+                            <input id="languages64" name="languages" type="checkbox" value="fil"  name="language64" />
+                        </div>
+                        <div>
+                            <label for="languages65">F&#xE4;r&#xF6;isch</label>
+                            <input id="languages65" name="languages" type="checkbox" value="fo"  name="language65" />
+                        </div>
+                        <div>
+                            <label for="languages67">Friaulisch</label>
+                            <input id="languages67" name="languages" type="checkbox" value="fur"  name="language67" />
+                        </div>
+                        <div>
+                            <label for="languages68">Westfriesisch</label>
+                            <input id="languages68" name="languages" type="checkbox" value="fy"  name="language68" />
+                        </div>
+                        <div>
+                            <label for="languages69">Irisch</label>
+                            <input id="languages69" name="languages" type="checkbox" value="ga"  name="language69" />
+                        </div>
+                        <div>
+                            <label for="languages70">G&#xE4;lisch (Schottland)</label>
+                            <input id="languages70" name="languages" type="checkbox" value="gd"  name="language70" />
+                        </div>
+                        <div>
+                            <label for="languages71">Galicisch</label>
+                            <input id="languages71" name="languages" type="checkbox" value="gl"  name="language71" />
+                        </div>
+                        <div>
+                            <label for="languages72">Guaran&#xED;</label>
+                            <input id="languages72" name="languages" type="checkbox" value="gn"  name="language72" />
+                        </div>
+                        <div>
+                            <label for="languages73">Schweizerdeutsch</label>
+                            <input id="languages73" name="languages" type="checkbox" value="gsw"  name="language73" />
+                        </div>
+                        <div>
+                            <label for="languages74">Gujarati</label>
+                            <input id="languages74" name="languages" type="checkbox" value="gu"  name="language74" />
+                        </div>
+                        <div>
+                            <label for="languages75">Gusii</label>
+                            <input id="languages75" name="languages" type="checkbox" value="guz"  name="language75" />
+                        </div>
+                        <div>
+                            <label for="languages76">Manx</label>
+                            <input id="languages76" name="languages" type="checkbox" value="gv"  name="language76" />
+                        </div>
+                        <div>
+                            <label for="languages77">Haussa</label>
+                            <input id="languages77" name="languages" type="checkbox" value="ha"  name="language77" />
+                        </div>
+                        <div>
+                            <label for="languages78">Hawaiisch</label>
+                            <input id="languages78" name="languages" type="checkbox" value="haw"  name="language78" />
+                        </div>
+                        <div>
+                            <label for="languages79">Hebr&#xE4;isch</label>
+                            <input id="languages79" name="languages" type="checkbox" value="he"  name="language79" />
+                        </div>
+                        <div>
+                            <label for="languages80">Hindi</label>
+                            <input id="languages80" name="languages" type="checkbox" value="hi"  name="language80" />
+                        </div>
+                        <div>
+                            <label for="languages81">Kroatisch</label>
+                            <input id="languages81" name="languages" type="checkbox" value="hr"  name="language81" />
+                        </div>
+                        <div>
+                            <label for="languages82">Obersorbisch</label>
+                            <input id="languages82" name="languages" type="checkbox" value="hsb"  name="language82" />
+                        </div>
+                        <div>
+                            <label for="languages83">Ungarisch</label>
+                            <input id="languages83" name="languages" type="checkbox" value="hu"  name="language83" />
+                        </div>
+                        <div>
+                            <label for="languages84">Armenisch</label>
+                            <input id="languages84" name="languages" type="checkbox" value="hy"  name="language84" />
+                        </div>
+                        <div>
+                            <label for="languages85">Interlingua</label>
+                            <input id="languages85" name="languages" type="checkbox" value="ia"  name="language85" />
+                        </div>
+                        <div>
+                            <label for="languages86">Ibibio</label>
+                            <input id="languages86" name="languages" type="checkbox" value="ibb"  name="language86" />
+                        </div>
+                        <div>
+                            <label for="languages87">Indonesisch</label>
+                            <input id="languages87" name="languages" type="checkbox" value="id"  name="language87" />
+                        </div>
+                        <div>
+                            <label for="languages88">Igbo</label>
+                            <input id="languages88" name="languages" type="checkbox" value="ig"  name="language88" />
+                        </div>
+                        <div>
+                            <label for="languages89">Yi</label>
+                            <input id="languages89" name="languages" type="checkbox" value="ii"  name="language89" />
+                        </div>
+                        <div>
+                            <label for="languages90">Isl&#xE4;ndisch</label>
+                            <input id="languages90" name="languages" type="checkbox" value="is"  name="language90" />
+                        </div>
+                        <div>
+                            <label for="languages92">Inuktitut</label>
+                            <input id="languages92" name="languages" type="checkbox" value="iu"  name="language92" />
+                        </div>
+                        <div>
+                            <label for="languages93">Inuktitut (Lateinisch)</label>
+                            <input id="languages93" name="languages" type="checkbox" value="iu-Latn"  name="language93" />
+                        </div>
+                        <div>
+                            <label for="languages94">Japanisch</label>
+                            <input id="languages94" name="languages" type="checkbox" value="ja"  name="language94" />
+                        </div>
+                        <div>
+                            <label for="languages95">Ngomba</label>
+                            <input id="languages95" name="languages" type="checkbox" value="jgo"  name="language95" />
+                        </div>
+                        <div>
+                            <label for="languages96">Machame</label>
+                            <input id="languages96" name="languages" type="checkbox" value="jmc"  name="language96" />
+                        </div>
+                        <div>
+                            <label for="languages97">Javanisch</label>
+                            <input id="languages97" name="languages" type="checkbox" value="jv"  name="language97" />
+                        </div>
+                        <div>
+                            <label for="languages98">Javanisch (Javanesisch)</label>
+                            <input id="languages98" name="languages" type="checkbox" value="jv-Java"  name="language98" />
+                        </div>
+                        <div>
+                            <label for="languages99">Georgisch</label>
+                            <input id="languages99" name="languages" type="checkbox" value="ka"  name="language99" />
+                        </div>
+                        <div>
+                            <label for="languages100">Kabylisch</label>
+                            <input id="languages100" name="languages" type="checkbox" value="kab"  name="language100" />
+                        </div>
+                        <div>
+                            <label for="languages101">Kamba</label>
+                            <input id="languages101" name="languages" type="checkbox" value="kam"  name="language101" />
+                        </div>
+                        <div>
+                            <label for="languages102">Makonde</label>
+                            <input id="languages102" name="languages" type="checkbox" value="kde"  name="language102" />
+                        </div>
+                        <div>
+                            <label for="languages103">Kabuverdianu</label>
+                            <input id="languages103" name="languages" type="checkbox" value="kea"  name="language103" />
+                        </div>
+                        <div>
+                            <label for="languages104">Koyra Chiini</label>
+                            <input id="languages104" name="languages" type="checkbox" value="khq"  name="language104" />
+                        </div>
+                        <div>
+                            <label for="languages105">Kikuyu</label>
+                            <input id="languages105" name="languages" type="checkbox" value="ki"  name="language105" />
+                        </div>
+                        <div>
+                            <label for="languages106">Kasachisch</label>
+                            <input id="languages106" name="languages" type="checkbox" value="kk"  name="language106" />
+                        </div>
+                        <div>
+                            <label for="languages107">Kako</label>
+                            <input id="languages107" name="languages" type="checkbox" value="kkj"  name="language107" />
+                        </div>
+                        <div>
+                            <label for="languages108">Gr&#xF6;nl&#xE4;ndisch</label>
+                            <input id="languages108" name="languages" type="checkbox" value="kl"  name="language108" />
+                        </div>
+                        <div>
+                            <label for="languages109">Kalenjin</label>
+                            <input id="languages109" name="languages" type="checkbox" value="kln"  name="language109" />
+                        </div>
+                        <div>
+                            <label for="languages110">Khmer</label>
+                            <input id="languages110" name="languages" type="checkbox" value="km"  name="language110" />
+                        </div>
+                        <div>
+                            <label for="languages111">Kannada</label>
+                            <input id="languages111" name="languages" type="checkbox" value="kn"  name="language111" />
+                        </div>
+                        <div>
+                            <label for="languages112">Koreanisch</label>
+                            <input id="languages112" name="languages" type="checkbox" value="ko"  name="language112" />
+                        </div>
+                        <div>
+                            <label for="languages113">Konkani</label>
+                            <input id="languages113" name="languages" type="checkbox" value="kok"  name="language113" />
+                        </div>
+                        <div>
+                            <label for="languages114">Kanuri</label>
+                            <input id="languages114" name="languages" type="checkbox" value="kr"  name="language114" />
+                        </div>
+                        <div>
+                            <label for="languages115">Kanuri (Lateinisch)</label>
+                            <input id="languages115" name="languages" type="checkbox" value="kr-Latn"  name="language115" />
+                        </div>
+                        <div>
+                            <label for="languages116">Kaschmiri</label>
+                            <input id="languages116" name="languages" type="checkbox" value="ks"  name="language116" />
+                        </div>
+                        <div>
+                            <label for="languages117">Kaschmiri (Arabisch)</label>
+                            <input id="languages117" name="languages" type="checkbox" value="ks-Arab"  name="language117" />
+                        </div>
+                        <div>
+                            <label for="languages118">Kaschmiri (Devanagari)</label>
+                            <input id="languages118" name="languages" type="checkbox" value="ks-Deva"  name="language118" />
+                        </div>
+                        <div>
+                            <label for="languages119">Shambala</label>
+                            <input id="languages119" name="languages" type="checkbox" value="ksb"  name="language119" />
+                        </div>
+                        <div>
+                            <label for="languages120">Bafia</label>
+                            <input id="languages120" name="languages" type="checkbox" value="ksf"  name="language120" />
+                        </div>
+                        <div>
+                            <label for="languages121">K&#xF6;lsch</label>
+                            <input id="languages121" name="languages" type="checkbox" value="ksh"  name="language121" />
+                        </div>
+                        <div>
+                            <label for="languages122">Kornisch</label>
+                            <input id="languages122" name="languages" type="checkbox" value="kw"  name="language122" />
+                        </div>
+                        <div>
+                            <label for="languages123">Kirgisisch</label>
+                            <input id="languages123" name="languages" type="checkbox" value="ky"  name="language123" />
+                        </div>
+                        <div>
+                            <label for="languages124">Latein</label>
+                            <input id="languages124" name="languages" type="checkbox" value="la"  name="language124" />
+                        </div>
+                        <div>
+                            <label for="languages125">Langi</label>
+                            <input id="languages125" name="languages" type="checkbox" value="lag"  name="language125" />
+                        </div>
+                        <div>
+                            <label for="languages126">Luxemburgisch</label>
+                            <input id="languages126" name="languages" type="checkbox" value="lb"  name="language126" />
+                        </div>
+                        <div>
+                            <label for="languages127">Ganda</label>
+                            <input id="languages127" name="languages" type="checkbox" value="lg"  name="language127" />
+                        </div>
+                        <div>
+                            <label for="languages128">Lakota</label>
+                            <input id="languages128" name="languages" type="checkbox" value="lkt"  name="language128" />
+                        </div>
+                        <div>
+                            <label for="languages129">Lingala</label>
+                            <input id="languages129" name="languages" type="checkbox" value="ln"  name="language129" />
+                        </div>
+                        <div>
+                            <label for="languages130">Laotisch</label>
+                            <input id="languages130" name="languages" type="checkbox" value="lo"  name="language130" />
+                        </div>
+                        <div>
+                            <label for="languages131">N&#xF6;rdliches Luri</label>
+                            <input id="languages131" name="languages" type="checkbox" value="lrc"  name="language131" />
+                        </div>
+                        <div>
+                            <label for="languages132">Litauisch</label>
+                            <input id="languages132" name="languages" type="checkbox" value="lt"  name="language132" />
+                        </div>
+                        <div>
+                            <label for="languages133">Luba-Katanga</label>
+                            <input id="languages133" name="languages" type="checkbox" value="lu"  name="language133" />
+                        </div>
+                        <div>
+                            <label for="languages134">Luo</label>
+                            <input id="languages134" name="languages" type="checkbox" value="luo"  name="language134" />
+                        </div>
+                        <div>
+                            <label for="languages135">Luhya</label>
+                            <input id="languages135" name="languages" type="checkbox" value="luy"  name="language135" />
+                        </div>
+                        <div>
+                            <label for="languages136">Lettisch</label>
+                            <input id="languages136" name="languages" type="checkbox" value="lv"  name="language136" />
+                        </div>
+                        <div>
+                            <label for="languages137">Maithili</label>
+                            <input id="languages137" name="languages" type="checkbox" value="mai"  name="language137" />
+                        </div>
+                        <div>
+                            <label for="languages138">Massai</label>
+                            <input id="languages138" name="languages" type="checkbox" value="mas"  name="language138" />
+                        </div>
+                        <div>
+                            <label for="languages139">Meru</label>
+                            <input id="languages139" name="languages" type="checkbox" value="mer"  name="language139" />
+                        </div>
+                        <div>
+                            <label for="languages140">Morisyen</label>
+                            <input id="languages140" name="languages" type="checkbox" value="mfe"  name="language140" />
+                        </div>
+                        <div>
+                            <label for="languages141">Malagasy</label>
+                            <input id="languages141" name="languages" type="checkbox" value="mg"  name="language141" />
+                        </div>
+                        <div>
+                            <label for="languages142">Makhuwa-Meetto</label>
+                            <input id="languages142" name="languages" type="checkbox" value="mgh"  name="language142" />
+                        </div>
+                        <div>
+                            <label for="languages143">Meta&#x2019;</label>
+                            <input id="languages143" name="languages" type="checkbox" value="mgo"  name="language143" />
+                        </div>
+                        <div>
+                            <label for="languages144">Maori</label>
+                            <input id="languages144" name="languages" type="checkbox" value="mi"  name="language144" />
+                        </div>
+                        <div>
+                            <label for="languages145">Mazedonisch</label>
+                            <input id="languages145" name="languages" type="checkbox" value="mk"  name="language145" />
+                        </div>
+                        <div>
+                            <label for="languages146">Malayalam</label>
+                            <input id="languages146" name="languages" type="checkbox" value="ml"  name="language146" />
+                        </div>
+                        <div>
+                            <label for="languages147">Mongolisch</label>
+                            <input id="languages147" name="languages" type="checkbox" value="mn"  name="language147" />
+                        </div>
+                        <div>
+                            <label for="languages148">Mongolisch (Mongolisch)</label>
+                            <input id="languages148" name="languages" type="checkbox" value="mn-Mong"  name="language148" />
+                        </div>
+                        <div>
+                            <label for="languages149">Meithei</label>
+                            <input id="languages149" name="languages" type="checkbox" value="mni"  name="language149" />
+                        </div>
+                        <div>
+                            <label for="languages150">Meithei (Bengalisch)</label>
+                            <input id="languages150" name="languages" type="checkbox" value="mni-Beng"  name="language150" />
+                        </div>
+                        <div>
+                            <label for="languages151">Mohawk</label>
+                            <input id="languages151" name="languages" type="checkbox" value="moh"  name="language151" />
+                        </div>
+                        <div>
+                            <label for="languages152">Marathi</label>
+                            <input id="languages152" name="languages" type="checkbox" value="mr"  name="language152" />
+                        </div>
+                        <div>
+                            <label for="languages153">Malaiisch</label>
+                            <input id="languages153" name="languages" type="checkbox" value="ms"  name="language153" />
+                        </div>
+                        <div>
+                            <label for="languages154">Maltesisch</label>
+                            <input id="languages154" name="languages" type="checkbox" value="mt"  name="language154" />
+                        </div>
+                        <div>
+                            <label for="languages155">Mundang</label>
+                            <input id="languages155" name="languages" type="checkbox" value="mua"  name="language155" />
+                        </div>
+                        <div>
+                            <label for="languages156">Birmanisch</label>
+                            <input id="languages156" name="languages" type="checkbox" value="my"  name="language156" />
+                        </div>
+                        <div>
+                            <label for="languages157">Masanderanisch</label>
+                            <input id="languages157" name="languages" type="checkbox" value="mzn"  name="language157" />
+                        </div>
+                        <div>
+                            <label for="languages158">Nama</label>
+                            <input id="languages158" name="languages" type="checkbox" value="naq"  name="language158" />
+                        </div>
+                        <div>
+                            <label for="languages159">Norwegisch (Bokm&#xE5;l)</label>
+                            <input id="languages159" name="languages" type="checkbox" value="nb"  name="language159" />
+                        </div>
+                        <div>
+                            <label for="languages160">Nord-Ndebele</label>
+                            <input id="languages160" name="languages" type="checkbox" value="nd"  name="language160" />
+                        </div>
+                        <div>
+                            <label for="languages161">Niederdeutsch</label>
+                            <input id="languages161" name="languages" type="checkbox" value="nds"  name="language161" />
+                        </div>
+                        <div>
+                            <label for="languages162">Nepalesisch</label>
+                            <input id="languages162" name="languages" type="checkbox" value="ne"  name="language162" />
+                        </div>
+                        <div>
+                            <label for="languages163">Niederl&#xE4;ndisch</label>
+                            <input id="languages163" name="languages" type="checkbox" value="nl"  name="language163" />
+                        </div>
+                        <div>
+                            <label for="languages164">Kwasio</label>
+                            <input id="languages164" name="languages" type="checkbox" value="nmg"  name="language164" />
+                        </div>
+                        <div>
+                            <label for="languages165">Norwegisch (Nynorsk)</label>
+                            <input id="languages165" name="languages" type="checkbox" value="nn"  name="language165" />
+                        </div>
+                        <div>
+                            <label for="languages166">Ngiemboon</label>
+                            <input id="languages166" name="languages" type="checkbox" value="nnh"  name="language166" />
+                        </div>
+                        <div>
+                            <label for="languages167">N&#x2019;Ko</label>
+                            <input id="languages167" name="languages" type="checkbox" value="nqo"  name="language167" />
+                        </div>
+                        <div>
+                            <label for="languages168">S&#xFC;d-Ndebele</label>
+                            <input id="languages168" name="languages" type="checkbox" value="nr"  name="language168" />
+                        </div>
+                        <div>
+                            <label for="languages169">Nord-Sotho</label>
+                            <input id="languages169" name="languages" type="checkbox" value="nso"  name="language169" />
+                        </div>
+                        <div>
+                            <label for="languages170">Nuer</label>
+                            <input id="languages170" name="languages" type="checkbox" value="nus"  name="language170" />
+                        </div>
+                        <div>
+                            <label for="languages171">Nyankole</label>
+                            <input id="languages171" name="languages" type="checkbox" value="nyn"  name="language171" />
+                        </div>
+                        <div>
+                            <label for="languages172">Okzitanisch</label>
+                            <input id="languages172" name="languages" type="checkbox" value="oc"  name="language172" />
+                        </div>
+                        <div>
+                            <label for="languages173">Oromo</label>
+                            <input id="languages173" name="languages" type="checkbox" value="om"  name="language173" />
+                        </div>
+                        <div>
+                            <label for="languages174">Oriya</label>
+                            <input id="languages174" name="languages" type="checkbox" value="or"  name="language174" />
+                        </div>
+                        <div>
+                            <label for="languages175">Ossetisch</label>
+                            <input id="languages175" name="languages" type="checkbox" value="os"  name="language175" />
+                        </div>
+                        <div>
+                            <label for="languages176">Punjabi</label>
+                            <input id="languages176" name="languages" type="checkbox" value="pa"  name="language176" />
+                        </div>
+                        <div>
+                            <label for="languages177">Punjabi (Arabisch)</label>
+                            <input id="languages177" name="languages" type="checkbox" value="pa-Arab"  name="language177" />
+                        </div>
+                        <div>
+                            <label for="languages178">Punjabi (Gurmukhi)</label>
+                            <input id="languages178" name="languages" type="checkbox" value="pa-Guru"  name="language178" />
+                        </div>
+                        <div>
+                            <label for="languages179">Papiamento</label>
+                            <input id="languages179" name="languages" type="checkbox" value="pap"  name="language179" />
+                        </div>
+                        <div>
+                            <label for="languages180">Nigerianisches Pidgin</label>
+                            <input id="languages180" name="languages" type="checkbox" value="pcm"  name="language180" />
+                        </div>
+                        <div>
+                            <label for="languages181">Polnisch</label>
+                            <input id="languages181" name="languages" type="checkbox" value="pl"  name="language181" />
+                        </div>
+                        <div>
+                            <label for="languages182">Altpreussisch</label>
+                            <input id="languages182" name="languages" type="checkbox" value="prg"  name="language182" />
+                        </div>
+                        <div>
+                            <label for="languages183">Paschtu</label>
+                            <input id="languages183" name="languages" type="checkbox" value="ps"  name="language183" />
+                        </div>
+                        <div>
+                            <label for="languages184">Portugiesisch</label>
+                            <input id="languages184" name="languages" type="checkbox" value="pt"  name="language184" />
+                        </div>
+                        <div>
+                            <label for="languages185">Quechua</label>
+                            <input id="languages185" name="languages" type="checkbox" value="qu"  name="language185" />
+                        </div>
+                        <div>
+                            <label for="languages186">K&#x2019;iche&#x2019;</label>
+                            <input id="languages186" name="languages" type="checkbox" value="quc"  name="language186" />
+                        </div>
+                        <div>
+                            <label for="languages187">R&#xE4;toromanisch</label>
+                            <input id="languages187" name="languages" type="checkbox" value="rm"  name="language187" />
+                        </div>
+                        <div>
+                            <label for="languages188">Rundi</label>
+                            <input id="languages188" name="languages" type="checkbox" value="rn"  name="language188" />
+                        </div>
+                        <div>
+                            <label for="languages189">Rum&#xE4;nisch</label>
+                            <input id="languages189" name="languages" type="checkbox" value="ro"  name="language189" />
+                        </div>
+                        <div>
+                            <label for="languages190">Rombo</label>
+                            <input id="languages190" name="languages" type="checkbox" value="rof"  name="language190" />
+                        </div>
+                        <div>
+                            <label for="languages191">Russisch</label>
+                            <input id="languages191" name="languages" type="checkbox" value="ru"  name="language191" />
+                        </div>
+                        <div>
+                            <label for="languages192">Kinyarwanda</label>
+                            <input id="languages192" name="languages" type="checkbox" value="rw"  name="language192" />
+                        </div>
+                        <div>
+                            <label for="languages193">Rwa</label>
+                            <input id="languages193" name="languages" type="checkbox" value="rwk"  name="language193" />
+                        </div>
+                        <div>
+                            <label for="languages194">Sanskrit</label>
+                            <input id="languages194" name="languages" type="checkbox" value="sa"  name="language194" />
+                        </div>
+                        <div>
+                            <label for="languages195">Jakutisch</label>
+                            <input id="languages195" name="languages" type="checkbox" value="sah"  name="language195" />
+                        </div>
+                        <div>
+                            <label for="languages196">Samburu</label>
+                            <input id="languages196" name="languages" type="checkbox" value="saq"  name="language196" />
+                        </div>
+                        <div>
+                            <label for="languages197">Santali</label>
+                            <input id="languages197" name="languages" type="checkbox" value="sat"  name="language197" />
+                        </div>
+                        <div>
+                            <label for="languages198">Santali (Ol Chiki)</label>
+                            <input id="languages198" name="languages" type="checkbox" value="sat-Olck"  name="language198" />
+                        </div>
+                        <div>
+                            <label for="languages199">Sangu</label>
+                            <input id="languages199" name="languages" type="checkbox" value="sbp"  name="language199" />
+                        </div>
+                        <div>
+                            <label for="languages200">Sindhi</label>
+                            <input id="languages200" name="languages" type="checkbox" value="sd"  name="language200" />
+                        </div>
+                        <div>
+                            <label for="languages201">Sindhi (Arabisch)</label>
+                            <input id="languages201" name="languages" type="checkbox" value="sd-Arab"  name="language201" />
+                        </div>
+                        <div>
+                            <label for="languages202">Sindhi (Devanagari)</label>
+                            <input id="languages202" name="languages" type="checkbox" value="sd-Deva"  name="language202" />
+                        </div>
+                        <div>
+                            <label for="languages203">Nordsamisch</label>
+                            <input id="languages203" name="languages" type="checkbox" value="se"  name="language203" />
+                        </div>
+                        <div>
+                            <label for="languages204">Sena</label>
+                            <input id="languages204" name="languages" type="checkbox" value="seh"  name="language204" />
+                        </div>
+                        <div>
+                            <label for="languages205">Koyra Senni</label>
+                            <input id="languages205" name="languages" type="checkbox" value="ses"  name="language205" />
+                        </div>
+                        <div>
+                            <label for="languages206">Sango</label>
+                            <input id="languages206" name="languages" type="checkbox" value="sg"  name="language206" />
+                        </div>
+                        <div>
+                            <label for="languages207">Taschelhit</label>
+                            <input id="languages207" name="languages" type="checkbox" value="shi"  name="language207" />
+                        </div>
+                        <div>
+                            <label for="languages208">Taschelhit (Lateinisch)</label>
+                            <input id="languages208" name="languages" type="checkbox" value="shi-Latn"  name="language208" />
+                        </div>
+                        <div>
+                            <label for="languages209">Taschelhit (Tifinagh)</label>
+                            <input id="languages209" name="languages" type="checkbox" value="shi-Tfng"  name="language209" />
+                        </div>
+                        <div>
+                            <label for="languages210">Singhalesisch</label>
+                            <input id="languages210" name="languages" type="checkbox" value="si"  name="language210" />
+                        </div>
+                        <div>
+                            <label for="languages211">Slowakisch</label>
+                            <input id="languages211" name="languages" type="checkbox" value="sk"  name="language211" />
+                        </div>
+                        <div>
+                            <label for="languages212">Slowenisch</label>
+                            <input id="languages212" name="languages" type="checkbox" value="sl"  name="language212" />
+                        </div>
+                        <div>
+                            <label for="languages213">S&#xFC;dsamisch</label>
+                            <input id="languages213" name="languages" type="checkbox" value="sma"  name="language213" />
+                        </div>
+                        <div>
+                            <label for="languages214">Lule-Samisch</label>
+                            <input id="languages214" name="languages" type="checkbox" value="smj"  name="language214" />
+                        </div>
+                        <div>
+                            <label for="languages215">Inari-Samisch</label>
+                            <input id="languages215" name="languages" type="checkbox" value="smn"  name="language215" />
+                        </div>
+                        <div>
+                            <label for="languages216">Skolt-Samisch</label>
+                            <input id="languages216" name="languages" type="checkbox" value="sms"  name="language216" />
+                        </div>
+                        <div>
+                            <label for="languages217">Shona</label>
+                            <input id="languages217" name="languages" type="checkbox" value="sn"  name="language217" />
+                        </div>
+                        <div>
+                            <label for="languages218">Somali</label>
+                            <input id="languages218" name="languages" type="checkbox" value="so"  name="language218" />
+                        </div>
+                        <div>
+                            <label for="languages219">Albanisch</label>
+                            <input id="languages219" name="languages" type="checkbox" value="sq"  name="language219" />
+                        </div>
+                        <div>
+                            <label for="languages220">Serbisch</label>
+                            <input id="languages220" name="languages" type="checkbox" value="sr"  name="language220" />
+                        </div>
+                        <div>
+                            <label for="languages221">Serbisch (Kyrillisch)</label>
+                            <input id="languages221" name="languages" type="checkbox" value="sr-Cyrl"  name="language221" />
+                        </div>
+                        <div>
+                            <label for="languages222">Serbisch (Lateinisch)</label>
+                            <input id="languages222" name="languages" type="checkbox" value="sr-Latn"  name="language222" />
+                        </div>
+                        <div>
+                            <label for="languages223">Swazi</label>
+                            <input id="languages223" name="languages" type="checkbox" value="ss"  name="language223" />
+                        </div>
+                        <div>
+                            <label for="languages224">Saho</label>
+                            <input id="languages224" name="languages" type="checkbox" value="ssy"  name="language224" />
+                        </div>
+                        <div>
+                            <label for="languages225">S&#xFC;d-Sotho</label>
+                            <input id="languages225" name="languages" type="checkbox" value="st"  name="language225" />
+                        </div>
+                        <div>
+                            <label for="languages226">Sundanesisch</label>
+                            <input id="languages226" name="languages" type="checkbox" value="su"  name="language226" />
+                        </div>
+                        <div>
+                            <label for="languages227">Sundanesisch (Lateinisch)</label>
+                            <input id="languages227" name="languages" type="checkbox" value="su-Latn"  name="language227" />
+                        </div>
+                        <div>
+                            <label for="languages228">Schwedisch</label>
+                            <input id="languages228" name="languages" type="checkbox" value="sv"  name="language228" />
+                        </div>
+                        <div>
+                            <label for="languages229">Suaheli</label>
+                            <input id="languages229" name="languages" type="checkbox" value="sw"  name="language229" />
+                        </div>
+                        <div>
+                            <label for="languages230">Syrisch</label>
+                            <input id="languages230" name="languages" type="checkbox" value="syr"  name="language230" />
+                        </div>
+                        <div>
+                            <label for="languages231">Tamil</label>
+                            <input id="languages231" name="languages" type="checkbox" value="ta"  name="language231" />
+                        </div>
+                        <div>
+                            <label for="languages232">Telugu</label>
+                            <input id="languages232" name="languages" type="checkbox" value="te"  name="language232" />
+                        </div>
+                        <div>
+                            <label for="languages233">Teso</label>
+                            <input id="languages233" name="languages" type="checkbox" value="teo"  name="language233" />
+                        </div>
+                        <div>
+                            <label for="languages234">Tadschikisch</label>
+                            <input id="languages234" name="languages" type="checkbox" value="tg"  name="language234" />
+                        </div>
+                        <div>
+                            <label for="languages235">Thail&#xE4;ndisch</label>
+                            <input id="languages235" name="languages" type="checkbox" value="th"  name="language235" />
+                        </div>
+                        <div>
+                            <label for="languages236">Tigrinya</label>
+                            <input id="languages236" name="languages" type="checkbox" value="ti"  name="language236" />
+                        </div>
+                        <div>
+                            <label for="languages237">Tigre</label>
+                            <input id="languages237" name="languages" type="checkbox" value="tig"  name="language237" />
+                        </div>
+                        <div>
+                            <label for="languages238">Turkmenisch</label>
+                            <input id="languages238" name="languages" type="checkbox" value="tk"  name="language238" />
+                        </div>
+                        <div>
+                            <label for="languages239">Tswana</label>
+                            <input id="languages239" name="languages" type="checkbox" value="tn"  name="language239" />
+                        </div>
+                        <div>
+                            <label for="languages240">Tongaisch</label>
+                            <input id="languages240" name="languages" type="checkbox" value="to"  name="language240" />
+                        </div>
+                        <div>
+                            <label for="languages241">T&#xFC;rkisch</label>
+                            <input id="languages241" name="languages" type="checkbox" value="tr"  name="language241" />
+                        </div>
+                        <div>
+                            <label for="languages242">Tsonga</label>
+                            <input id="languages242" name="languages" type="checkbox" value="ts"  name="language242" />
+                        </div>
+                        <div>
+                            <label for="languages243">Tatarisch</label>
+                            <input id="languages243" name="languages" type="checkbox" value="tt"  name="language243" />
+                        </div>
+                        <div>
+                            <label for="languages244">Tasawaq</label>
+                            <input id="languages244" name="languages" type="checkbox" value="twq"  name="language244" />
+                        </div>
+                        <div>
+                            <label for="languages245">Zentralatlas-Tamazight</label>
+                            <input id="languages245" name="languages" type="checkbox" value="tzm"  name="language245" />
+                        </div>
+                        <div>
+                            <label for="languages246">Zentralatlas-Tamazight (Arabisch)</label>
+                            <input id="languages246" name="languages" type="checkbox" value="tzm-Arab"  name="language246" />
+                        </div>
+                        <div>
+                            <label for="languages247">Zentralatlas-Tamazight (Tifinagh)</label>
+                            <input id="languages247" name="languages" type="checkbox" value="tzm-Tfng"  name="language247" />
+                        </div>
+                        <div>
+                            <label for="languages248">Uigurisch</label>
+                            <input id="languages248" name="languages" type="checkbox" value="ug"  name="language248" />
+                        </div>
+                        <div>
+                            <label for="languages249">Ukrainisch</label>
+                            <input id="languages249" name="languages" type="checkbox" value="uk"  name="language249" />
+                        </div>
+                        <div>
+                            <label for="languages250">Urdu</label>
+                            <input id="languages250" name="languages" type="checkbox" value="ur"  name="language250" />
+                        </div>
+                        <div>
+                            <label for="languages251">Usbekisch</label>
+                            <input id="languages251" name="languages" type="checkbox" value="uz"  name="language251" />
+                        </div>
+                        <div>
+                            <label for="languages252">Usbekisch (Arabisch)</label>
+                            <input id="languages252" name="languages" type="checkbox" value="uz-Arab"  name="language252" />
+                        </div>
+                        <div>
+                            <label for="languages253">Usbekisch (Kyrillisch)</label>
+                            <input id="languages253" name="languages" type="checkbox" value="uz-Cyrl"  name="language253" />
+                        </div>
+                        <div>
+                            <label for="languages254">Usbekisch (Lateinisch)</label>
+                            <input id="languages254" name="languages" type="checkbox" value="uz-Latn"  name="language254" />
+                        </div>
+                        <div>
+                            <label for="languages255">Vai</label>
+                            <input id="languages255" name="languages" type="checkbox" value="vai"  name="language255" />
+                        </div>
+                        <div>
+                            <label for="languages256">Vai (Lateinisch)</label>
+                            <input id="languages256" name="languages" type="checkbox" value="vai-Latn"  name="language256" />
+                        </div>
+                        <div>
+                            <label for="languages257">Vai (Vai)</label>
+                            <input id="languages257" name="languages" type="checkbox" value="vai-Vaii"  name="language257" />
+                        </div>
+                        <div>
+                            <label for="languages258">Venda</label>
+                            <input id="languages258" name="languages" type="checkbox" value="ve"  name="language258" />
+                        </div>
+                        <div>
+                            <label for="languages259">Vietnamesisch</label>
+                            <input id="languages259" name="languages" type="checkbox" value="vi"  name="language259" />
+                        </div>
+                        <div>
+                            <label for="languages260">Volap&#xFC;k</label>
+                            <input id="languages260" name="languages" type="checkbox" value="vo"  name="language260" />
+                        </div>
+                        <div>
+                            <label for="languages261">Vunjo</label>
+                            <input id="languages261" name="languages" type="checkbox" value="vun"  name="language261" />
+                        </div>
+                        <div>
+                            <label for="languages262">Walliserdeutsch</label>
+                            <input id="languages262" name="languages" type="checkbox" value="wae"  name="language262" />
+                        </div>
+                        <div>
+                            <label for="languages263">Walamo</label>
+                            <input id="languages263" name="languages" type="checkbox" value="wal"  name="language263" />
+                        </div>
+                        <div>
+                            <label for="languages264">Wolof</label>
+                            <input id="languages264" name="languages" type="checkbox" value="wo"  name="language264" />
+                        </div>
+                        <div>
+                            <label for="languages265">Xhosa</label>
+                            <input id="languages265" name="languages" type="checkbox" value="xh"  name="language265" />
+                        </div>
+                        <div>
+                            <label for="languages266">Soga</label>
+                            <input id="languages266" name="languages" type="checkbox" value="xog"  name="language266" />
+                        </div>
+                        <div>
+                            <label for="languages267">Yangben</label>
+                            <input id="languages267" name="languages" type="checkbox" value="yav"  name="language267" />
+                        </div>
+                        <div>
+                            <label for="languages268">Jiddisch</label>
+                            <input id="languages268" name="languages" type="checkbox" value="yi"  name="language268" />
+                        </div>
+                        <div>
+                            <label for="languages269">Yoruba</label>
+                            <input id="languages269" name="languages" type="checkbox" value="yo"  name="language269" />
+                        </div>
+                        <div>
+                            <label for="languages270">Tamazight</label>
+                            <input id="languages270" name="languages" type="checkbox" value="zgh"  name="language270" />
+                        </div>
+                        <div>
+                            <label for="languages271">Chinesisch</label>
+                            <input id="languages271" name="languages" type="checkbox" value="zh"  name="language271" />
+                        </div>
+                        <div>
+                            <label for="languages272">Chinesisch (Vereinfacht)</label>
+                            <input id="languages272" name="languages" type="checkbox" value="zh-Hans"  name="language272" />
+                        </div>
+                        <div>
+                            <label for="languages273">Chinesisch (Traditionell)</label>
+                            <input id="languages273" name="languages" type="checkbox" value="zh-Hant"  name="language273" />
+                        </div>
+                        <div>
+                            <label for="languages274">Zulu</label>
+                            <input id="languages274" name="languages" type="checkbox" value="zu"  name="language274" />
+                        </div>
+                </o-grid>
+            </details>
+          </m-details>
+        </div>
+        <hr>
+        <h3>Weiteres</h3>
+        <div>
+            <label validation-message="Die lessonsFrom sind ungültig" for="lessonsFrom">Untericht ab welchem Alter?</label>
+            <input id="lessonsFrom" type="number" required="" value="0" name="lessonsFrom" placeholder="Bitte geben Sie hier Ihre lessonsFrom ein..." autocomplete="off" />
+        </div>
+
+        <div class="inline">
+            <label for="homeVisits">Du machst auch Hausbesuche?</label>
+            <input id="homeVisits" name="homeVisits" type="checkbox" value="" />
+        </div>
+        <hr>
+
+
+
+<section name="instrumentLocations">
+    <h2 multiply-text="Unterrichtslokalität $count$">Unterrichtslokalität</h2>
+    <div>
+        Unten kannst du erfassen wo, du welche Instrumente unterrichtest.
+        <ul>
+            <li>Für Privat unterricht lasse das Feld Schule leer</li>
+        </ul>
+    </div>
+        <div class="instruments">
+          <m-details id="details-instrumente" namespace="details-default-" mode="false">
+            <details open>
+                <summary>Instrumente</summary>
+                <div>
+                    <o-grid id="grid-sprachen" auto-fill mode="false" padding="1em">
+                            <div>
+                                <label>Akkordeon</label>
+                                <input type="checkbox" id="instruments0" name="instruments" value="9040c08d-a23b-4f85-99ae-e88922de5ed6" />
+                            </div>
+                            <div>
+                                <label>Alphorn</label>
+                                <input type="checkbox" id="instruments1" name="instruments" value="018e6d5d-21eb-4c18-8c2a-ca8f650b06a3" />
+                            </div>
+                            <div>
+                                <label>Balaleika</label>
+                                <input type="checkbox" id="instruments2" name="instruments" value="deacdd54-fc31-418a-bbb9-313a7d5e5b23" />
+                            </div>
+                            <div>
+                                <label>Banjo</label>
+                                <input type="checkbox" id="instruments3" name="instruments" value="2417a6ce-a606-4c65-8b2f-ca89cbb98fc0" />
+                            </div>
+                            <div>
+                                <label>Basler Trommel</label>
+                                <input type="checkbox" id="instruments4" name="instruments" value="7678855b-343c-43eb-87ee-9909ab705972" />
+                            </div>
+                            <div>
+                                <label>Bassetthorn</label>
+                                <input type="checkbox" id="instruments5" name="instruments" value="f152f69a-fa5a-4ffe-aba8-584558528e8a" />
+                            </div>
+                            <div>
+                                <label>Beatbox</label>
+                                <input type="checkbox" id="instruments6" name="instruments" value="e121f7ee-0859-48a8-8c82-c02be452b9c2" />
+                            </div>
+                            <div>
+                                <label>Blockfl&#xF6;te</label>
+                                <input type="checkbox" id="instruments7" name="instruments" value="4fe70b66-0f71-4030-ac63-63bc49cfcc9b" />
+                            </div>
+                            <div>
+                                <label>Body Percussion</label>
+                                <input type="checkbox" id="instruments8" name="instruments" value="3e000b92-b8b4-4b87-b571-d10d8e2aace6" />
+                            </div>
+                            <div>
+                                <label>Bratsche</label>
+                                <input type="checkbox" id="instruments9" name="instruments" value="5d91d0c4-c555-44a0-b92e-ca99de41d16d" />
+                            </div>
+                            <div>
+                                <label>Cajon</label>
+                                <input type="checkbox" id="instruments10" name="instruments" value="111bd885-ab0b-4151-9e15-03518d5ae380" />
+                            </div>
+                            <div>
+                                <label>Cello</label>
+                                <input type="checkbox" id="instruments11" name="instruments" value="2607d750-026c-447a-991b-2baa0ecb4074" />
+                            </div>
+                            <div>
+                                <label>Cembalo</label>
+                                <input type="checkbox" id="instruments12" name="instruments" value="d9668b8f-5d54-485e-8b6d-0fa1e3b4802e" />
+                            </div>
+                            <div>
+                                <label>Clairon</label>
+                                <input type="checkbox" id="instruments13" name="instruments" value="15236d97-957d-42a9-926f-77992bb3bc26" />
+                            </div>
+                            <div>
+                                <label>Conga</label>
+                                <input type="checkbox" id="instruments14" name="instruments" value="9aec63fa-c192-4c05-8615-e861b3826da0" />
+                            </div>
+                            <div>
+                                <label>Didgeridoo</label>
+                                <input type="checkbox" id="instruments15" name="instruments" value="da5e7fcb-bc66-4e24-83a6-c90052b11d38" />
+                            </div>
+                            <div>
+                                <label>Djembe</label>
+                                <input type="checkbox" id="instruments16" name="instruments" value="32162b95-1ef2-49d0-b0c9-d1539e644117" />
+                            </div>
+                            <div>
+                                <label>Dudelsack</label>
+                                <input type="checkbox" id="instruments17" name="instruments" value="0acc2ba1-13cc-4f31-962c-73f7f1d15b00" />
+                            </div>
+                            <div>
+                                <label>Duduk</label>
+                                <input type="checkbox" id="instruments18" name="instruments" value="237d095e-1420-4d05-9297-ddd7cdb76151" />
+                            </div>
+                            <div>
+                                <label>E-Bass</label>
+                                <input type="checkbox" id="instruments19" name="instruments" value="1f51051d-365b-48b3-a09e-7a469b5f313f" />
+                            </div>
+                            <div>
+                                <label>E-Gitarre</label>
+                                <input type="checkbox" id="instruments20" name="instruments" value="2cdde3f2-a6d1-42b1-90d5-989c39e129d8" />
+                            </div>
+                            <div>
+                                <label>Englischhorn</label>
+                                <input type="checkbox" id="instruments21" name="instruments" value="fc71c987-fe27-42ac-873b-c22493c184f0" />
+                            </div>
+                            <div>
+                                <label>Euphonium</label>
+                                <input type="checkbox" id="instruments22" name="instruments" value="f7ab8389-b46c-4d00-a94c-d07ebe24408b" />
+                            </div>
+                            <div>
+                                <label>Fagott</label>
+                                <input type="checkbox" id="instruments23" name="instruments" value="ced6cb47-a407-4669-98ee-5a0ebf4e99de" />
+                            </div>
+                            <div>
+                                <label>Fl&#xFC;gelhorn</label>
+                                <input type="checkbox" id="instruments24" name="instruments" value="bd09b202-2da5-47db-a31c-31eb711389a8" />
+                            </div>
+                            <div>
+                                <label>Gamelan</label>
+                                <input type="checkbox" id="instruments25" name="instruments" value="ac549349-978d-4fce-a475-74afc90d94b0" />
+                            </div>
+                            <div>
+                                <label>Geige</label>
+                                <input type="checkbox" id="instruments26" name="instruments" value="0e256caf-22aa-4d68-bb53-731867fa82a4" />
+                            </div>
+                            <div>
+                                <label>Gitalele</label>
+                                <input type="checkbox" id="instruments27" name="instruments" value="d2d88d66-c8fa-4d9e-9bb7-0534aa38dce5" />
+                            </div>
+                            <div>
+                                <label>Gitarre</label>
+                                <input type="checkbox" id="instruments28" name="instruments" value="78110a53-a6bf-49cf-b0b0-5f3e3556a41b" />
+                            </div>
+                            <div>
+                                <label>Hackbrett</label>
+                                <input type="checkbox" id="instruments29" name="instruments" value="eed4bd52-52b1-4d24-9c5b-9184ccccf504" />
+                            </div>
+                            <div>
+                                <label>Handpan (Hang)</label>
+                                <input type="checkbox" id="instruments30" name="instruments" value="a62a26f5-9580-4d38-a514-1c6853432e23" />
+                            </div>
+                            <div>
+                                <label>Harde</label>
+                                <input type="checkbox" id="instruments31" name="instruments" value="219a8da9-b4fb-412e-82c2-a4ae486c60fc" />
+                            </div>
+                            <div>
+                                <label>Harfe</label>
+                                <input type="checkbox" id="instruments32" name="instruments" value="0f1c0aaa-d044-49d3-add0-a89b33658c8d" />
+                            </div>
+                            <div>
+                                <label>Harmonium</label>
+                                <input type="checkbox" id="instruments33" name="instruments" value="ef469864-3670-4b6c-a1f6-4fb14bc278f2" />
+                            </div>
+                            <div>
+                                <label>Horn</label>
+                                <input type="checkbox" id="instruments34" name="instruments" value="4eeab735-10b1-4ea1-be5a-1686dc4fbfe2" />
+                            </div>
+                            <div>
+                                <label>Jodeln</label>
+                                <input type="checkbox" id="instruments35" name="instruments" value="197d0b52-75c7-4f1f-a24d-eb95128b18cd" />
+                            </div>
+                            <div>
+                                <label>Keltische Harfe</label>
+                                <input type="checkbox" id="instruments36" name="instruments" value="7e6e8615-f9bf-4926-8a88-8b5b69cabd59" />
+                            </div>
+                            <div>
+                                <label>Mundharmonika</label>
+                                <input type="checkbox" id="instruments37" name="instruments" value="89ff269a-a77e-4fa3-b2ba-0518367300e2" />
+                            </div>
+                            <div>
+                                <label>Klarinette</label>
+                                <input type="checkbox" id="instruments38" name="instruments" value="35ba73f3-787b-4b13-a0cc-d83601f6bc4b" />
+                            </div>
+                            <div>
+                                <label>Klavichord</label>
+                                <input type="checkbox" id="instruments39" name="instruments" value="888c2dab-bc26-4fa4-b53b-0387cf44e012" />
+                            </div>
+                            <div>
+                                <label>Kontrabass</label>
+                                <input type="checkbox" id="instruments40" name="instruments" value="9cf284bf-8be8-4a5a-90a9-bdaeb2035d43" />
+                            </div>
+                            <div>
+                                <label>Kontrafagott</label>
+                                <input type="checkbox" id="instruments41" name="instruments" value="d5827b1a-c06d-485e-80f4-8b09e394db51" />
+                            </div>
+                            <div>
+                                <label>Kornett</label>
+                                <input type="checkbox" id="instruments42" name="instruments" value="506410f1-ade8-4282-ad84-cffe05be52f5" />
+                            </div>
+                            <div>
+                                <label>Kretische Lyra</label>
+                                <input type="checkbox" id="instruments43" name="instruments" value="c868c7d3-6eed-425a-94f9-4bc20c840eab" />
+                            </div>
+                            <div>
+                                <label>Laute</label>
+                                <input type="checkbox" id="instruments44" name="instruments" value="11099ce8-b0f6-48d0-a33e-996d8cd9f06b" />
+                            </div>
+                            <div>
+                                <label>Leier</label>
+                                <input type="checkbox" id="instruments45" name="instruments" value="a94cf706-8c0c-4e5f-aa9c-721dccafc863" />
+                            </div>
+                            <div>
+                                <label>Mandoline</label>
+                                <input type="checkbox" id="instruments46" name="instruments" value="c358fc80-5069-40bd-b8cb-51bb70dd0b9c" />
+                            </div>
+                            <div>
+                                <label>Marimba</label>
+                                <input type="checkbox" id="instruments47" name="instruments" value="277975c0-1159-44f5-b84b-c2c3eb70d630" />
+                            </div>
+                            <div>
+                                <label>Melodica</label>
+                                <input type="checkbox" id="instruments48" name="instruments" value="25a8fd85-828b-4e05-9df8-a621161e6b2d" />
+                            </div>
+                            <div>
+                                <label>Musette</label>
+                                <input type="checkbox" id="instruments49" name="instruments" value="98cd8c55-53ac-43ee-82e2-c6aac1dd602b" />
+                            </div>
+                            <div>
+                                <label>Naturhorn</label>
+                                <input type="checkbox" id="instruments50" name="instruments" value="23c678c2-0ff6-4bfc-b37a-4bc2630e7673" />
+                            </div>
+                            <div>
+                                <label>Naturtrompete</label>
+                                <input type="checkbox" id="instruments51" name="instruments" value="84b67726-7b47-4d47-aff9-b47f4a05c393" />
+                            </div>
+                            <div>
+                                <label>Oboe</label>
+                                <input type="checkbox" id="instruments52" name="instruments" value="2ba485a0-d680-49e1-866a-1331330788f3" />
+                            </div>
+                            <div>
+                                <label>Okarina</label>
+                                <input type="checkbox" id="instruments53" name="instruments" value="7bb8b282-c5c7-41ce-b27a-0a2731c76ffc" />
+                            </div>
+                            <div>
+                                <label>Orgel</label>
+                                <input type="checkbox" id="instruments54" name="instruments" value="ee4d4e2f-e321-45fa-b885-e7bc12714491" />
+                            </div>
+                            <div>
+                                <label>Oud</label>
+                                <input type="checkbox" id="instruments55" name="instruments" value="b68880e7-dde8-417e-80ee-a52aa52c5d7c" />
+                            </div>
+                            <div>
+                                <label>Panfl&#xF6;te</label>
+                                <input type="checkbox" id="instruments56" name="instruments" value="58a042d7-86b8-4c2f-bdd4-c8175a91b0a6" />
+                            </div>
+                            <div>
+                                <label>Perkussion</label>
+                                <input type="checkbox" id="instruments57" name="instruments" value="90f9fa99-c692-4568-8fd9-cf750cfda8f6" />
+                            </div>
+                            <div>
+                                <label>Piccolo</label>
+                                <input type="checkbox" id="instruments58" name="instruments" value="395df6ee-ff2e-488f-87fb-c405d0f6aaa9" />
+                            </div>
+                            <div>
+                                <label>Posaune</label>
+                                <input type="checkbox" id="instruments59" name="instruments" value="2ec9229b-5414-43bb-b436-4ec98c68cc5e" />
+                            </div>
+                            <div>
+                                <label>Querfl&#xF6;te</label>
+                                <input type="checkbox" id="instruments60" name="instruments" value="1f70c095-1cfd-448c-aa2c-66d837a24744" />
+                            </div>
+                            <div>
+                                <label>Rappen</label>
+                                <input type="checkbox" id="instruments61" name="instruments" value="3e45c4b9-66c0-4a9b-a1c2-1bd003b18757" />
+                            </div>
+                            <div>
+                                <label>Saxophon</label>
+                                <input type="checkbox" id="instruments62" name="instruments" value="11137004-64e1-4fc8-92bb-c1b7df0a0de2" />
+                            </div>
+                            <div>
+                                <label>Schalmei</label>
+                                <input type="checkbox" id="instruments63" name="instruments" value="6691a289-ca55-4988-a31b-9d8c926ed52e" />
+                            </div>
+                            <div>
+                                <label>Schlagzeug</label>
+                                <input type="checkbox" id="instruments64" name="instruments" value="15f388b2-d526-44c8-8c15-e2c4de644221" />
+                            </div>
+                            <div>
+                                <label>Schwyzer&#xF6;rgeli</label>
+                                <input type="checkbox" id="instruments65" name="instruments" value="ea30b351-ae63-415a-b88d-b631f6191486" />
+                            </div>
+                            <div>
+                                <label>Serpent</label>
+                                <input type="checkbox" id="instruments66" name="instruments" value="66c909d4-316e-4be2-836f-32d4b88cacdb" />
+                            </div>
+                            <div>
+                                <label>Sitar</label>
+                                <input type="checkbox" id="instruments67" name="instruments" value="152de5ec-a2ed-437f-b7c1-79aed846aee5" />
+                            </div>
+                            <div>
+                                <label>Steelpan</label>
+                                <input type="checkbox" id="instruments68" name="instruments" value="f56c70ce-9ddf-43b6-8bb3-7c057a3cbc04" />
+                            </div>
+                            <div>
+                                <label>Synthesizer</label>
+                                <input type="checkbox" id="instruments69" name="instruments" value="026ee205-b700-4110-b496-240bf7627b77" />
+                            </div>
+                            <div>
+                                <label>Tabla</label>
+                                <input type="checkbox" id="instruments70" name="instruments" value="4dfaa613-c61b-4a4d-9acf-b7e98903f52e" />
+                            </div>
+                            <div>
+                                <label>Therobe</label>
+                                <input type="checkbox" id="instruments71" name="instruments" value="a7215de6-8d56-44b8-9dc6-b24eb750ba51" />
+                            </div>
+                            <div>
+                                <label>Ukulele</label>
+                                <input type="checkbox" id="instruments72" name="instruments" value="5ef8f942-142c-4643-aa54-9787d74b70c8" />
+                            </div>
+                            <div>
+                                <label>Xylophon</label>
+                                <input type="checkbox" id="instruments73" name="instruments" value="a699029a-dcfc-4ec4-8584-37ed8b88608f" />
+                            </div>
+                    </o-grid>
+                </div>
+            </details>
+          </m-details>
+        </div>
+    <div>
+        <label for="school">Schule</label>
+        <select id="school" name="school">
+                    <option value="a1bb7689-1c9b-4218-a74f-ee83dd3996d2">Privatunterricht</option>
+                    <option value="62306f02-3c88-40d6-b336-ec4768829fbf">Testschule 1</option>
+                    <option value="851cfacb-763f-4b29-a1fd-4f4a37f0526e">Testschule 2</option>
+                    <option value="c4f0ff63-4c11-47b8-b962-49246bcf4ab1">Testschule 3</option>
+                    <option value="0b52d7b8-985b-4830-8737-0dc23a9dc248">Musikschule Stadt St. Gallen</option>
+        </select>
+    </div>
+    <div>
+        <label for="location">Lokalität / Gebäude</label>
+        <input id="location" type="text" value="" name="location" placeholder="Bitte geben Sie hier Ihren Schule ein..." autocomplete="off" />
+    </div>
+    <div>
+        <label for="streetNr">Strasse</label>
+        <input id="streetNr" type="text" value="" name="streetNr" placeholder="Strasse hier eingeben..." autocomplete="off" />
+    </div>
+    <div>
+        <label for="zipCode">Postleitzahl</label>
+        <input id="zipCode" type="number" min="1000" max="9999" inputmode="numeric" value="" name="zipCode" placeholder="Postleitzahl hier eingeben..." autocomplete="off" />
+    </div>
+    <div>
+        <label for="city">Ortschaft</label>
+        <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
+    </div>
+    <div class="inline">
+        <label for="addMore">Mehr hinzufügen!</label>
+        <input id="addMore" name="addMore" type="checkbox" multiply="section[name=instrumentLocations]" multiply-text-selector="multiply-text" multiply-condition="true" multiply-max="5" counter-placeholder="$count$" />
+      </div>
+      <hr>
+    </section>
+    <div id="response" name="response"></div>
+    <div><input type="submit" value="Speichern" /></div>
     </form>
 </m-simple-form>
+<div class="spacer-two"></div>
