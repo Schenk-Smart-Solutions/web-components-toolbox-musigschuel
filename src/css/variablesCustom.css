@@ -44,6 +44,8 @@
   --bg-line-height: 1.5em;
   --button-category-background-color-custom:var(--color-quaternary);
   --button-category-background-color-hover-mobile-custom: var(--color-quaternary);
+  --button-secondary-border-radius: 2em;
+  --button-secondary-border-width-custom: 1.5px;
   --color-active: #f3d6ae;
   --color-disabled: gray;
   --color-error: red;
@@ -87,6 +89,7 @@
   --header-default-a-logo-top-mobile-custom: 1.75em;
   --header-default-a-menu-icon-border-radius-custom: none;
   --header-default-content-spacing-mobile: 0;
+  --header-default-content-width: max(calc(1200px - var(--content-spacing) * 2), var(--any-content-width));
   --header-default-logo-width-custom: 14em;
   --header-default-margin-custom: 0 auto var(--content-spacing);
   --header-default-margin-mobile-custom: 0 auto var(--content-spacing-mobile);
@@ -95,6 +98,8 @@
   --hr-secondary-border-bottom: 2px solid var(--color-secondary);
   --hr-secondary-opacity: 1;
   --input-font-size-mobile: var(--font-size);
+  --meta-header-default-a-font-size-custom: 1em;
+  --meta-header-default-padding-custom: 0.25em 0 0.25em;
   --navigation-alnatura-a-link-line-height-mobile: 1.5;
   --navigation-alnatura-a-link-line-height: 1.5;
   --navigation-alnatura-color-mobile-custom: var(--navigation-alnatura-color-second-level-custom);
