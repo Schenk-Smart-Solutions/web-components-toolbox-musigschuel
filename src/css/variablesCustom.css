@@ -87,6 +87,7 @@
   --header-default-a-font-family: var(--font-family-secondary);
   --header-default-a-logo-top-custom: calc(61px / 2 - 24px / 2);
   --header-default-a-logo-top-mobile-custom: 1.75em;
+  --header-default-a-menu-icon-background-color-custom: var(--color-tertiary);
   --header-default-a-menu-icon-border-radius-custom: none;
   --header-default-content-spacing-mobile: 0;
   --header-default-content-width: max(calc(1200px - var(--content-spacing) * 2), var(--any-content-width));

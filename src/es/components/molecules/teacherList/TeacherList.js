@@ -51,6 +51,7 @@ export default class TeacherList extends Shadow() {
         --ul-padding: 0;
         --ul-margin: 0;
         --ul-margin-mobile: 0;
+        --ul-padding-left: 0;
       }
       :host ul li {
         margin-bottom: calc(var(--content-spacing) * 2);

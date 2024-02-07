@@ -15,7 +15,8 @@ TODO
 - [x] Home Map Instrument filter / API get Players / player list
 - [x] IPhone Select Option Display height bug fix
 - [x] Recaptcha Spam protection recaptcha in simpleForm
-- [ ] Form styling
-- [ ] Profile Pages styling
+- [x] Form styling
+- [x] Profile Pages styling
+- [x] .net captcha https://captcha.com/asp.net-captcha.html / https://github.com/Schenk-Smart-Solutions/musigschuel.ch/issues/69
 - [ ] map marker html size
 - [ ] Google Tag Manager, click on Address event
