@@ -25,6 +25,8 @@ export default class Value extends Shadow() {
   renderCSS () {
     this.css = `
             :host {
+                display: block;
+                margin-bottom: 1rem;
                 width: 100%;
             }
             
