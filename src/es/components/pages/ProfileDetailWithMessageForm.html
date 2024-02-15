@@ -31,24 +31,30 @@
             <label validation-message="Bitte eine Nachricht eingeben" for="password">Deine Nachricht: *</label>
             <textarea id="message" required="" value="" name="message" placeholder="Hier deine Nachricht eingeben" autocomplete="off"></textarea>
         </div>
-        <div id="captcha">
-            <div class="BDC_CaptchaDiv " id="Captcha_CaptchaDiv" style="width: 280px !important; height: 50px !important; ">
-                <div class="BDC_CaptchaImageDiv" id="Captcha_CaptchaImageDiv" style="width: 250px !important; height: 50px !important;">
-                <div class="BDC_CaptchaImageDiv" style="width:250px; height:40px;"><img class="BDC_CaptchaImage" id="Captcha_CaptchaImage" src="http://musigschuel-dev.schenk-smart-solutions.ch/BotDetectCaptcha.ashx?get=image&amp;c=Captcha&amp;t=6155194eeaaf4b41bbba9d047384a79b" alt="Retype the CAPTCHA code from the image" style="" /></div>
-                <a href="//captcha.org/captcha.html?asp.net" title="BotDetect CAPTCHA ASP.NET Form Validation" style="display: block !important; height: 10px !important; margin: 0 !important; padding: 0 !important; font-size: 9px !important; line-height: 10px !important; visibility: visible !important; font-family: Verdana, DejaVu Sans, Bitstream Vera Sans, Verdana Ref, sans-serif !important; vertical-align: middle !important; text-align: center !important; text-decoration: none !important; background-color: #f8f8f8 !important; color: #606060 !important;">BotDetect CAPTCHA ASP.NET Form Validation</a>
-            </div>
-            <div class="BDC_CaptchaIconsDiv" id="Captcha_CaptchaIconsDiv" style="width: 24px !important;">
-                <a class="BDC_ReloadLink" id="Captcha_ReloadLink" href="#" title="Change the CAPTCHA code"><img class="BDC_ReloadIcon" id="Captcha_ReloadIcon" src="http://musigschuel-dev.schenk-smart-solutions.ch/BotDetectCaptcha.ashx?get=reload-icon" alt="Change the CAPTCHA code" /></a>
-                <a class="BDC_SoundLink" id="Captcha_SoundLink" href="http://musigschuel-dev.schenk-smart-solutions.ch/BotDetectCaptcha.ashx?get=sound&amp;c=Captcha&amp;t=6155194eeaaf4b41bbba9d047384a79b" title="Speak the CAPTCHA code" rel="nofollow"><img class="BDC_SoundIcon" id="Captcha_SoundIcon" src="http://musigschuel-dev.schenk-smart-solutions.ch/BotDetectCaptcha.ashx?get=sound-icon" alt="Speak the CAPTCHA code" /></a>
-                <div class="BDC_Placeholder" id="Captcha_AudioPlaceholder">&nbsp;</div>
-            </div>
-            <script src="http://musigschuel-dev.schenk-smart-solutions.ch/BotDetectCaptcha.ashx?get=script-include&amp;c=Captcha&amp;t=6155194eeaaf4b41bbba9d047384a79b" type="text/javascript"></script>
-            <input type="hidden" name="BDC_VCID_Captcha" id="BDC_VCID_Captcha" value="6155194eeaaf4b41bbba9d047384a79b" />
-            <input type="hidden" name="BDC_BackWorkaround_Captcha" id="BDC_BackWorkaround_Captcha" value="0" />
-            <input type="hidden" name="BDC_Hs_Captcha" id="BDC_Hs_Captcha" value="46c7da151a93f59fa1b3542723c3dcd072bce31b" />
-            <input type="hidden" name="BDC_SP_Captcha" id="BDC_SP_Captcha" value="1635719827" />
-            </div>
-            <input id="captchaCode" name="captchaCode" type="text" placeholder="enter the captcha" required />
+        <div>
+            <a-ascii-captcha namespace="ascii-captcha-invert-" real-name="ASCII MOUSE" debug>
+<pre>
+    _                        
+    \`*-.                    
+     )  _`-.                 
+    .  : `. .                
+    : _   '  \               
+    ; *` _.   `*-._          
+    `-.-'          `-.       
+      ;       `       `.     
+      :.       .        \    
+      . \  .   :   .-'   .   
+      '  `+.;  ;  '      :   
+      :  '  |    ;       ;-. 
+      ; '   : :`-:     _.`* ;
+    .*' /  .*' ; .*`- +'  `*'
+   `*-*   `*-*  `*-*'        
+                              
+</pre>
+                <ol>
+                    <li>Male das Auge der Katze aus!</li>
+                </ol>
+            </a-ascii-captcha>
         </div>
         <div class="inline"><input type="submit" value="Senden" /><div id="response" name="response"></div></div>
     </form>
