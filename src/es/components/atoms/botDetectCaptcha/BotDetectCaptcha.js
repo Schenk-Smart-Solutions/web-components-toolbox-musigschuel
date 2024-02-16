@@ -100,6 +100,9 @@ export default class BotDetectCaptcha extends Shadow() {
       :host > section > div > a {
         margin: 0 0 0.1em 0.1em;
       }
+      :host([no-sound]) > section > div > #sound {
+        display: none;
+      }
       :host a[href^="//captcha.org"] {
         font-size: 0.75em;
         font-style: italic;
