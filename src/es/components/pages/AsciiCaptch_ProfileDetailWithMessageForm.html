@@ -32,7 +32,50 @@
             <textarea id="message" required="" value="" name="message" placeholder="Hier deine Nachricht eingeben" autocomplete="off"></textarea>
         </div>
         <div>
-            <ms-a-bot-detect-captcha vc-id="598d27fa6f634b3c9f81010d92dc85ea" endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/BotDetectCaptcha.ashx"></ms-a-bot-detect-captcha>
+            <a-ascii-captcha namespace="ascii-captcha-invert-" real-name="ASCII MOUSE" debug>
+                <ol>
+                    <li>Male das Auge der Katze aus!</li>
+                </ol>
+<pre>
+_                        
+\`*-.                    
+ )  _`-.                 
+.  : `. .                
+: _   '  \               
+; *` _.   `*-._          
+`-.-'          `-.       
+  ;       `       `.     
+  :.       .        \    
+  . \  .   :   .-'   .   
+  '  `+.;  ;  '      :   
+  :  '  |    ;       ;-. 
+  ; '   : :`-:     _.`* ;
+.*' /  .*' ; .*`- +'  `*'
+`*-*   `*-*  `*-*'        
+</pre>
+            <button id="reset">&#9851;</button>
+            </a-ascii-captcha>
+        </div>
+        <div>
+            <a-ascii-captcha namespace="ascii-captcha-default-" real-name="ASCII SHAPE" fill debug>
+                <ol>
+                    <li>Color the inside of the shape!</li>
+                </ol>
+<!-- https://asciiflow.com -->
+<pre>
+┌───┐             
+│   │             
+│   │             
+│   │             
+│   │             
+│   │             
+│   │             
+│   └────────────┐
+│                │
+└────────────────┘
+</pre>
+            <button id="reset">&#9851;</button>
+            </a-ascii-captcha>
         </div>
         <div class="inline"><input type="submit" value="Senden" /><div id="response" name="response"></div></div>
     </form>
