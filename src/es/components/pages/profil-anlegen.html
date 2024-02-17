@@ -47,6 +47,12 @@
         <input id="email" type="hidden" name="email" value="hkofloardhtthmjggn@cazlq.com" />
         <input id="name" type="hidden" value="ruedi ruetishuser" name="name" />
 
+        <div>
+            <h1>ruedi ruetishuser</h1>
+        </div>
+
+        <!-- Nur die preview mit a-picture falls prefilled mit defaultSource -->
+        <!--
         <div class="center">
             <div class="has-files">
                 <div validationsn-message="Bild fehlt">
@@ -62,17 +68,24 @@
                 <input name="image" type="file" data-required="" remove-file-title="Bild entfernen" file-preview="" title="Bild entfernen">
             </div>
         </div>
-        <div>
-            <h1>ruedi ruetishuser</h1>
-        </div>
+        -->
+        <div class="center">
+            <div>
+              <div validation-message="Bild fehlt">
+                <a-icon-paperclip hover-level="2" size="1em"></a-icon-paperclip>
+                <div class="type-file-label">Bild auswählen</div>
+              </div>
+              <input name="image" type="file" required="" remove-file-title="Bild entfernen" file-preview />
+            </div>
+          </div>
 
         <div class="inline">
             <label for="gender1">männlich</label>
-            <input id="gender1" name="gender" type="radio" value="m"  />
+            <input id="gender1" name="gender" type="radio" value="m" checked />
             <label for="gender2">weiblich</label>
-            <input id="gender2" name="gender" type="radio" value="w"  />
+            <input id="gender2" name="gender" type="radio" value="w" />
             <label for="gender3">divers</label>
-            <input id="gender3" name="gender" type="radio" value="d"  />
+            <input id="gender3" name="gender" type="radio" value="d" />
         </div>
 
         <div>
@@ -84,11 +97,11 @@
             <input id="zipCode" type="number" min="1000" max="9999" inputmode="numeric" required="" value="" name="zipCode" placeholder="Postleitzahl hier eingeben..." autocomplete="off" />
         </div>
         <div>
-            <label for="city">Ortschaft *</label>
+            <label validation-message="Bitte gib eine Ortschaft an" for="city">Ortschaft *</label>
             <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
         </div>
         <div>
-            <label for="phone">Gib deine Telefonnummer ein *</label>
+            <label validation-message="Bitte gib eine Telefonnummer an" for="phone">Telefonnummer*</label>
             <input type="text" required id="phone" name="phone" value="" placeholder="Telefonnummer hier eingeben" />
             <div class="inline">
                 <label for="hidePhoneNr">Telefonnummer nicht öffentlich anzeigen im Profil</label>
@@ -97,12 +110,12 @@
         </div>
         <div>
             <label for="email">E-Mailadresse</label>
-            <div>hkofloardhtthmjggn@cazlq.com</div>
+            <div class="bold">hkofloardhtthmjggn@cazlq.com</div>
             <div class="inline">
                 <label for="hideEmail">E-Mail nicht öffentlich anzeigen im Profil</label>
                 <input id="hideEmail" name="hideEmail" type="checkbox" checked />
             </div>
-            <div style="font-weight: bold; margin: 1rem 0;">Wenn die E-Mailadresse nicht gezeigt wird, wird auf dem Profil stattdessen ein Kontaktformular eingeblendet damit deine potentiellen Schüler*innen dich kontaktieren können.</div>
+            <div class="italic">Wenn die E-Mailadresse nicht gezeigt wird, wird auf dem Profil stattdessen ein Kontaktformular eingeblendet damit deine potentiellen Schüler*innen dich kontaktieren können.</div>
         </div>
         <div>
             <label for="subtitle">
@@ -186,7 +199,7 @@
                 </div>
         </o-grid>
         <div>
-            <m-details id="details-sprachen" namespace="details-default-">
+            <m-details id="details-sprachen" namespace="details-default-" mode="false">
                 <details>
                     <summary>andere Sprachen</summary>
                     <o-grid id="grid-sprachen" mode="false" auto-fill padding="1em">
@@ -1292,7 +1305,6 @@
 
         <br />
         <hr />
-        <hr />
         <br />
 
 
@@ -1380,7 +1392,7 @@
                     </div>
             </o-grid>
             <div>
-                <m-details id="details-instrumente-7647d190-073b-4bf4-a48c-d277d118c029" namespace="details-default-">
+                <m-details id="details-instrumente-7647d190-073b-4bf4-a48c-d277d118c029" namespace="details-default-" mode="false">
                     <details>
                         <summary>andere Instrumente</summary>
                         <o-grid id="grid-instrumente-7647d190-073b-4bf4-a48c-d277d118c029" mode="false" auto-fill padding="1em">
@@ -1661,7 +1673,7 @@
         <input id="zipCode" type="number" min="1000" max="9999" inputmode="numeric" value="" name="zipCode" placeholder="Postleitzahl hier eingeben..." autocomplete="off" />
     </div>
     <div>
-        <label for="city">Ortschaft</label>
+        <label validation-message="Bitte gib eine Ortschaft an" for="city">Ortschaft*</label>
         <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
     </div>
     <div>

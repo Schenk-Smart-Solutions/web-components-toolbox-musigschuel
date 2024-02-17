@@ -61,13 +61,14 @@
   --details-default-content-spacing-custom: 0;
   --details-default-content-spacing-mobile-custom: 0;
   --details-default-svg-color-custom: var(--color-tertiary);
+  --details-default-text-align: left;
   --download-box-shadow-color-custom: var(--download-color-custom);
   --download-color-custom: var(--color-tertiary);
   --emotion-pictures-default-img-max-height: 50vh;
   --emotion-pictures-with-button-img-max-height: var(--emotion-pictures-default-img-max-height);
   --emotion-pictures-with-logo-img-max-height: var(--emotion-pictures-default-img-max-height);
   --emotion-pictures-with-title-img-max-height: var(--emotion-pictures-default-img-max-height);
-  --font-family-bold: "SF Pro Text Bold", "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "Apple Legacy Chevron", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  --font-family-bold: var(--font-family);
   --font-family-secondary: "Noto Music", "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "Apple Legacy Chevron", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   --font-family: "Myriad Set Pro", "Apple Legacy Chevron", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   --footer-default-h4-color: var(--background-color);
@@ -114,6 +115,7 @@
   --select-font-size-mobile: var(--input-font-size-mobile);
   --select-height-mobile: 117%;
   --simple-form-default-button-secondary-border-radius: 0.5em;
+  --simple-form-default-o-grid-div-justify-content-custom: start;
   --teaser-plain-figcaption-justify-content-custom: flex-start;
   --teaser-round-figcaption-color: var(--color-secondary);
   --teaser-tile-rounded-h6-figcaption-color-custom: var(--color-secondary);
