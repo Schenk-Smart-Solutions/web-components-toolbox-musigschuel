@@ -40,6 +40,7 @@
 
 :root {
   --any-content-width: 80%;
+  --auto-fill-grid-template-columns: 10em;
   --background-color: white;
   --bg-line-height: 1.5em;
   --button-category-background-color-custom:var(--color-quaternary);
