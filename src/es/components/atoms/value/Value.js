@@ -1,28 +1,28 @@
 import { Shadow } from '../../web-components-toolbox/src/es/components/prototypes/Shadow.js'
 
 export default class Value extends Shadow() {
-  constructor (...args) {
+  constructor(...args) {
     super(...args)
   }
 
-  connectedCallback () {
+  connectedCallback() {
     if (this.shouldComponentRenderCSS()) this.renderCSS()
     if (this.shouldComponentRenderHTML()) this.renderHTML()
   }
 
-  disconnectedCallback () {
+  disconnectedCallback() {
 
   }
 
-  shouldComponentRenderHTML () {
+  shouldComponentRenderHTML() {
     return !this.root.querySelector('div')
   }
 
-  shouldComponentRenderCSS () {
+  shouldComponentRenderCSS() {
     return !this.root.querySelector(`:host > style[_css], ${this.tagName} > style[_css]`)
   }
 
-  renderCSS () {
+  renderCSS() {
     this.css = `
             :host {
                 display: block;
@@ -50,7 +50,7 @@ export default class Value extends Shadow() {
         `
   }
 
-  renderHTML () {
+  renderHTML() {
     this.container = document.createElement('DIV')
     this.label = document.createElement('LABEL')
     this.label.className = 'label'
@@ -61,7 +61,21 @@ export default class Value extends Shadow() {
     this.container.appendChild(this.line)
     this.value = this.getAttribute('asAddress') ? document.createElement('ADDRESS') : document.createElement('DIV')
     this.value.className = 'value'
-    this.value.innerText = this.getAttribute('value')
+    if (this.getAttribute('as-email')) {
+      this.link = document.createElement('A')
+      this.link.setAttribute('href', `mailto:${this.getAttribute('value')}`)
+      this.link.innerText = this.getAttribute('value')
+      this.value.appendChild(this.link);
+    } else if (this.getAttribute('as-link')) {
+      this.link = document.createElement('A')
+      this.link.setAttribute('target', '_blank')
+      this.link.setAttribute('href', `${this.getAttribute('value')}`)
+      this.link.innerText = this.getAttribute('value')
+      this.value.appendChild(this.link);
+    }
+    else {
+      this.value.innerText = this.getAttribute('value')
+    }
     this.container.appendChild(this.value)
     this.html = this.container
   }
