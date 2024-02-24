@@ -1,49 +1,81 @@
 <o-body-style any-content-width-var="min(80%, 1200px)">
-  <div><a-button namespace="button-secondary-" href="javascript:history.back()">&#8592; zurück</a-button></div>
+    <div><a-button namespace="button-secondary-" href="javascript:history.back()">&#8592; zurück</a-button></div>
 
-  <o-wrapper>
-      <div>
-                  <div>
-                      <a-picture namespace="picture-cover-" defaultsource="http://musigschuel-dev.schenk-smart-solutions.ch/media/cikbhb0s/roland_schenk.jpg?format=png&amp;quality=80&amp;v=1da51f3e129d990" alt="Roland_Schenk.jpg (6)" />
-                  </div>
+    <o-wrapper>
+        <div>
+            <div>
+                        <a-picture namespace="picture-cover-" defaultsource="http://musigschuel-dev.schenk-smart-solutions.ch/media/vclcb0kv/avatar-1577909_640.png?format=png&amp;quality=80&amp;v=1da6671bc4fb990" alt="Avatar 1577909 640" />
+            </div>
 
-      </div>
-      <div>
-          <h2>Roland Schenk</h2>
-              <address>
-                  H&#xF6;rmoos 54 <br />
-                  9217 Neukirch an der Thur <br />
-                  Thurgau<br />
-              </address>
-              <a href="mailto:roland.schenk@hoermoos.ch">roland.schenk@hoermoos.ch</a>
-          <p class="o-wrapper__text">
+        </div>
+        <div>
+            <h2>Peter Gasser</h2>
+            <hr />
+            <p style="font-weight: bold;">Nimm mit Peter Gasser Kontakt auf:</p>
 
-          </p>
-      </div>
-  </o-wrapper>
 
-  <div>
+<m-simple-form load-form-styles
+               namespace="simple-form-default-"
+               endpoint="/api/sendContactMail?sourceLanguage=de-CH"
+               method="POST"
+               headers="{
+                    'Content-Type': 'application/json'
+               }"
+               mode="same-origin">
+    <form>
+        <input type="hidden" name="target" value="_self" />
+        <input type="hidden" name="teacherId" value="d92d9a8d-d136-4270-a475-614222ba5fc9" />
+
+        <div>
+            <label validation-message="Bitte gültige Email-Adresse eingeben" for="sender">Deine E-Mail *</label>
+            <input id="sender" type="email" required="" value="" name="sender" placeholder="Hier deine Email-Adresse eingeben" autocomplete="off" />
+        </div>
+        <div>
+            <label validation-message="Bitte eine Nachricht eingeben" for="password">Deine Nachricht: *</label>
+            <textarea id="message" required="" value="" name="message" placeholder="Hier deine Nachricht eingeben" autocomplete="off"></textarea>
+        </div>
+        <div>
+            <ms-a-bot-detect-captcha placeholder="Bitte gib die Zeichen aus dem Bild ein" vc-id="802b7ce650fc4fa9af2c183f5ffe1d16" endpoint="http://musigschuel-dev.schenk-smart-solutions.ch/BotDetectCaptcha.ashx"></ms-a-bot-detect-captcha>
+        </div>
+        <div class="inline"><input type="submit" value="Senden" /><div id="response" name="response"></div></div>
+    </form>
+</m-simple-form>
+
+                    <br />
+                    <br />
+
+                    <ms-a-value label="Telefon" value="0874548844"></ms-a-value>
+                    <ms-a-value label="Website" as-link="true" value="https://schenk-smart-solutions.ch" tabindex="0"></ms-a-value>
+
+        </div>
+    </o-wrapper>
+
     <div>
-        <ms-a-value label="über mich" value="Ich mache Musik aller Art und spiele fast alle Instrumente. Zudem spreche ich viele Sprachen fliessend."></ms-a-value>
+        <div>
+            <ms-a-value label="über mich" value="text text"></ms-a-value>
+        </div>
+        <div>
+                <ms-a-value label="Stilistik" value="Rock "></ms-a-value>
+        </div>
+
+
+            <ms-a-value label="Unterricht ab" value="8 Jahren"></ms-a-value>
+
+            <ms-a-value label="Sprachen" value="Deutsch"></ms-a-value>
+
+
+
+            <br/>
+            <hr />
+            <br />
+            <h3>Instrumente</h3>
+                <ms-a-value label="Gitarre" value="Privatunterricht&#xD;&#xA;Neudorfgass 6&#xD;&#xA;9527 Niederhelfenschwil" asAddress="true"></ms-a-value>
+
     </div>
-    <div>
-            <ms-a-value label="Stilistik" value="Rock, Metal, Punk, EDM "></ms-a-value>
-    </div>
-
-
-      <ms-a-value label="Unterricht ab" value="8 Jahren"></ms-a-value>
-
-      <ms-a-value label="Sprachen" value="Belarussisch, Bemba, Bena, Zentralkurdisch, Deutsch, Hindi, Interlingua, Ibibio, Koreanisch, Konkani, Vai, Walliserdeutsch"></ms-a-value>
-
-      <h3>Instrumente</h3>
-          <ms-a-value label="Akkordeon, Alphorn, Keltische Harfe, Mundharmonika, Kretische Lyra, Laute, Leier, Oboe" value="Privatunterricht&#xD;&#xA;H&#xF6;rmoos 54&#xD;&#xA;9217 Neukirch an der Thur" asAddress="true"></ms-a-value>
-          <ms-a-value label="Akkordeon, Alphorn, Keltische Harfe, Mundharmonika, Kretische Lyra, Laute, Leier, Oboe" value="Testschule 2&#xD;&#xA;Bahnhofstrasse&#xD;&#xA;9500 Wil" asAddress="true"></ms-a-value>
-
-      <div>
-          <span>Website:</span>
-          <a href="https://schenk-smart-solutions.ch">https://schenk-smart-solutions.ch</a>
-      </div>
-  </div>
 </o-body-style>
+
+
+
+
 
 

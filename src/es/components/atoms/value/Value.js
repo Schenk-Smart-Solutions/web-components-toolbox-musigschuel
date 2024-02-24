@@ -1,8 +1,8 @@
 import { Shadow } from '../../web-components-toolbox/src/es/components/prototypes/Shadow.js'
 
 export default class Value extends Shadow() {
-  constructor(...args) {
-    super(...args)
+  constructor (options = {}, ...args) {
+    super({ importMetaUrl: import.meta.url, ...options }, ...args)
   }
 
   connectedCallback() {
@@ -25,6 +25,7 @@ export default class Value extends Shadow() {
   renderCSS() {
     this.css = `
             :host {
+                --a-margin: 0;
                 display: block;
                 margin-bottom: 1rem;
                 width: 100%;
@@ -48,6 +49,30 @@ export default class Value extends Shadow() {
                 text-align: right;
             }
         `
+        return this.fetchTemplate()
+  }
+
+  /**
+   * fetches the template
+   *
+   * @return {Promise<void>}
+   */
+  fetchTemplate () {
+    /** @type {import("../../prototypes/Shadow.js").fetchCSSParams[]} */
+    const styles = [
+      {
+        path: `${this.importMetaUrl}../../web-components-toolbox/src/css/reset.css`, // no variables for this reason no namespace
+        namespace: false
+      },
+      {
+        path: `${this.importMetaUrl}../../web-components-toolbox/src/css/style.css`, // apply namespace and fallback to allow overwriting on deeper level
+        namespaceFallback: false
+      }
+    ]
+    switch (this.getAttribute('namespace')) {
+      default:
+        return this.fetchCSS(styles, false)
+    }
   }
 
   renderHTML() {
