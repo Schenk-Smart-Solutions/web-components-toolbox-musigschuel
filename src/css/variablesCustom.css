@@ -117,6 +117,17 @@
   --select-height-mobile: 117%;
   --simple-form-default-button-secondary-border-radius: 0.5em;
   --simple-form-default-o-grid-div-justify-content-custom: start;
+  --simple-form-default-section-background-color: var(--color-quaternary);
+  --simple-form-default-section-border-radius: var(--search-input-border-radius);
+  --simple-form-default-section-border: 3px outset var(--color-secondary);
+  --simple-form-default-section-color-hover: var(--background-color);
+  --simple-form-default-section-color-secondary: var(--background-color);
+  --simple-form-default-section-color: var(--background-color);
+  --simple-form-default-section-h-color: var(--background-color);
+  --simple-form-default-section-hr-color: var(--background-color);
+  --simple-form-default-section-input-color: var(--color);
+  --simple-form-default-section-padding-mobile: calc(2* var(--content-spacing-mobile));
+  --simple-form-default-section-padding: calc(2* var(--content-spacing));
   --teaser-plain-figcaption-justify-content-custom: flex-start;
   --teaser-round-figcaption-color: var(--color-secondary);
   --teaser-tile-rounded-h6-figcaption-color-custom: var(--color-secondary);
