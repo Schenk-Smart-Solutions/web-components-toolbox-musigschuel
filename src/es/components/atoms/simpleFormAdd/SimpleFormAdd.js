@@ -94,11 +94,11 @@ export default class SimpleFormAdd extends Shadow() {
     if (this.hasAttribute('removed-child')) return this.remove()
     this.icon = '<a-icon-mdx icon-url="../../../../../../../img/pencil-plus.svg" size="2em"></a-icon-mdx>'
     this.html = this.icon
-    if (this.inputAtRoot) return this.appendChild(this.inputAtRoot)
-    if (this.input) return
+    if (this.inputAtRoot) this.inputAtRoot.remove()
+    if (this.input) this.input.remove()
     const div = document.createElement('div')
     div.innerHTML = /* html */`<input
-      slot="1"
+      slot="none"
       id="${this.getAttribute('id') || 'addMore'}"
       name="${this.getAttribute('name') || 'addMore'}"
       type="${this.getAttribute('type') || 'checkbox'}"
@@ -106,9 +106,19 @@ export default class SimpleFormAdd extends Shadow() {
       multiply-text-selector="${this.getAttribute('multiply-text-selector') || 'multiply-text'}"
       multiply-condition="${this.getAttribute('multiply-condition') || 'true'}"
       multiply-max="${this.getAttribute('multiply-max') || '5'}"
+      counter="${this.getAttribute('counter') || '0'}"
       counter-placeholder="${this.getAttribute('counter-placeholder') || '$count$'}"
     />`
+    if (!this.hasAttribute('id')) this.setAttribute('id', div.children[0].getAttribute('id'))
+    if (!this.hasAttribute('name')) this.setAttribute('name', div.children[0].getAttribute('name'))
+    if (!this.hasAttribute('multiply')) this.setAttribute('multiply', div.children[0].getAttribute('multiply'))
+    if (!this.hasAttribute('multiply-text-selector')) this.setAttribute('multiply-text-selector', div.children[0].getAttribute('multiply-text-selector'))
+    if (!this.hasAttribute('multiply-condition')) this.setAttribute('multiply-condition', div.children[0].getAttribute('multiply-condition'))
+    if (!this.hasAttribute('multiply-max')) this.setAttribute('multiply-max', div.children[0].getAttribute('multiply-max'))
+    if (!this.hasAttribute('counter')) this.setAttribute('counter', div.children[0].getAttribute('counter'))
+    if (!this.hasAttribute('counter-placeholder')) this.setAttribute('counter-placeholder', div.children[0].getAttribute('counter-placeholder'))
     this.appendChild(div.children[0])
+    if (this.hasAttribute('no-multiply')) this.input.removeAttribute('multiply')
     return this.fetchModules([
       {
         path: `${this.importMetaUrl}../../web-components-toolbox/src/es/components/atoms/iconMdx/IconMdx.js`,
