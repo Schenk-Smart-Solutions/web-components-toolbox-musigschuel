@@ -12,7 +12,10 @@ export default class SimpleFormAdd extends Shadow() {
 
     this.clickEventListener = event => {
       this.input.click()
-      this.setAttribute('hidden', 'true')
+      setTimeout(() => {
+        this.input.checked = false
+      }, 1);
+      //this.setAttribute('hidden', 'true')
     }
   }
 
@@ -88,9 +91,11 @@ export default class SimpleFormAdd extends Shadow() {
    * @returns void
    */
   renderHTML () {
-    this.icon = '<div>(+)</div>'
+    if (this.hasAttribute('removed-child')) return this.remove()
+    this.icon = '<a-icon-mdx icon-url="../../../../../../../img/pencil-plus.svg" size="2em"></a-icon-mdx>'
     this.html = this.icon
     if (this.inputAtRoot) return this.appendChild(this.inputAtRoot)
+    if (this.input) return
     const div = document.createElement('div')
     div.innerHTML = /* html */`<input
       slot="1"
@@ -104,6 +109,12 @@ export default class SimpleFormAdd extends Shadow() {
       counter-placeholder="${this.getAttribute('counter-placeholder') || '$count$'}"
     />`
     this.appendChild(div.children[0])
+    return this.fetchModules([
+      {
+        path: `${this.importMetaUrl}../../web-components-toolbox/src/es/components/atoms/iconMdx/IconMdx.js`,
+        name: 'a-icon-mdx'
+      }
+    ])
   }
 
   get input () {

@@ -95,7 +95,13 @@ export default class SimpleFormTrash extends Shadow() {
    * @returns void
    */
   renderHTML () {
-    this.html = (this.icon = '<div>(Trash)</div>')
+    this.html = (this.icon = '<a-icon-mdx icon-url="../../../../../../../img/trash.svg" size="2em"></a-icon-mdx>')
+    return this.fetchModules([
+      {
+        path: `${this.importMetaUrl}../../web-components-toolbox/src/es/components/atoms/iconMdx/IconMdx.js`,
+        name: 'a-icon-mdx'
+      }
+    ])
   }
 
   /**
