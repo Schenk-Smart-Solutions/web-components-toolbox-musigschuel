@@ -128,7 +128,7 @@ export default class TeacherList extends Shadow() {
       }
       const htmlStr = /* html */`<ul>${teachers.reduce((acc, teacher) => /* html */`${acc}
           <li>
-            <o-wrapper>
+            <o-wrapper href="${origin}${teacher.link}">
               <a-picture
                 picture-load
                 namespace="picture-cover-"

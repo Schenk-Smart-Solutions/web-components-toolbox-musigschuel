@@ -100,7 +100,7 @@
   --hr-border-width: 0 0 2px;
   --hr-secondary-border-bottom: 2px solid var(--color-secondary);
   --hr-secondary-opacity: 1;
-  --input-font-size-mobile: var(--font-size-mobile);
+  --input-font-size-mobile: max(var(--font-size-mobile), 16px);
   --meta-header-default-a-font-size-custom: 1em;
   --meta-header-default-div-flex-mobile: none;
   --meta-header-default-padding-custom: 0.25em 0 0.25em;
