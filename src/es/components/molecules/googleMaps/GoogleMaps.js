@@ -208,9 +208,10 @@ export default class GoogleMaps extends Shadow() {
                 ></a-picture>
               </div>
               <div class="flip-card-back">
-                <h2>${teacher.title}</h2>
-                <p>${teacher.text}</p>
-                <a href="${origin}${teacher.link}">${this.getAttribute('label-more') || '...more'}</a>
+                <a style="text-decoration:none;" href="${origin}${teacher.link}">
+                     <h2 style="text-decoration:none;text-align:center">${teacher.title}</h2>
+                    <div>${teacher.text}</div>
+                </a>
               </div>
             </div>
           </div>
