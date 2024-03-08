@@ -344,12 +344,14 @@ export default class GoogleMaps extends Shadow() {
     })
 
     marker.addListener('click', () => {
+      this.markers.forEach(marker => marker.infoWindow?.close())
       infoWindow.open({
         anchor: marker,
         gMap,
         shouldFocus: true
       })
     })
+    marker.infoWindow = infoWindow
   }
 
   getMarkers = () => {
