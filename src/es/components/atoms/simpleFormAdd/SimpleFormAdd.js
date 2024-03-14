@@ -57,6 +57,13 @@ export default class SimpleFormAdd extends Shadow() {
         :host {}
       }
     `
+    const section = SimpleFormAdd.walksUpDomQueryMatches(this, 'section')
+    this.style.textContent = /* css */`
+      :host form > section${section.hasAttribute('id') ? `[id="${section.getAttribute('id')}"]` : ''}${section.hasAttribute('name') ? `[name="${section.getAttribute('name')}"]` : ''}:has(~section${section.hasAttribute('id') ? `[id="${section.getAttribute('id')}"]` : ''}${section.hasAttribute('name') ? `[name="${section.getAttribute('name')}"]` : ''}:not([hidden])) [add] {
+        display: none;
+      }
+    `
+    this.appendChild(this.style)
     return this.fetchTemplate()
   }
 
@@ -127,11 +134,36 @@ export default class SimpleFormAdd extends Shadow() {
     ])
   }
 
+  /**
+   * matches html element by selector
+   * ends and returns root when stepped up all the way but nothing found
+   *
+   * @param {HTMLElement | any} el
+   * @param {string} selector
+   * @param {HTMLElement} [root=document.documentElement]
+   * @return {any}
+   */
+  static walksUpDomQueryMatches (el, selector, root = document.documentElement) {
+    if (el.matches(selector)) return el
+    while ((el = el.parentNode || el.host || root) && el !== root) { // eslint-disable-line
+      if (typeof el.matches === 'function' && el.matches(selector)) return el
+    }
+    return el
+  }
+
   get input () {
     return this.querySelector('input')
   }
 
   get inputAtRoot () {
     return this.root.querySelector('input')
+  }
+
+  get style () {
+    return this._style || (this._style = (() => {
+      const style = document.createElement('style')
+      style.setAttribute('_css', 'components/atoms/flatpickr/Flatpickr.js')
+      return style
+    })())
   }
 }

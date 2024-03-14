@@ -61,6 +61,16 @@ export default class SimpleFormTrash extends Shadow() {
         :host {}
       }
     `
+    const section = SimpleFormTrash.walksUpDomQueryMatches(this, 'section')
+    this.style.textContent = /* css */`
+      :host form > section${section.hasAttribute('id') ? `[id="${section.getAttribute('id')}"]` : ''}${section.hasAttribute('name') ? `[name="${section.getAttribute('name')}"]` : ''}:not(:has(~section${section.hasAttribute('id') ? `[id="${section.getAttribute('id')}"]` : ''}${section.hasAttribute('name') ? `[name="${section.getAttribute('name')}"]` : ''}:not([hidden]))) [trash] {
+        display: none;
+      }
+      :host form > section${section.hasAttribute('id') ? `[id="${section.getAttribute('id')}"]` : ''}${section.hasAttribute('name') ? `[name="${section.getAttribute('name')}"]` : ''}:not([hidden]) ~section${section.hasAttribute('id') ? `[id="${section.getAttribute('id')}"]` : ''}${section.hasAttribute('name') ? `[name="${section.getAttribute('name')}"]` : ''} [trash] {
+        display: inherit;
+      }
+    `
+    this.appendChild(this.style)
     return this.fetchTemplate()
   }
 
@@ -119,5 +129,13 @@ export default class SimpleFormTrash extends Shadow() {
       if (typeof el.matches === 'function' && el.matches(selector)) return el
     }
     return el
+  }
+
+  get style () {
+    return this._style || (this._style = (() => {
+      const style = document.createElement('style')
+      style.setAttribute('_css', '')
+      return style
+    })())
   }
 }

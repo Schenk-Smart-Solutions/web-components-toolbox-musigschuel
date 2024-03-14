@@ -1,0 +1,493 @@
+<m-simple-form load-form-styles
+               namespace="simple-form-default-"
+               endpoint="/api/saveTeacherProfile?sourceLanguage=de-CH"
+               method="POST"
+               headers="{
+                    'Content-Type': 'application/json'
+               }"
+               schema="{
+    'image': 'string',
+    'gender': 'string',
+    'instrumentLocations': [
+      {
+        'instruments': [
+            '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+        ],
+        'school': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        'location': 'string',
+        'streetNr': 'string',
+        'zipCode': 'string',
+        'city': 'string',
+        'state': '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+      }
+    ],
+    'otherStuffs': [
+      {
+        'cityTwo': 'string'
+      }
+    ],
+    'style': [
+        '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+    ],
+    'lessonsFrom': 0,
+    'name': 'string',
+    'subtitle': 'string',
+    'address': 'string',
+    'zipCode': 'string',
+    'mailConfigId': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    'city': 'string',
+    'website': 'string',
+    'email': 'string',
+    'hideEmail': 'boolean',
+    'languages': [
+      'string'
+    ],
+    'hidePhoneNr': 'boolean',
+    'homeVisits': 'boolean',
+    'phone': 'string'
+  }">
+    <form action="/api/saveTeacherProfile" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="redirectUrl" />
+        <input type="hidden" name="mailConfigId" value="e03cd870-d199-4aaa-9ef5-5a9c6e8b6936" />
+        <input id="email" type="hidden" name="email" value="hkofloardhtthmjggn@cazlq.com" />
+        <input id="name" type="hidden" value="ruedi ruetishuser" name="name" />
+
+        <div>
+            <h1>ruedi ruetishuser</h1>
+        </div>
+
+    <section name="instrumentLocations">
+    <div class="inline">
+        <h2>Unterrichtslokalität</h2>
+        <span multiply-text="($count$)"></span>
+    </div>
+    
+    <div>
+        Unten kannst du erfassen wo du welche Instrumente unterrichtest.
+    </div>
+        <div class="instruments">
+            <h3>Instrumente</h3>
+            <o-grid id="grid-instrumente-default-7647d190-073b-4bf4-a48c-d277d118c029" auto-fill mode="false" padding="1em">
+                    <div>
+                        <label for="instruments0">Akkordeon</label>
+                        <input type="checkbox" id="instruments0" name="instruments" value="9040c08d-a23b-4f85-99ae-e88922de5ed6" />
+                    </div>
+                    <div>
+                        <label for="instruments1">Blockfl&#xF6;te</label>
+                        <input type="checkbox" id="instruments1" name="instruments" value="4fe70b66-0f71-4030-ac63-63bc49cfcc9b" />
+                    </div>
+                    <div>
+                        <label for="instruments2">Cello</label>
+                        <input type="checkbox" id="instruments2" name="instruments" value="2607d750-026c-447a-991b-2baa0ecb4074" />
+                    </div>
+                    <div>
+                        <label for="instruments3">E-Bass</label>
+                        <input type="checkbox" id="instruments3" name="instruments" value="1f51051d-365b-48b3-a09e-7a469b5f313f" />
+                    </div>
+                    <div>
+                        <label for="instruments4">E-Gitarre</label>
+                        <input type="checkbox" id="instruments4" name="instruments" value="2cdde3f2-a6d1-42b1-90d5-989c39e129d8" />
+                    </div>
+                    <div>
+                        <label for="instruments5">Geige</label>
+                        <input type="checkbox" id="instruments5" name="instruments" value="0e256caf-22aa-4d68-bb53-731867fa82a4" />
+                    </div>
+                    <div>
+                        <label for="instruments6">Gitarre</label>
+                        <input type="checkbox" id="instruments6" name="instruments" value="78110a53-a6bf-49cf-b0b0-5f3e3556a41b" />
+                    </div>
+                    <div>
+                        <label for="instruments7">Harfe</label>
+                        <input type="checkbox" id="instruments7" name="instruments" value="0f1c0aaa-d044-49d3-add0-a89b33658c8d" />
+                    </div>
+                    <div>
+                        <label for="instruments8">Horn</label>
+                        <input type="checkbox" id="instruments8" name="instruments" value="4eeab735-10b1-4ea1-be5a-1686dc4fbfe2" />
+                    </div>
+                    <div>
+                        <label for="instruments9">Klarinette</label>
+                        <input type="checkbox" id="instruments9" name="instruments" value="35ba73f3-787b-4b13-a0cc-d83601f6bc4b" />
+                    </div>
+                    <div>
+                        <label for="instruments10">Kontrabass</label>
+                        <input type="checkbox" id="instruments10" name="instruments" value="9cf284bf-8be8-4a5a-90a9-bdaeb2035d43" />
+                    </div>
+                    <div>
+                        <label for="instruments11">Kornett</label>
+                        <input type="checkbox" id="instruments11" name="instruments" value="506410f1-ade8-4282-ad84-cffe05be52f5" />
+                    </div>
+                    <div>
+                        <label for="instruments12">Orgel</label>
+                        <input type="checkbox" id="instruments12" name="instruments" value="ee4d4e2f-e321-45fa-b885-e7bc12714491" />
+                    </div>
+                    <div>
+                        <label for="instruments13">Panfl&#xF6;te</label>
+                        <input type="checkbox" id="instruments13" name="instruments" value="58a042d7-86b8-4c2f-bdd4-c8175a91b0a6" />
+                    </div>
+                    <div>
+                        <label for="instruments14">Perkussion</label>
+                        <input type="checkbox" id="instruments14" name="instruments" value="90f9fa99-c692-4568-8fd9-cf750cfda8f6" />
+                    </div>
+                    <div>
+                        <label for="instruments15">Saxophon</label>
+                        <input type="checkbox" id="instruments15" name="instruments" value="11137004-64e1-4fc8-92bb-c1b7df0a0de2" />
+                    </div>
+                    <div>
+                        <label for="instruments16">Schlagzeug</label>
+                        <input type="checkbox" id="instruments16" name="instruments" value="15f388b2-d526-44c8-8c15-e2c4de644221" />
+                    </div>
+                    <div>
+                        <label for="instruments17">Schwyzer&#xF6;rgeli</label>
+                        <input type="checkbox" id="instruments17" name="instruments" value="ea30b351-ae63-415a-b88d-b631f6191486" />
+                    </div>
+            </o-grid>
+            <div>
+                <m-details id="details-instrumente-7647d190-073b-4bf4-a48c-d277d118c029" namespace="details-default-" mode="false">
+                    <details>
+                        <summary>andere Instrumente</summary>
+                        <o-grid id="grid-instrumente-7647d190-073b-4bf4-a48c-d277d118c029" mode="false" auto-fill padding="1em">
+                                <div>
+                                    <label for="instruments0">Alphorn</label>
+                                    <input type="checkbox" id="instruments0" name="instruments" value="018e6d5d-21eb-4c18-8c2a-ca8f650b06a3" />
+                                </div>
+                                <div>
+                                    <label for="instruments1">Balaleika</label>
+                                    <input type="checkbox" id="instruments1" name="instruments" value="deacdd54-fc31-418a-bbb9-313a7d5e5b23" />
+                                </div>
+                                <div>
+                                    <label for="instruments2">Banjo</label>
+                                    <input type="checkbox" id="instruments2" name="instruments" value="2417a6ce-a606-4c65-8b2f-ca89cbb98fc0" />
+                                </div>
+                                <div>
+                                    <label for="instruments3">Basler Trommel</label>
+                                    <input type="checkbox" id="instruments3" name="instruments" value="7678855b-343c-43eb-87ee-9909ab705972" />
+                                </div>
+                                <div>
+                                    <label for="instruments4">Bassetthorn</label>
+                                    <input type="checkbox" id="instruments4" name="instruments" value="f152f69a-fa5a-4ffe-aba8-584558528e8a" />
+                                </div>
+                                <div>
+                                    <label for="instruments5">Beatbox</label>
+                                    <input type="checkbox" id="instruments5" name="instruments" value="e121f7ee-0859-48a8-8c82-c02be452b9c2" />
+                                </div>
+                                <div>
+                                    <label for="instruments6">Body Percussion</label>
+                                    <input type="checkbox" id="instruments6" name="instruments" value="3e000b92-b8b4-4b87-b571-d10d8e2aace6" />
+                                </div>
+                                <div>
+                                    <label for="instruments7">Bratsche</label>
+                                    <input type="checkbox" id="instruments7" name="instruments" value="5d91d0c4-c555-44a0-b92e-ca99de41d16d" />
+                                </div>
+                                <div>
+                                    <label for="instruments8">Cajon</label>
+                                    <input type="checkbox" id="instruments8" name="instruments" value="111bd885-ab0b-4151-9e15-03518d5ae380" />
+                                </div>
+                                <div>
+                                    <label for="instruments9">Cembalo</label>
+                                    <input type="checkbox" id="instruments9" name="instruments" value="d9668b8f-5d54-485e-8b6d-0fa1e3b4802e" />
+                                </div>
+                                <div>
+                                    <label for="instruments10">Clairon</label>
+                                    <input type="checkbox" id="instruments10" name="instruments" value="15236d97-957d-42a9-926f-77992bb3bc26" />
+                                </div>
+                                <div>
+                                    <label for="instruments11">Conga</label>
+                                    <input type="checkbox" id="instruments11" name="instruments" value="9aec63fa-c192-4c05-8615-e861b3826da0" />
+                                </div>
+                                <div>
+                                    <label for="instruments12">Didgeridoo</label>
+                                    <input type="checkbox" id="instruments12" name="instruments" value="da5e7fcb-bc66-4e24-83a6-c90052b11d38" />
+                                </div>
+                                <div>
+                                    <label for="instruments13">Djembe</label>
+                                    <input type="checkbox" id="instruments13" name="instruments" value="32162b95-1ef2-49d0-b0c9-d1539e644117" />
+                                </div>
+                                <div>
+                                    <label for="instruments14">Dudelsack</label>
+                                    <input type="checkbox" id="instruments14" name="instruments" value="0acc2ba1-13cc-4f31-962c-73f7f1d15b00" />
+                                </div>
+                                <div>
+                                    <label for="instruments15">Duduk</label>
+                                    <input type="checkbox" id="instruments15" name="instruments" value="237d095e-1420-4d05-9297-ddd7cdb76151" />
+                                </div>
+                                <div>
+                                    <label for="instruments16">Englischhorn</label>
+                                    <input type="checkbox" id="instruments16" name="instruments" value="fc71c987-fe27-42ac-873b-c22493c184f0" />
+                                </div>
+                                <div>
+                                    <label for="instruments17">Euphonium</label>
+                                    <input type="checkbox" id="instruments17" name="instruments" value="f7ab8389-b46c-4d00-a94c-d07ebe24408b" />
+                                </div>
+                                <div>
+                                    <label for="instruments18">Fagott</label>
+                                    <input type="checkbox" id="instruments18" name="instruments" value="ced6cb47-a407-4669-98ee-5a0ebf4e99de" />
+                                </div>
+                                <div>
+                                    <label for="instruments19">Fl&#xFC;gelhorn</label>
+                                    <input type="checkbox" id="instruments19" name="instruments" value="bd09b202-2da5-47db-a31c-31eb711389a8" />
+                                </div>
+                                <div>
+                                    <label for="instruments20">Gamelan</label>
+                                    <input type="checkbox" id="instruments20" name="instruments" value="ac549349-978d-4fce-a475-74afc90d94b0" />
+                                </div>
+                                <div>
+                                    <label for="instruments21">Gitalele</label>
+                                    <input type="checkbox" id="instruments21" name="instruments" value="d2d88d66-c8fa-4d9e-9bb7-0534aa38dce5" />
+                                </div>
+                                <div>
+                                    <label for="instruments22">Hackbrett</label>
+                                    <input type="checkbox" id="instruments22" name="instruments" value="eed4bd52-52b1-4d24-9c5b-9184ccccf504" />
+                                </div>
+                                <div>
+                                    <label for="instruments23">Handpan (Hang)</label>
+                                    <input type="checkbox" id="instruments23" name="instruments" value="a62a26f5-9580-4d38-a514-1c6853432e23" />
+                                </div>
+                                <div>
+                                    <label for="instruments24">Harde</label>
+                                    <input type="checkbox" id="instruments24" name="instruments" value="219a8da9-b4fb-412e-82c2-a4ae486c60fc" />
+                                </div>
+                                <div>
+                                    <label for="instruments25">Harmonium</label>
+                                    <input type="checkbox" id="instruments25" name="instruments" value="ef469864-3670-4b6c-a1f6-4fb14bc278f2" />
+                                </div>
+                                <div>
+                                    <label for="instruments26">Jodeln</label>
+                                    <input type="checkbox" id="instruments26" name="instruments" value="197d0b52-75c7-4f1f-a24d-eb95128b18cd" />
+                                </div>
+                                <div>
+                                    <label for="instruments27">Keltische Harfe</label>
+                                    <input type="checkbox" id="instruments27" name="instruments" value="7e6e8615-f9bf-4926-8a88-8b5b69cabd59" />
+                                </div>
+                                <div>
+                                    <label for="instruments28">Klavichord</label>
+                                    <input type="checkbox" id="instruments28" name="instruments" value="888c2dab-bc26-4fa4-b53b-0387cf44e012" />
+                                </div>
+                                <div>
+                                    <label for="instruments29">Kontrafagott</label>
+                                    <input type="checkbox" id="instruments29" name="instruments" value="d5827b1a-c06d-485e-80f4-8b09e394db51" />
+                                </div>
+                                <div>
+                                    <label for="instruments30">Kretische Lyra</label>
+                                    <input type="checkbox" id="instruments30" name="instruments" value="c868c7d3-6eed-425a-94f9-4bc20c840eab" />
+                                </div>
+                                <div>
+                                    <label for="instruments31">Laute</label>
+                                    <input type="checkbox" id="instruments31" name="instruments" value="11099ce8-b0f6-48d0-a33e-996d8cd9f06b" />
+                                </div>
+                                <div>
+                                    <label for="instruments32">Leier</label>
+                                    <input type="checkbox" id="instruments32" name="instruments" value="a94cf706-8c0c-4e5f-aa9c-721dccafc863" />
+                                </div>
+                                <div>
+                                    <label for="instruments33">Mandoline</label>
+                                    <input type="checkbox" id="instruments33" name="instruments" value="c358fc80-5069-40bd-b8cb-51bb70dd0b9c" />
+                                </div>
+                                <div>
+                                    <label for="instruments34">Marimba</label>
+                                    <input type="checkbox" id="instruments34" name="instruments" value="277975c0-1159-44f5-b84b-c2c3eb70d630" />
+                                </div>
+                                <div>
+                                    <label for="instruments35">Melodica</label>
+                                    <input type="checkbox" id="instruments35" name="instruments" value="25a8fd85-828b-4e05-9df8-a621161e6b2d" />
+                                </div>
+                                <div>
+                                    <label for="instruments36">Mundharmonika</label>
+                                    <input type="checkbox" id="instruments36" name="instruments" value="89ff269a-a77e-4fa3-b2ba-0518367300e2" />
+                                </div>
+                                <div>
+                                    <label for="instruments37">Musette</label>
+                                    <input type="checkbox" id="instruments37" name="instruments" value="98cd8c55-53ac-43ee-82e2-c6aac1dd602b" />
+                                </div>
+                                <div>
+                                    <label for="instruments38">Naturhorn</label>
+                                    <input type="checkbox" id="instruments38" name="instruments" value="23c678c2-0ff6-4bfc-b37a-4bc2630e7673" />
+                                </div>
+                                <div>
+                                    <label for="instruments39">Naturtrompete</label>
+                                    <input type="checkbox" id="instruments39" name="instruments" value="84b67726-7b47-4d47-aff9-b47f4a05c393" />
+                                </div>
+                                <div>
+                                    <label for="instruments40">Oboe</label>
+                                    <input type="checkbox" id="instruments40" name="instruments" value="2ba485a0-d680-49e1-866a-1331330788f3" />
+                                </div>
+                                <div>
+                                    <label for="instruments41">Okarina</label>
+                                    <input type="checkbox" id="instruments41" name="instruments" value="7bb8b282-c5c7-41ce-b27a-0a2731c76ffc" />
+                                </div>
+                                <div>
+                                    <label for="instruments42">Oud</label>
+                                    <input type="checkbox" id="instruments42" name="instruments" value="b68880e7-dde8-417e-80ee-a52aa52c5d7c" />
+                                </div>
+                                <div>
+                                    <label for="instruments43">Piccolo</label>
+                                    <input type="checkbox" id="instruments43" name="instruments" value="395df6ee-ff2e-488f-87fb-c405d0f6aaa9" />
+                                </div>
+                                <div>
+                                    <label for="instruments44">Posaune</label>
+                                    <input type="checkbox" id="instruments44" name="instruments" value="2ec9229b-5414-43bb-b436-4ec98c68cc5e" />
+                                </div>
+                                <div>
+                                    <label for="instruments45">Querfl&#xF6;te</label>
+                                    <input type="checkbox" id="instruments45" name="instruments" value="1f70c095-1cfd-448c-aa2c-66d837a24744" />
+                                </div>
+                                <div>
+                                    <label for="instruments46">Rappen</label>
+                                    <input type="checkbox" id="instruments46" name="instruments" value="3e45c4b9-66c0-4a9b-a1c2-1bd003b18757" />
+                                </div>
+                                <div>
+                                    <label for="instruments47">Schalmei</label>
+                                    <input type="checkbox" id="instruments47" name="instruments" value="6691a289-ca55-4988-a31b-9d8c926ed52e" />
+                                </div>
+                                <div>
+                                    <label for="instruments48">Serpent</label>
+                                    <input type="checkbox" id="instruments48" name="instruments" value="66c909d4-316e-4be2-836f-32d4b88cacdb" />
+                                </div>
+                                <div>
+                                    <label for="instruments49">Sitar</label>
+                                    <input type="checkbox" id="instruments49" name="instruments" value="152de5ec-a2ed-437f-b7c1-79aed846aee5" />
+                                </div>
+                                <div>
+                                    <label for="instruments50">Steelpan</label>
+                                    <input type="checkbox" id="instruments50" name="instruments" value="f56c70ce-9ddf-43b6-8bb3-7c057a3cbc04" />
+                                </div>
+                                <div>
+                                    <label for="instruments51">Synthesizer</label>
+                                    <input type="checkbox" id="instruments51" name="instruments" value="026ee205-b700-4110-b496-240bf7627b77" />
+                                </div>
+                                <div>
+                                    <label for="instruments52">Tabla</label>
+                                    <input type="checkbox" id="instruments52" name="instruments" value="4dfaa613-c61b-4a4d-9acf-b7e98903f52e" />
+                                </div>
+                                <div>
+                                    <label for="instruments53">Therobe</label>
+                                    <input type="checkbox" id="instruments53" name="instruments" value="a7215de6-8d56-44b8-9dc6-b24eb750ba51" />
+                                </div>
+                                <div>
+                                    <label for="instruments54">Ukulele</label>
+                                    <input type="checkbox" id="instruments54" name="instruments" value="5ef8f942-142c-4643-aa54-9787d74b70c8" />
+                                </div>
+                                <div>
+                                    <label for="instruments55">Xylophon</label>
+                                    <input type="checkbox" id="instruments55" name="instruments" value="a699029a-dcfc-4ec4-8584-37ed8b88608f" />
+                                </div>
+                        </o-grid>
+                    </details>
+                </m-details>
+            </div>
+        </div>
+    <div>
+        <label for="school">Schule</label>
+        <select id="school" name="school">
+                    <option value="a1bb7689-1c9b-4218-a74f-ee83dd3996d2">Privatunterricht</option>
+                    <option value="0b52d7b8-985b-4830-8737-0dc23a9dc248">Musikschule Stadt St. Gallen</option>
+                    <option value="8f540925-0e35-4ecd-94de-d190cb86a990">Musikzentrum St. Gallen Klubschule Migros</option>
+                    <option value="d975efd0-f3b2-4767-bf93-1124be283f46">Musikschule Gaiserwald</option>
+                    <option value="6adca1eb-3488-4b08-ba6f-c9369d55ae04">Musikschule Appenzell</option>
+                    <option value="153d11d6-42c6-47ac-94dd-e2a0a7d792db">Musikschule Appenzeller Mittelland</option>
+                    <option value="f04638b9-eb8d-44ca-9d48-b12b9759144e">Musikschule Herisau, Appenzeller Hinterland</option>
+                    <option value="64b6d3fa-fed4-4063-b389-e38d0fc21288">Musikschule Degersheim</option>
+                    <option value="9567526c-717e-4903-b2bb-0b2c1bef8498">Musikschule F&#xFC;rstenland</option>
+                    <option value="1dd791f0-6078-4142-be6c-7c9c043f64d5">Musikschule Waldkirch Bernhardzell</option>
+                    <option value="df0a09cc-edde-4a2b-bd8d-cc71298690d0">Musikschule Bischofszell</option>
+                    <option value="8eda2409-6d70-4d98-a0d7-8a728fafaa73">Musikschule Flawil</option>
+                    <option value="089d5987-05e4-46af-a7d6-591fe414da03">Musikschule Uzwil</option>
+                    <option value="613c16a1-dc97-4f0b-9d44-6bead8a98acd">Musikschule Oberuzwil-Jonschwil</option>
+                    <option value="32e104f3-fa8c-4658-bd2b-d9e889074e89">Musikschule ThurLand</option>
+                    <option value="c8c163fa-9b7c-4e61-b95c-664d64588539">Schule f&#xFC;r Musik Wittenbach</option>
+                    <option value="518c4307-2a12-4e70-b4fd-2ebf94fd0640">Musikschule Egnach</option>
+                    <option value="e0cfdba4-ee30-4836-a6ee-b426ea94c884">Musikschule Arbon</option>
+                    <option value="c036c52d-55a1-45ee-b57b-733487b80c63">Musikschule Rorschach-Rorschacherberg</option>
+                    <option value="75f04fbe-7be2-4037-b792-8d31c2f1dfe8">Musikschule M&#xF6;rschwil</option>
+                    <option value="86625296-c89b-4d6a-a81a-cd2204c93350">Musikschule Goldach</option>
+                    <option value="72ab9250-3c1b-477d-8c5d-36c596c2bc9c">Musikschule Appenzeller Vorderland</option>
+                    <option value="a9ac6056-0dc5-4210-ad2d-77677c4edd7d">Musikschule Am Alten Rhein</option>
+                    <option value="fe71d8da-2c9b-48bc-b729-825c87752746">Musik im Zentrum</option>
+                    <option value="08415f17-c28b-4698-b48e-f764d30e8564">Musikschule Oberrheintal</option>
+                    <option value="fa4e380b-db5d-42e2-9d56-0f3b1feb36a2">Musikschule Werdenberg</option>
+                    <option value="73a2b819-4214-46ca-8f57-3d558ef1df4e">Liechtensteinische Musikschule</option>
+                    <option value="6dc8d7fa-af57-4c2e-b783-23f865ff91b9">Musikschule Wil</option>
+                    <option value="5d6ab917-c50b-4360-987f-c38f1c7f9bc6">Jugendmusikschule Wil-Land</option>
+                    <option value="fd1a719d-ada3-4e83-87f4-016eccc9ca01">Musikschule Toggenburg</option>
+        </select>
+    </div>
+    <div>
+        <label for="location">Lokalität / Gebäude</label>
+        <input id="location" type="text" value="" name="location" placeholder="Bitte geben Sie hier Ihren Schule ein..." autocomplete="off" />
+    </div>
+    <div>
+        <label for="streetNr">Strasse</label>
+        <input id="streetNr" type="text" value="" name="streetNr" placeholder="Strasse hier eingeben..." autocomplete="off" />
+    </div>
+    <div>
+        <label for="zipCode">Postleitzahl</label>
+        <input id="zipCode" type="number" min="1000" max="9999" inputmode="numeric" value="" name="zipCode" placeholder="Postleitzahl hier eingeben..." autocomplete="off" />
+    </div>
+    <div>
+        <label validation-message="Bitte gib eine Ortschaft an" for="city">Ortschaft*</label>
+        <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
+    </div>
+    <div>
+        <label validation-message="Bitte gib deinen Kanton ein" for="state">Kanton</label>
+
+        <select id="state" name="state" required>
+            <option>Bitte wählen...</option>
+                    <option value="0ef61509-48c8-478c-a980-f0fb6bb83577">Aargau</option>
+                    <option value="0bf6cbe2-93be-4806-8edb-b2e2b3f9f2d5">Appenzell Ausserrhoden</option>
+                    <option value="2751ea94-8943-445f-9e78-d5e6092dc7ac">Appenzell Innerrhoden</option>
+                    <option value="04c82ed8-76c0-453e-8c28-3819ebc48835">Basel-Land</option>
+                    <option value="7decd32d-315d-4d90-8c1d-dcce2cb88aaf">Basel-Stadt</option>
+                    <option value="6389eeb0-7354-461e-b55f-25c14405e054">Bern</option>
+                    <option value="1890c018-b28c-4500-bf81-02dd68131cf4">Freiburg</option>
+                    <option value="4d6271d7-9b04-447b-afe4-0838c91a2358">Genf</option>
+                    <option value="72e0871c-7cd8-4ad0-9c96-46b89934b619">Glarus</option>
+                    <option value="7c81e98c-849c-41ef-9d13-0cbe690882a3">Graub&#xFC;nden</option>
+                    <option value="3680f4a1-b6a1-4e28-9531-e8f4ad1800bc">Jura</option>
+                    <option value="bb9da6c3-a069-4df0-b0e0-3426475adddb">Luzern</option>
+                    <option value="b2683ff9-a8d3-49f9-a8d1-0ddf33cec512">Neuenburg</option>
+                    <option value="18132d96-147d-4f13-a8f6-3f601121fda3">Nidwalden</option>
+                    <option value="77d54bf0-a601-4567-bd3d-38a3c6cc3136">Obwalden</option>
+                    <option value="329c0122-646c-4054-85eb-23c293b5d2d9">Sankt Gallen</option>
+                    <option value="d7fb9071-406c-4e90-a6ff-4e0084b02fa2">Schaffhausen</option>
+                    <option value="327b19c8-5139-4763-9bb5-e27c6d35c5e6">Schwyz</option>
+                    <option value="520d8a42-3ed4-40bf-b904-8784452e0afb">Solothurn</option>
+                    <option value="622d0c3a-ee48-4473-8ca2-d22068d48de3">Thurgau</option>
+                    <option value="5e4848f2-6e7c-4d2b-813b-7266efb986d1">Tessin</option>
+                    <option value="346227b2-36c2-4e43-985b-293cde16d397">Uri</option>
+                    <option value="ebc7ddc2-3d4a-4f10-a9f5-883bb3d8c84b">Waadt</option>
+                    <option value="f9a7c110-3efa-48a5-9c53-15a98f0fcb50">Wallis</option>
+                    <option value="d2b42199-5e57-4d40-95c5-3b509f055db1">Zug</option>
+                    <option value="14bd142c-2527-47a4-9255-14f95663bea8">Z&#xFC;rich</option>
+        </select>
+    </div>
+    <div class="inline">
+        <ms-a-simple-form-trash trash="section[name=instrumentLocations]" title="Löschen"></ms-a-simple-form-trash>
+        <ms-a-simple-form-add add multiply-max="9" title="Hinzufügen"></ms-a-simple-form-add>
+    </div>
+</section>
+<section name="otherStuffs">
+    <div class="inline">
+        <h2>More Stuff</h2>
+        <span multiply-text-otherStuffs="($count$)"></span>
+    </div>
+    <div>
+        <label validation-message="Bitte gib eine Ortschaft an" for="cityTwo">Ortschaft*</label>
+        <input id="cityTwo" type="text" required="" value="" name="cityTwo" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
+    </div>
+    <div class="inline">
+        <ms-a-simple-form-trash trash="section[name=otherStuffs]" title="Löschen"></ms-a-simple-form-trash>
+        <ms-a-simple-form-add
+            add
+            multiply="section[name=otherStuffs]"
+            multiply-text-selector="multiply-text-otherStuffs"
+            multiply-max="9"
+            title="Hinzufügen"
+        ></ms-a-simple-form-add>
+    </div>
+</section>
+<hr />
+        <div class="inline">
+            <input type="submit" value="Speichern" />
+            <div id="response" name="response"></div>
+        </div>
+    </form>
+</m-simple-form>
