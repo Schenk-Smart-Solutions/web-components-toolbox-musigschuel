@@ -464,7 +464,7 @@
   "shortcuts": [
     {
       "name": "Login",
-      "url": "https://musigschuel.ch/login/",
+      "url": "/login",
       "description": "Logge dich ein um ein Profil zu erstellen, bzw. dein bestehendes Profil zubearbeiten."
     }
   ],
