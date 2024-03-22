@@ -2,14 +2,14 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="15.35617mm"
+   width="16.621038mm"
    height="2.365376mm"
-   viewBox="0 0 15.356169 2.365376"
+   viewBox="0 0 16.621038 2.365376"
    version="1.1"
    id="svg39319"
    inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
-   sodipodi:docname="logo.ch.svg"
-   inkscape:export-filename="/var/www/html/vm_work/web-components-toolbox-musigschuel/src/img/logo.ch.png"
+   sodipodi:docname="logo.ch.simple.svg"
+   inkscape:export-filename="/var/www/html/vm_work/web-components-toolbox-musigschuel/src/img/logo.ch.simple.png"
    inkscape:export-xdpi="1905"
    inkscape:export-ydpi="1905"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -35,19 +35,14 @@
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g42186"
+     inkscape:current-layer="g86769"
      showguides="true"
      inkscape:guide-bbox="true"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:snap-text-baseline="false">
-    <sodipodi:guide
-       position="-0.54993837,5.324081"
-       orientation="1,0"
-       id="guide56153" />
-  </sodipodi:namedview>
+     inkscape:snap-text-baseline="false" />
   <defs
      id="defs39316">
     <inkscape:path-effect
@@ -484,7 +479,7 @@
      inkscape:label=".ch"
      style="display:none"
      sodipodi:insensitive="true"
-     transform="translate(0.01588395,0.13242055)">
+     transform="translate(0.015884,0.1324205)">
     <text
        xml:space="preserve"
        style="font-size:2.82222px;line-height:125%;font-family:'Helvetica Now Text';-inkscape-font-specification:'Helvetica Now Text';letter-spacing:0.211667px;word-spacing:0px;fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -503,7 +498,7 @@
      inkscape:label=".ch copy"
      style="display:none"
      sodipodi:insensitive="true"
-     transform="translate(0.01588395,0.13242055)">
+     transform="translate(0.015884,0.1324205)">
     <g
        aria-label=".ch"
        id="text41839"
@@ -526,8 +521,9 @@
      inkscape:groupmode="layer"
      id="g42186"
      inkscape:label=".ch normal small"
-     style="display:inline"
-     transform="translate(-2.3338414,-7.1518887)">
+     style="display:none"
+     transform="translate(-2.3338414,-7.1518887)"
+     sodipodi:insensitive="true">
     <g
        aria-label="decentral"
        id="g42182"
@@ -580,6 +576,47 @@
        style="fill:none;fill-opacity:1;stroke:#9d835d;stroke-width:0.0806126;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
        id="rect42184"
        width="15.275558"
+       height="1.5482516"
+       x="2.3741477"
+       y="7.6351647"
+       ry="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g86769"
+     inkscape:label=".ch normal capital"
+     style="display:inline"
+     transform="translate(-2.3338414,-7.1518887)">
+    <g
+       aria-label="decentral"
+       id="g86755"
+       style="font-size:3.52778px;letter-spacing:0px;word-spacing:0px;opacity:1;fill:#fff8e0;fill-opacity:1;stroke:none;stroke-width:0.01;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       transform="translate(1.3813821,3.0086618)">
+      <text
+         xml:space="preserve"
+         style="font-size:1.41111px;line-height:125%;font-family:sans-serif;letter-spacing:0.396875px;word-spacing:0px;fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="1.372003"
+         y="5.8630195"
+         id="text86753"><tspan
+           sodipodi:role="line"
+           id="tspan86751"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Ramaraja;-inkscape-font-specification:Ramaraja;fill:#9d835d;fill-opacity:1;stroke:none;stroke-width:0.264583px"
+           x="1.372003"
+           y="5.8630195"
+           rotate="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+           dy="0"><tspan
+             id="tspan86743">MUSI</tspan><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.76389px;font-family:Ramaraja;-inkscape-font-specification:Ramaraja"
+             id="tspan86745"
+             rotate="0 0">𝄞</tspan><tspan
+             id="tspan86747">SCHUEL.CH</tspan><tspan
+             style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.41111px;font-family:Ramaraja;-inkscape-font-specification:'Ramaraja Italic'"
+             id="tspan86749" /></tspan></text>
+    </g>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#9d835d;stroke-width:0.0806126;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="rect86767"
+       width="16.540426"
        height="1.5482516"
        x="2.3741477"
        y="7.6351647"
