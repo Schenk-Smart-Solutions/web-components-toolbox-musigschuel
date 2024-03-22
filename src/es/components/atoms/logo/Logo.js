@@ -52,8 +52,8 @@ export default class Logo extends Shadow() {
     this.setAttribute('lang', document.documentElement.getAttribute('lang') || 'de')
 
     this.clickListener = event => {
-      if (!this.getAttribute('href')) return
-      self.open(this.getAttribute('href'))
+        if (!this.getAttribute('href')) return
+        window.location = this.getAttribute('href')
     }
   }
 
