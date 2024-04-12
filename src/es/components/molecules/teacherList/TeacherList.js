@@ -131,6 +131,7 @@ export default class TeacherList extends Shadow() {
             <o-wrapper href="${origin}${teacher.link}">
               <a-picture
                 picture-load
+                no-bad-quality
                 namespace="picture-cover-"
                 defaultSource="${origin}${teacher.imageUrl}"
                 width="20%"

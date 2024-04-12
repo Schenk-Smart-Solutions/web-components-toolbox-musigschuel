@@ -1,0 +1,103 @@
+<m-simple-form load-form-styles
+               namespace="simple-form-default-"
+               endpoint="/api/saveTeacherProfile?sourceLanguage=de-CH"
+               method="POST"
+               headers="{
+                    'Content-Type': 'application/json'
+               }"
+               schema="{
+    'image': 'string',
+    'gender': 'string',
+    'instrumentLocations': [
+      {
+        'instruments': [
+            '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+        ],
+        'school': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        'location': 'string',
+        'streetNr': 'string',
+        'zipCode': 'string',
+        'city': 'string',
+        'state': '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+      }
+    ],
+    'style': [
+        '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+    ],
+    'lessonsFrom': 0,
+    'name': 'string',
+    'subtitle': 'string',
+    'address': 'string',
+    'zipCode': 'string',
+    'mailConfigId': '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    'city': 'string',
+    'website': 'string',
+    'email': 'string',
+    'hideEmail': 'boolean',
+    'languages': [
+      'string'
+    ],
+    'hidePhoneNr': 'boolean',
+    'homeVisits': 'boolean',
+    'phone': 'string',
+    'pets': 'string'
+  }">
+    <form action="/api/saveTeacherProfile" enctype="multipart/form-data" method="post">
+        <input type="hidden" name="redirectUrl" />
+        <input type="hidden" name="mailConfigId" value="e03cd870-d199-4aaa-9ef5-5a9c6e8b6936" />
+        <input id="email" type="hidden" name="email" value="hkofloardhtthmjggn@cazlq.com" />
+        <input id="name" type="hidden" value="ruedi ruetishuser" name="name" />
+
+        <div>
+            <h1>ruedi ruetishuser</h1>
+        </div>
+        <div class="inline">
+            <label for="gender1">männlich</label>
+            <input id="gender1" name="gender" type="radio" value="m" checked />
+            <label for="gender2">weiblich</label>
+            <input id="gender2" name="gender" type="radio" value="w" />
+            <label for="gender3">divers</label>
+            <input id="gender3" name="gender" type="radio" value="d" />
+        </div>
+
+        <div>
+            <label validation-message="Bitte gib deine Adresse ein" for="address">Adresse *</label>
+            <input id="address" type="text" required="" value="" name="address" placeholder="Adresse hier eingeben..." autocomplete="off" />
+        </div>
+        <div>
+            <label validation-message="PLZ ist ung&#xFC;ltig" for="zipCode">Postleitzahl *</label>
+            <input id="zipCode" type="number" min="1000" max="9999" inputmode="numeric" required="" value="" name="zipCode" placeholder="Postleitzahl hier eingeben..." autocomplete="off" />
+        </div>
+        <div>
+            <label validation-message="Bitte gib eine Ortschaft an" for="city">Ortschaft *</label>
+            <input id="city" type="text" required="" value="" name="city" placeholder="Ortschaft hier eingeben..." autocomplete="off" />
+        </div>
+        <select name="pets" id="pets" required slot="select">
+            <option value="">--Please choose an option--</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+            <option value="hamster">Hamster</option>
+            <option value="parrot">Parrot</option>
+            <option value="spider">Spider</option>
+            <option value="goldfish">Goldfish</option>
+        </select>
+        <div>
+            <ms-a-select-option-search>
+                <label validation-message="Bitte gib ein pet an" slot="select-label" for="pets">pets *</label>
+                <select name="pets" id="pets" required slot="select">
+                    <option value="">--Please choose an option--</option>
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                    <option value="hamster">Hamster</option>
+                    <option value="parrot">Parrot</option>
+                    <option value="spider">Spider</option>
+                    <option value="goldfish">Goldfish</option>
+                </select>
+            </ms-a-select-option-search>
+        </div>
+        <div class="inline">
+            <input type="submit" value="Speichern" />
+            <div id="response" name="response"></div>
+        </div>
+    </form>
+</m-simple-form>
