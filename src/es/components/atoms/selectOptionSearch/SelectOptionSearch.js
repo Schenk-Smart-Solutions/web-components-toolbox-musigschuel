@@ -15,6 +15,8 @@ export default class SelectOptionSearch extends Shadow() {
       const target = event.composedPath().find(node => node.tagName === 'LI')
       if (target) {
         this.input.value = target.textContent
+        this.selectLi(target)
+        this.input.blur()
         this.ul.classList.remove('show')
         this.ul.classList.remove('hide')
       }
@@ -23,16 +25,45 @@ export default class SelectOptionSearch extends Shadow() {
     let blurTimeoutId = null
     this.focusEventListener = event => {
       clearTimeout(blurTimeoutId)
-      this.ul.classList.add('show')
-      this.ul.classList.remove('hide')
+      this.section.scrollIntoView()
+      const show = event => {
+        this.style.textContent = /* css */`
+          :host > section > ul > li {
+            ${this.input ? `font-size: ${self.getComputedStyle(this.input).getPropertyValue('font-size')};` : ''}
+          }
+          :host > section > ul {
+            max-height: calc(100svh - ${this.section.getBoundingClientRect().bottom}px);
+          }
+        `
+        this.filterFunction()
+        this.ul.classList.add('show')
+        this.ul.classList.remove('hide')
+        this.ul.scrollTop = 0
+        if (!this.liSelected || this.liSelected.classList.contains('hidden')) this.selectLi()
+      }
+      if ((self.innerHeight + self.scrollY) >= document.body.scrollHeight) {
+        show()
+      } else {
+        document.addEventListener('scrollend', show, { once: true })
+      }
     }
 
     this.blurEventListener = event => {
       this.ul.classList.add('hide')
+      this.style.textContent = ''
       blurTimeoutId = setTimeout(() => {
         this.ul.classList.remove('show')
         this.ul.classList.remove('hide')
       }, 1000)
+    }
+
+    this.keydownListener = event => {
+      if (event.key === 'Enter') {
+        event.preventDefault()
+        this.liSelected?.click()
+        return
+      }
+      if (event.key.includes('Arrow')) event.preventDefault()
     }
 
     this.keyupListener = event => {
@@ -40,6 +71,15 @@ export default class SelectOptionSearch extends Shadow() {
       if (event.key === 'Escape') {
         this.ul.classList.remove('show')
         this.ul.classList.remove('hide')
+        this.input?.blur()
+        return
+      }
+      if (event.key === 'ArrowUp') {
+        this.selectLi(this.lisShown[this.lisShown.indexOf(this.liSelected) - 1] || this.lisShown[this.lisShown.length - 1])
+        return
+      }
+      if (event.key === 'ArrowDown') {
+        this.selectLi(this.lisShown[this.lisShown.indexOf(this.liSelected) + 1])
         return
       }
       this.filterFunction()
@@ -52,6 +92,7 @@ export default class SelectOptionSearch extends Shadow() {
     this.addEventListener('click', this.clickEventListener, {capture: true})
     this.input?.addEventListener('focus', this.focusEventListener)
     this.input?.addEventListener('blur', this.blurEventListener)
+    this.input?.addEventListener('keydown', this.keydownListener)
     this.input?.addEventListener('keyup', this.keyupListener)
   }
 
@@ -59,6 +100,7 @@ export default class SelectOptionSearch extends Shadow() {
     this.removeEventListener('click', this.clickEventListener)
     this.input?.removeEventListener('focus', this.focusEventListener)
     this.input?.removeEventListener('blur', this.blurEventListener)
+    this.input?.removeEventListener('keydown', this.keydownListener)
     this.input?.removeEventListener('keyup', this.keyupListener)
   }
 
@@ -95,6 +137,7 @@ export default class SelectOptionSearch extends Shadow() {
         list-style: none;
         padding: 0;
         margin: 0;
+        overflow: auto;
         position: absolute;
         width: 100%;
         z-index: 100;
@@ -107,12 +150,15 @@ export default class SelectOptionSearch extends Shadow() {
       }
       :host > section > ul > li {
         cursor: pointer;
-        padding-left: 0.5em;
+        padding: 0.25em 0.5em;
+      }
+      :host > section > ul > li.hidden {
+        display: none;
       }
       :host > section > ul > li:last-child {
         padding-bottom: 0.25em;
       }
-      :host > section > ul > li:hover {
+      :host > section > ul > li:hover, :host > section > ul > li.selected {
         background-color: var(--color-secondary, orange);
         color: var(--background-color, white);
       }
@@ -164,6 +210,7 @@ export default class SelectOptionSearch extends Shadow() {
         </ul>
       </section>
     `
+    this.html = this.style
   }
 
   // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown_filter
@@ -171,12 +218,25 @@ export default class SelectOptionSearch extends Shadow() {
     const filter = this.input?.value.toUpperCase()
     for (let i = 0; i < this.lis.length; i++) {
       const txtValue = this.lis[i].textContent || this.lis[i].innerText
-      this.lis[i].style.display = !filter || txtValue.toUpperCase().indexOf(filter) > -1 ? '' : 'none'
+      this.lis[i].classList[!filter || txtValue.toUpperCase().indexOf(filter) > -1 ? 'remove' : 'add']('hidden')
+    }
+  }
+
+  selectLi (liToSelect) {
+    this.lis.forEach(li => li.classList.remove('selected'))
+    if (liToSelect) {
+      liToSelect.classList.add('selected')
+    } else {
+      this.lis.find(li => !li.classList.contains('hidden'))?.classList.add('selected')
     }
   }
 
   get select () {
     return this.querySelector('select')
+  }
+
+  get section () {
+    return this.root.querySelector('section')
   }
 
   get ul () {
@@ -187,7 +247,24 @@ export default class SelectOptionSearch extends Shadow() {
     return Array.from(this.root.querySelectorAll('li')) || []
   }
 
+  get lisShown () {
+    return Array.from(this.root.querySelectorAll('li:not(.hidden)')) || []
+  }
+
+  get liSelected () {
+    return this.root.querySelector('li.selected')
+  }
+
   get slot () {
     return this.root.querySelector('slot')
+  }
+
+  get style () {
+    return this._style || (this._style = (() => {
+      const style = document.createElement('style')
+      style.setAttribute('_css', '')
+      style.setAttribute('protected', 'true')
+      return style
+    })())
   }
 }
