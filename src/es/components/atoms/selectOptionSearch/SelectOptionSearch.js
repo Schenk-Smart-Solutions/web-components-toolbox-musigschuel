@@ -31,13 +31,14 @@ export default class SelectOptionSearch extends Shadow() {
       clearTimeout(changeTimeoutId)
       changeTimeoutId = setTimeout(() => {
         // TODO: add new/custom
-        // on input text freely changed, check if it has a matching preset
+        // on input text free hand changed, check if it has a matching preset
         let matchingLi
-        if (isTypeChange && (matchingLi = this.ul.querySelector(`[value*=${this.input.value}]`))) this.activeLi(matchingLi)
+        if (isTypeChange && this.input.value && (matchingLi = Array.from(this.ul.children).find(li => li.textContent.includes(this.input.value)
+          || this.input.value.includes(li.textContent)))) this.activeLi(matchingLi)
         // TODO: multi-select
-        if (this.liActive.getAttribute('value') !== null) this.input.value = this.liActive.textContent
+        this.input.value = this.liActive.getAttribute('value') ? this.liActive.textContent : ''
         let matchingOption
-        if ((matchingOption = this.section.querySelector(`[value${this.liActive.getAttribute('value') ? `=${this.liActive.getAttribute('value')}` : ''}]`))) {
+        if ((matchingOption = this.section.querySelector(`[value${this.liActive.getAttribute('value') ? `="${this.liActive.getAttribute('value')}"` : ''}]`))) {
           Array.from(this.section.querySelectorAll(':checked')).forEach(option => (option.selected = false))
           matchingOption.selected = true
         }
@@ -207,6 +208,9 @@ export default class SelectOptionSearch extends Shadow() {
         cursor: pointer;
         padding: 0.25em 0.5em;
       }
+      :host > section > ul > li.placeholder {
+        color: gray;
+      }
       :host > section > ul > li.hidden {
         display: none;
       }
@@ -256,7 +260,7 @@ export default class SelectOptionSearch extends Shadow() {
           <input type=text autocomplete=off placeholder="${this.select.querySelector('[value=""]')?.textContent || this.select.children[0].textContent}"></input>
         </div>
         <ul>
-          ${Array.from(this.select.querySelectorAll('option')).reduce((acc, option, i) => acc + (option.value || i > 0 ? `<li${option.value ? ` value="${option.value}"` : ''}>${option.textContent}</li>` : ''), '')}
+          ${Array.from(this.select.querySelectorAll('option')).reduce((acc, option, i) => acc + `<li value="${option.value}"${i === 0 && !option.value ? ' class="placeholder"' : ''}>${option.textContent}</li>`, '')}
         </ul>
       </section>
     `
