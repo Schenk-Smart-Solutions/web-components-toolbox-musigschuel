@@ -8,18 +8,41 @@ import { Shadow } from '../../web-components-toolbox/src/es/components/prototype
 */
 export default class SelectOptionSearch extends Shadow() {
   constructor (options = {}, ...args) {
-    super({ importMetaUrl: import.meta.url, ...options }, ...args)
+    super({ importMetaUrl: import.meta.url, mode: 'false', ...options }, ...args)
+
+    if (!this.hasAttribute('id')) this.setAttribute('id', 'select-option-search')
 
     this.clickEventListener = event => {
       if (!this.input) return
       const target = event.composedPath().find(node => node.tagName === 'LI')
       if (target) {
-        this.input.value = target.textContent
-        this.selectLi(target)
+        this.activeLi(target)
+        this.changeEventListener(event)
         this.input.blur()
         this.ul.classList.remove('show')
         this.ul.classList.remove('hide')
       }
+    }
+
+    // adjust for handling both events from input change and activeLi function
+    let changeTimeoutId = null
+    this.changeEventListener = event => {
+      const isTypeChange = event.type === 'change'
+      clearTimeout(changeTimeoutId)
+      changeTimeoutId = setTimeout(() => {
+        // TODO: add new/custom
+        // on input text freely changed, check if it has a matching preset
+        let matchingLi
+        if (isTypeChange && (matchingLi = this.ul.querySelector(`[value*=${this.input.value}]`))) this.activeLi(matchingLi)
+        // TODO: multi-select
+        if (this.liActive.getAttribute('value') !== null) this.input.value = this.liActive.textContent
+        let matchingOption
+        if ((matchingOption = this.section.querySelector(`[value${this.liActive.getAttribute('value') ? `=${this.liActive.getAttribute('value')}` : ''}]`))) {
+          Array.from(this.section.querySelectorAll(':checked')).forEach(option => (option.selected = false))
+          matchingOption.selected = true
+        }
+        this.updateValidity()
+      }, isTypeChange ? 200 : 0)
     }
 
     let blurTimeoutId = null
@@ -27,19 +50,22 @@ export default class SelectOptionSearch extends Shadow() {
       clearTimeout(blurTimeoutId)
       this.section.scrollIntoView()
       const show = event => {
-        this.style.textContent = /* css */`
+        this.style.textContent = ''
+        this.setCss(/* css */`
           :host > section > ul > li {
             ${this.input ? `font-size: ${self.getComputedStyle(this.input).getPropertyValue('font-size')};` : ''}
           }
           :host > section > ul {
             max-height: calc(100svh - ${this.section.getBoundingClientRect().bottom}px);
           }
-        `
+        `, undefined, undefined, true, this.style)
         this.filterFunction()
         this.ul.classList.add('show')
         this.ul.classList.remove('hide')
         this.ul.scrollTop = 0
-        if (!this.liSelected || this.liSelected.classList.contains('hidden')) this.selectLi()
+        if (!this.liActive || this.liActive.classList.contains('hidden')) this.activeLi()
+        // set cursor to the end of the input filed
+        if (this.input.value) setTimeout(() => this.input.setSelectionRange(this.input.value.length, this.input.value.length), 20)
       }
       if ((self.innerHeight + self.scrollY) >= document.body.scrollHeight) {
         show()
@@ -50,8 +76,9 @@ export default class SelectOptionSearch extends Shadow() {
 
     this.blurEventListener = event => {
       this.ul.classList.add('hide')
-      this.style.textContent = ''
+      // must have a timeout of at least 200ms, that the value on click can be consumed before blur
       blurTimeoutId = setTimeout(() => {
+        this.style.textContent = ''
         this.ul.classList.remove('show')
         this.ul.classList.remove('hide')
       }, 1000)
@@ -60,10 +87,22 @@ export default class SelectOptionSearch extends Shadow() {
     this.keydownListener = event => {
       if (event.key === 'Enter') {
         event.preventDefault()
-        this.liSelected?.click()
+        this.liActive?.click()
         return
       }
-      if (event.key.includes('Arrow')) event.preventDefault()
+      if (event.key.includes('Arrow')) {
+        event.preventDefault()
+        if (event.key === 'ArrowUp') {
+          this.activeLi(this.lisShown[this.lisShown.indexOf(this.liActive) - 1] || this.lisShown[this.lisShown.length - 1])
+          this.changeEventListener(event)
+          return
+        }
+        if (event.key === 'ArrowDown') {
+          this.activeLi(this.lisShown[this.lisShown.indexOf(this.liActive) + 1])
+          this.changeEventListener(event)
+          return
+        }
+      }
     }
 
     this.keyupListener = event => {
@@ -74,14 +113,8 @@ export default class SelectOptionSearch extends Shadow() {
         this.input?.blur()
         return
       }
-      if (event.key === 'ArrowUp') {
-        this.selectLi(this.lisShown[this.lisShown.indexOf(this.liSelected) - 1] || this.lisShown[this.lisShown.length - 1])
-        return
-      }
-      if (event.key === 'ArrowDown') {
-        this.selectLi(this.lisShown[this.lisShown.indexOf(this.liSelected) + 1])
-        return
-      }
+      if (event.key === 'ArrowUp') return
+      if (event.key === 'ArrowDown') return
       this.filterFunction()
     }
   }
@@ -89,7 +122,9 @@ export default class SelectOptionSearch extends Shadow() {
   connectedCallback () {
     if (this.shouldRenderCSS()) this.renderCSS()
     if (this.shouldRenderHTML()) this.renderHTML()
+    this.updateValidity()
     this.addEventListener('click', this.clickEventListener, {capture: true})
+    this.input?.addEventListener('change', this.changeEventListener)
     this.input?.addEventListener('focus', this.focusEventListener)
     this.input?.addEventListener('blur', this.blurEventListener)
     this.input?.addEventListener('keydown', this.keydownListener)
@@ -98,6 +133,7 @@ export default class SelectOptionSearch extends Shadow() {
 
   disconnectedCallback () {
     this.removeEventListener('click', this.clickEventListener)
+    this.input?.removeEventListener('change', this.changeEventListener)
     this.input?.removeEventListener('focus', this.focusEventListener)
     this.input?.removeEventListener('blur', this.blurEventListener)
     this.input?.removeEventListener('keydown', this.keydownListener)
@@ -119,7 +155,7 @@ export default class SelectOptionSearch extends Shadow() {
    * @return {boolean}
    */
   shouldRenderHTML () {
-    return !this.slot
+    return !this.input
   }
 
   /**
@@ -129,6 +165,25 @@ export default class SelectOptionSearch extends Shadow() {
     this.css = /* css */`
       :host > section {
         position: relative;
+      }
+      :host > section > div {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        width: 100%;
+      }
+      :host > section > div > * {
+        grid-column: 1;
+        grid-row: 2;
+        height: 100%;
+        width: 100%;
+      }
+      :host > section > div > label {
+        grid-row: 1;
+      }
+      :host > section > div > select {
+        pointer-events: none;
+        opacity: 0;
       }
       :host > section > ul {
         background-color: white;
@@ -158,7 +213,7 @@ export default class SelectOptionSearch extends Shadow() {
       :host > section > ul > li:last-child {
         padding-bottom: 0.25em;
       }
-      :host > section > ul > li:hover, :host > section > ul > li.selected {
+      :host > section > ul > li:hover, :host > section > ul > li.active {
         background-color: var(--color-secondary, orange);
         color: var(--background-color, white);
       }
@@ -195,21 +250,18 @@ export default class SelectOptionSearch extends Shadow() {
    * @returns void
    */
   renderHTML () {
-    this.input = document.createElement('input')
-    this.input.setAttribute('slot', 'input')
-    this.input.setAttribute('type', 'text')
-    this.input.setAttribute('autocomplete', 'off')
-    this.input.setAttribute('placeholder', this.select.querySelector('[value=""]')?.textContent || this.select.children[0].textContent)
-    this.appendChild(this.input)
     this.html = /* html */`
-      <slot name="select-label"></slot>
       <section>
-        <slot name="input"></slot>
+        <div>
+          <input type=text autocomplete=off placeholder="${this.select.querySelector('[value=""]')?.textContent || this.select.children[0].textContent}"></input>
+        </div>
         <ul>
-          ${Array.from(this.select.querySelectorAll('option')).reduce((acc, option, i) => acc + (option.value ? `<li>${option.textContent}</li>` : ''), '')}
+          ${Array.from(this.select.querySelectorAll('option')).reduce((acc, option, i) => acc + (option.value || i > 0 ? `<li${option.value ? ` value="${option.value}"` : ''}>${option.textContent}</li>` : ''), '')}
         </ul>
       </section>
     `
+    if (this.label) this.div.appendChild(this.label)
+    this.div.appendChild(this.select)
     this.html = this.style
   }
 
@@ -222,21 +274,38 @@ export default class SelectOptionSearch extends Shadow() {
     }
   }
 
-  selectLi (liToSelect) {
-    this.lis.forEach(li => li.classList.remove('selected'))
+  activeLi (liToSelect) {
+    this.lis.forEach(li => li.classList.remove('active'))
     if (liToSelect) {
-      liToSelect.classList.add('selected')
+      liToSelect.classList.add('active')
     } else {
-      this.lis.find(li => !li.classList.contains('hidden'))?.classList.add('selected')
+      this.lis.find(li => !li.classList.contains('hidden'))?.classList.add('active')
     }
+    this.liActive?.scrollIntoView({block: 'nearest'})
+  }
+
+  updateValidity () {
+    this.input.setCustomValidity(this.select.checkValidity() ? '' : 'select not valid')
+  }
+
+  get label () {
+    return this.root.querySelector('label')
+  }
+
+  get input () {
+    return this.root.querySelector('input')
   }
 
   get select () {
-    return this.querySelector('select')
+    return this.root.querySelector('select')
   }
 
   get section () {
     return this.root.querySelector('section')
+  }
+
+  get div () {
+    return this.root.querySelector('div')
   }
 
   get ul () {
@@ -251,12 +320,8 @@ export default class SelectOptionSearch extends Shadow() {
     return Array.from(this.root.querySelectorAll('li:not(.hidden)')) || []
   }
 
-  get liSelected () {
-    return this.root.querySelector('li.selected')
-  }
-
-  get slot () {
-    return this.root.querySelector('slot')
+  get liActive () {
+    return this.root.querySelector('li.active')
   }
 
   get style () {
