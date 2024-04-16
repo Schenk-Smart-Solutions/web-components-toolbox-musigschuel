@@ -33,8 +33,11 @@ export default class SelectOptionSearch extends Shadow() {
         // TODO: add new/custom
         // on input text free hand changed, check if it has a matching preset
         let matchingLi
-        if (isTypeChange && this.input.value && (matchingLi = Array.from(this.ul.children).find(li => li.textContent.includes(this.input.value)
-          || this.input.value.includes(li.textContent)))) this.activeLi(matchingLi)
+        if (isTypeChange && this.input.value && (matchingLi = Array.from(this.ul.children).find(li => {
+          const inputValue = this.input.value.toLowerCase()
+          const liTextContent = li.textContent.toLowerCase()
+          return liTextContent.includes(inputValue) || inputValue.includes(liTextContent)
+        }))) this.activeLi(matchingLi)
         // TODO: multi-select
         this.input.value = this.liActive.getAttribute('value') ? this.liActive.textContent : ''
         let matchingOption
