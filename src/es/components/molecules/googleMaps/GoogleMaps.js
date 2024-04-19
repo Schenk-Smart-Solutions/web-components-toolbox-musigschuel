@@ -204,6 +204,7 @@ export default class GoogleMaps extends Shadow() {
               <div class="flip-card-front">
                 <a-picture
                   no-bad-quality
+                  sources-keep-query-aspect-ratio
                   namespace="picture-cover-"
                   defaultSource="${origin}${teacher.imageUrl}"
                 ></a-picture>
