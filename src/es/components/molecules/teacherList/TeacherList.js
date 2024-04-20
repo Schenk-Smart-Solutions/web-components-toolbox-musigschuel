@@ -133,6 +133,7 @@ export default class TeacherList extends Shadow() {
                 picture-load
                 no-bad-quality
                 sources-keep-query-aspect-ratio
+                sources-delete-query-keys="v"
                 namespace="picture-cover-"
                 defaultSource="${origin}${teacher.imageUrl}"
                 width="20%"

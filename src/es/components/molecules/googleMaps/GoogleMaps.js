@@ -205,6 +205,7 @@ export default class GoogleMaps extends Shadow() {
                 <a-picture
                   no-bad-quality
                   sources-keep-query-aspect-ratio
+                  sources-delete-query-keys="v"
                   namespace="picture-cover-"
                   defaultSource="${origin}${teacher.imageUrl}"
                 ></a-picture>
