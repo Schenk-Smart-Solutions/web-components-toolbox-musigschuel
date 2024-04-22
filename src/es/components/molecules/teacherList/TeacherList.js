@@ -136,6 +136,7 @@ export default class TeacherList extends Shadow() {
                 sources-delete-query-keys="v"
                 namespace="picture-cover-"
                 defaultSource="${origin}${teacher.imageUrl}"
+                ${teacher.imageSources ? `sources="${teacher.imageSources}"` : ''}
                 width="20%"
               ></a-picture>
               <div>
