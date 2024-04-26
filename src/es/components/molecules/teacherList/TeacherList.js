@@ -10,15 +10,27 @@ export default class TeacherList extends Shadow() {
   constructor (options = {}, ...args) {
     super({ importMetaUrl: import.meta.url, ...options }, ...args)
 
+    this.rankedTeachers = []
+    this.renderTimeoutId = null
+
     this.teachersEventListener = event => {
       this.renderHTML(event.detail.fetch, event.detail.origin)
+    }
+
+    this.teacherClickEventListener = event => {
+      let clickedTeacher
+      if (this.teachers && event.detail.marker.id && (clickedTeacher = this.teachers.find(teacher => teacher.teacherId === event.detail.marker.id))) {
+        this.rankedTeachers.push(clickedTeacher)
+        this.renderHTML(Promise.resolve(this.teachers), this.origin || '')
+      }
     }
   }
 
   connectedCallback () {
     if (this.shouldRenderCSS()) this.renderCSS()
     document.body.addEventListener('teachers', this.teachersEventListener)
-  document.body.addEventListener('google-maps-teachers', this.teachersEventListener)
+    document.body.addEventListener('google-maps-teachers', this.teachersEventListener)
+    document.body.addEventListener('google-maps-teacher-click', this.teacherClickEventListener)
     this.dispatchEvent(new CustomEvent(this.getAttribute('request-teachers') || 'request-teachers', {
       bubbles: true,
       cancelable: true,
@@ -29,6 +41,7 @@ export default class TeacherList extends Shadow() {
   disconnectedCallback () {
     document.body.removeEventListener('teachers', this.teachersEventListener)
     document.body.removeEventListener('google-maps-teachers', this.teachersEventListener)
+    document.body.removeEventListener('google-maps-teacher-click', this.teacherClickEventListener)
   }
 
   /**
@@ -102,62 +115,84 @@ export default class TeacherList extends Shadow() {
    *
    * @param {Promise<import("../../controllers/teachers/Teachers.js").teachers>} fetch
    * @param {string} origin
-   * @return {Promise<void>}
+   * @return {Promise<void> | void}
    */
   renderHTML (fetch, origin) {
-    return Promise.all([
+    // @ts-ignore
+    clearTimeout(this.renderTimeoutId)
+    this.renderTimeoutId = setTimeout(() => Promise.all([
       fetch,
       this.fetchModules([
-        {
-          path: `${this.importMetaUrl}../../web-components-toolbox/src/es/components/atoms/picture/Picture.js`,
-          name: 'a-picture'
-        },
-        {
-          path: `${this.importMetaUrl}../../web-components-toolbox/src/es/components/organisms/wrapper/Wrapper.js`,
-          name: 'o-wrapper'
+          {
+            path: `${this.importMetaUrl}../../web-components-toolbox/src/es/components/atoms/picture/Picture.js`,
+            name: 'a-picture'
+          },
+          {
+            path: `${this.importMetaUrl}../../web-components-toolbox/src/es/components/organisms/wrapper/Wrapper.js`,
+            name: 'o-wrapper'
+          }
+        ])
+      ]).then(([teachers]) => {
+        this.teachers = teachers
+        this.origin = origin
+        // sort teachers by rank
+        if (this.rankedTeachers.length > 0) {
+          this.rankedTeachers.forEach(rankedTeacher => {
+            let index
+            if ((index = teachers.findIndex(teacher => teacher.teacherId === rankedTeacher.teacherId)) !== -1) {
+              teachers.splice(index, 1)
+              teachers.unshift(rankedTeacher)
+            }
+          })
         }
-      ])
-    ]).then(([teachers]) => {
-      if (!this.hasAttribute('no-filter-teachers')) {
-        const addedTeachers = []
-        teachers = teachers.filter(teacher => {
-          if (addedTeachers.includes(teacher.teacherId)) return false
-          addedTeachers.push(teacher.teacherId)
-          return true
+        if (!this.hasAttribute('no-filter-teachers')) {
+          const addedTeachers = []
+          teachers = teachers.filter(teacher => {
+            if (addedTeachers.includes(teacher.teacherId)) return false
+            addedTeachers.push(teacher.teacherId)
+            return true
+          })
+        }
+        const htmlStr = /* html */`<ul>${teachers.reduce((acc, teacher) => {
+          const url = new URL(`${origin}${teacher.imageUrl}`)
+          const height = url.searchParams.get('height')
+          const width = url.searchParams.get('width')
+          // @ts-ignore
+          const aspectRatio = height && !isNaN(height) && width && !isNaN(width) ? height / width : null
+          return /* html */`${acc}
+            <li>
+              <o-wrapper href="${origin}${teacher.link}">
+                <a-picture
+                  picture-load
+                  no-bad-quality
+                  sources-keep-query-aspect-ratio
+                  sources-delete-query-keys="v"
+                  namespace="picture-cover-"
+                  defaultSource="${origin}${teacher.imageUrl}"
+                  ${teacher.imageSources ? `sources="${teacher.imageSources}"` : ''}
+                  width="20%"
+                  ${aspectRatio ? `aspect-ratio="${aspectRatio}"` : ''}
+                ></a-picture>
+                <div>
+                  <h2>${teacher.title}</h2>
+                  <p>${teacher.text}</p>
+                  <a href="${origin}${teacher.link}">${this.getAttribute('label-more') || '...more'}</a>
+                </div>
+              </o-wrapper>
+            </li>
+          `}, '')}
+        </ul>`
+        if (this.lastHtmlStr === htmlStr) return
+        this.lastHtmlStr = htmlStr
+        this.html = ''
+        this.html = htmlStr
+        this.root.querySelectorAll('o-wrapper').forEach(wrapper => {
+          const pictures = Array.from(wrapper.root.querySelectorAll('a-picture'))
+          if (pictures.every(picture => !picture.hasAttribute('loaded'))) {
+            wrapper.hidden = true
+            wrapper.root.querySelectorAll('a-picture').forEach(picture => picture.addEventListener('picture-load', event => (wrapper.hidden = false), { once: true }))
+          }
         })
-      }
-      const htmlStr = /* html */`<ul>${teachers.reduce((acc, teacher) => /* html */`${acc}
-          <li>
-            <o-wrapper href="${origin}${teacher.link}">
-              <a-picture
-                picture-load
-                no-bad-quality
-                sources-keep-query-aspect-ratio
-                sources-delete-query-keys="v"
-                namespace="picture-cover-"
-                defaultSource="${origin}${teacher.imageUrl}"
-                ${teacher.imageSources ? `sources="${teacher.imageSources}"` : ''}
-                width="20%"
-              ></a-picture>
-              <div>
-                <h2>${teacher.title}</h2>
-                <p>${teacher.text}</p>
-                <a href="${origin}${teacher.link}">${this.getAttribute('label-more') || '...more'}</a>
-              </div>
-            </o-wrapper>
-          </li>
-        `, '')}
-      </ul>`
-      if (this.lastHtmlStr === htmlStr) return
-      this.lastHtmlStr = htmlStr
-      this.hidden = true
-      this.html = ''
-      this.html = htmlStr
-      let counter = 0
-      this.root.querySelectorAll('o-wrapper').forEach(wrapper => wrapper.root.querySelectorAll('a-picture').forEach(picture => picture.addEventListener('picture-load', event => {
-        counter++
-        if (counter === teachers.length) this.hidden = false
-      }, { once: true })))
-    })
+    }), 50)
   }
 }

@@ -197,7 +197,7 @@ export default class GoogleMaps extends Shadow() {
         ...teacher,
         lat: parseFloat(teacher.lat) || null,
         lng: parseFloat(teacher.lon) || null,
-        id: `${teacher.title}/${teacher.link}/${teacher.imageUrl}`,
+        id: teacher.teacherId,
         content: /* HTML */`
           <div class="flip-card">
             <div class="flip-card-inner">
@@ -353,6 +353,14 @@ export default class GoogleMaps extends Shadow() {
         gMap,
         shouldFocus: true
       })
+      this.dispatchEvent(new CustomEvent(this.getAttribute('google-maps-teacher-click') || 'google-maps-teacher-click', {
+        detail: {
+          marker
+        },
+        bubbles: true,
+        cancelable: true,
+        composed: true
+      }))
     })
     marker.infoWindow = infoWindow
   }
