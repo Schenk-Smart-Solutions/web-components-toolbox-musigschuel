@@ -175,7 +175,7 @@ export default class TeacherList extends Shadow() {
                 ></a-picture>
                 <div>
                   <h2>${teacher.title}</h2>
-                  <p>${teacher.text}</p>
+                  <div style="font-size: 0.7rem">${teacher.longText}</div>
                   <a href="${origin}${teacher.link}">${this.getAttribute('label-more') || '...more'}</a>
                 </div>
               </o-wrapper>
